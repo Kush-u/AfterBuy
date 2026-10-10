@@ -2,13 +2,13 @@
   <title id="ab-favicon-title">AfterBuy</title>
   <style>
     :root {
-      --ab-mark-tile: #0f766e;
+      --ab-mark-tile: #2563eb;
       --ab-mark-stroke: #ffffff;
-      --ab-mark-dot: #7dd3fc;
+      --ab-mark-dot: #6ee7b7;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --ab-mark-tile: #0d9488;
+        --ab-mark-tile: #3b82f6;
       }
     }
   </style>

@@ -24,7 +24,7 @@ export function productTypeTone(label: string): string {
     return 'text-[var(--green)]';
   }
   if (label === 'Manual Delivery') {
-    return 'text-[var(--warm)]';
+    return 'text-[var(--amber)]';
   }
   return 'text-[var(--accent-soft)]';
 }

@@ -130,7 +130,7 @@ export default function ResellerApiKeysPage(): JSX.Element {
       key: 'env',
       header: 'Environment',
       render: (row) => (
-        <span className={row.environment === 'live' ? 'text-[var(--green)]' : 'text-[var(--warm)]'}>
+        <span className={row.environment === 'live' ? 'text-[var(--green)]' : 'text-[var(--amber)]'}>
           {row.environment}
         </span>
       ),
@@ -157,7 +157,7 @@ export default function ResellerApiKeysPage(): JSX.Element {
       header: '',
       render: (row) =>
         row.isActive ? (
-          <button type="button" className="text-sm text-[var(--red)] hover:text-danger/80" onClick={() => void revoke(row.id)}>
+          <button type="button" className="text-sm text-[var(--red)] hover:text-red-300" onClick={() => void revoke(row.id)}>
             Revoke
           </button>
         ) : null,
@@ -180,7 +180,7 @@ export default function ResellerApiKeysPage(): JSX.Element {
             </button>
             <button
               type="button"
-              className="rounded-md bg-accent-solid px-3 py-2 text-sm font-medium text-accent-on hover:bg-accent-solid-hover"
+              className="rounded-md bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white hover:bg-[var(--accent-soft)]"
               onClick={() => setShowForm(true)}
             >
               Create New Key
@@ -194,8 +194,8 @@ export default function ResellerApiKeysPage(): JSX.Element {
         Show revoked
       </label>
       {rawKey ? (
-        <div className="mb-6 rounded-lg border border-warm/40 bg-warm/10 p-4">
-          <p className="text-sm font-semibold text-warm">
+        <div className="mb-6 rounded-lg border border-amber-500/40 bg-amber-500/10 p-4">
+          <p className="text-sm font-semibold text-amber-200">
             This key will only be shown once. Copy it now and store it securely.
           </p>
           <pre className="mt-3 overflow-x-auto rounded-md bg-[var(--bg-page)] p-3 text-sm text-[var(--text-1)]">{rawKey}</pre>
@@ -217,14 +217,14 @@ export default function ResellerApiKeysPage(): JSX.Element {
           <div className="flex gap-3 text-sm">
             <button
               type="button"
-              className={`rounded-md px-3 py-2 ${environment === 'test' ? 'bg-warm/20 text-warm' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
+              className={`rounded-md px-3 py-2 ${environment === 'test' ? 'bg-yellow-500/20 text-yellow-200' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
               onClick={() => setEnvironment('test')}
             >
               Test
             </button>
             <button
               type="button"
-              className={`rounded-md px-3 py-2 ${environment === 'live' ? 'bg-success/20 text-success' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
+              className={`rounded-md px-3 py-2 ${environment === 'live' ? 'bg-emerald-500/20 text-emerald-200' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
               onClick={() => setEnvironment('live')}
             >
               Live
@@ -256,7 +256,7 @@ export default function ResellerApiKeysPage(): JSX.Element {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-md bg-accent-solid px-3 py-2 text-sm font-medium text-accent-on disabled:opacity-50"
+              className="rounded-md bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
             >
               {saving ? 'Creating…' : 'Create key'}
             </button>

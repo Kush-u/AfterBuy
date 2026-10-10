@@ -76,10 +76,10 @@ function MemoryCard({
   return (
     <Card
       padding="p-4"
-      className={warning ? 'border-[var(--warm)]/30 bg-[var(--warm-soft)]' : ''}
+      className={warning ? 'border-[var(--amber)]/30 bg-[var(--amber-soft)]' : ''}
     >
       <p className="text-sm text-[var(--text-1)]">{memory.text}</p>
-      <p className={`mt-2 text-xs ${warning ? 'text-[var(--warm)]' : 'text-[var(--text-3)]'}`}>
+      <p className={`mt-2 text-xs ${warning ? 'text-[var(--amber)]' : 'text-[var(--text-3)]'}`}>
         {warning ? 'Objection · ' : ''}
         {formatRelativeTime(memory.occurredAt)}
       </p>
@@ -167,7 +167,7 @@ export function CustomerIntelligencePanel({
             className={`rounded-full px-3 py-1.5 text-xs ${
               withMemory
                 ? 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
-                : 'bg-accent-solid text-accent-on'
+                : 'bg-[var(--accent)] text-white'
             }`}
           >
             Without Memory
@@ -177,7 +177,7 @@ export function CustomerIntelligencePanel({
             onClick={() => setWithMemory(true)}
             className={`rounded-full px-3 py-1.5 text-xs ${
               withMemory
-                ? 'bg-accent-solid text-accent-on'
+                ? 'bg-[var(--accent)] text-white'
                 : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
             }`}
           >
@@ -187,7 +187,7 @@ export function CustomerIntelligencePanel({
       </div>
 
       {withMemory && data.degraded ? (
-        <div className="rounded-[var(--r-md)] border border-[var(--warm)]/20 bg-[var(--warm-soft)] px-4 py-2 text-xs text-[var(--warm)]">
+        <div className="rounded-[var(--r-md)] border border-[var(--amber)]/20 bg-[var(--amber-soft)] px-4 py-2 text-xs text-[var(--amber)]">
           Memory service offline — showing live data only
         </div>
       ) : null}
@@ -220,7 +220,7 @@ export function CustomerIntelligencePanel({
           </div>
           <div className="space-y-3">
             <h3 className="text-sm font-semibold text-[var(--text-1)]">AI Recommendation</h3>
-            <Card className="border-l-[3px] border-l-[var(--brand-teal)] bg-[var(--surface-3)]">
+            <Card className="border-l-[3px] border-l-[var(--electric)] bg-[var(--surface-3)]">
               <p className="bg-[image:var(--grad-memory)] bg-clip-text text-xs font-medium text-transparent">✦ AI Recommendation</p>
               <p className="mt-3 whitespace-pre-wrap text-sm text-[var(--text-0)]">
                 {data.recommendation ?? 'No recommendation yet.'}
@@ -235,7 +235,7 @@ export function CustomerIntelligencePanel({
                 </button>
                 <button
                   type="button"
-                  className="min-h-11 rounded-full bg-success-solid px-3 text-xs font-medium text-paper active:scale-[0.97]"
+                  className="min-h-11 rounded-full bg-[image:linear-gradient(135deg,#00E5A0,#0ea5a0)] px-3 text-xs font-medium text-[#04221a] active:scale-[0.97]"
                   onClick={() => void recordOutcome('converted')}
                 >
                   ✓ Converted

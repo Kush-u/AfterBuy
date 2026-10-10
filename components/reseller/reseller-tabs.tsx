@@ -40,7 +40,7 @@ export function ResellerTabs(): JSX.Element {
             href={tab.href}
             className={`rounded-full px-3 py-1.5 text-xs ${
               active
-                ? 'bg-accent-solid text-accent-on'
+                ? 'bg-[var(--accent)] text-white'
                 : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)] hover:text-[var(--text-1)]'
             }`}
           >

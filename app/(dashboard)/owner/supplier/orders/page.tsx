@@ -134,7 +134,7 @@ export default async function OwnerSupplierPage(): Promise<JSX.Element> {
         <StatCard label="Completed today" value={String(completedToday)} />
         <StatCard label="Failed today" value={String(failedToday)} />
       </div>
-      <h2 className="mb-3 mt-8 text-sm font-medium text-[var(--warm)]">Outcome unknown (needs attention)</h2>
+      <h2 className="mb-3 mt-8 text-sm font-medium text-[var(--amber)]">Outcome unknown (needs attention)</h2>
       <DataTable
         columns={unknownColumns}
         rows={unknownRows}

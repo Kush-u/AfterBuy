@@ -6,7 +6,6 @@
 import * as THREE from 'three';
 import { MemoryCrystal } from '@/components/landing/MemoryCrystal';
 import { crystal, landingMobile, landingReducedMotion } from '@/lib/landing/crystal-state';
-import { readTokenColor } from '@/lib/landing/palette';
 
 export const experienceHandle: { current: Experience | null } = { current: null };
 
@@ -52,7 +51,7 @@ export class Experience {
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.2;
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2));
-    this.renderer.setClearColor(readTokenColor('--void-rgb'), 1);
+    this.renderer.setClearColor(crystal.light > 0.5 ? 0xf0f2ff : 0x02030a, 1);
 
     this.scene = new THREE.Scene();
     const aspect = window.innerWidth / Math.max(window.innerHeight, 1);
@@ -89,9 +88,7 @@ export class Experience {
 
     this.themeObserver = new MutationObserver(() => {
       crystal.light = document.documentElement.getAttribute('data-theme') === 'light' ? 1 : 0;
-      // Palette tokens change with the theme, so refresh clear colour and shader uniforms together.
-      this.renderer.setClearColor(readTokenColor('--void-rgb'), 1);
-      this.memory.refreshPalette();
+      this.renderer.setClearColor(crystal.light > 0.5 ? 0xf0f2ff : 0x02030a, 1);
     });
     this.themeObserver.observe(document.documentElement, {
       attributes: true,

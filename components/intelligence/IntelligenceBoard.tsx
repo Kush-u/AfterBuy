@@ -19,15 +19,15 @@ type Buyer = {
 
 type FeedItem = {
   readonly id: string;
-  readonly tone: 'teal' | 'sky' | 'coral';
+  readonly tone: 'violet' | 'blue' | 'orange';
   readonly text: string;
   readonly time: string;
 };
 
 const SEED: ReadonlyArray<FeedItem> = [
-  { id: 'a1', tone: 'teal', text: '3 new patterns promoted from customer memory', time: 'just now' },
-  { id: 'a2', tone: 'sky', text: 'Customer preference recalled before the reply', time: '4 min ago' },
-  { id: 'a3', tone: 'coral', text: 'Recovery pattern saved for a payment dispute', time: '18 min ago' },
+  { id: 'a1', tone: 'violet', text: '3 new patterns promoted from customer memory', time: 'just now' },
+  { id: 'a2', tone: 'blue', text: 'Customer preference recalled before the reply', time: '4 min ago' },
+  { id: 'a3', tone: 'orange', text: 'Recovery pattern saved for a payment dispute', time: '18 min ago' },
 ];
 
 type IntelligenceBoardProps = {
@@ -60,7 +60,7 @@ export function IntelligenceBoard({ tenantId }: IntelligenceBoardProps): JSX.Ele
       if (!text) return;
       const item: FeedItem = {
         id: `${Date.now()}`,
-        tone: detail.tone ?? 'teal',
+        tone: detail.tone ?? 'violet',
         text,
         time: 'just now',
       };
@@ -102,7 +102,7 @@ export function IntelligenceBoard({ tenantId }: IntelligenceBoardProps): JSX.Ele
             aria-selected={tab === id}
             onClick={() => setTab(id)}
             className={`min-h-11 rounded-full px-4 text-sm ${
-              tab === id ? 'bg-[image:var(--grad-primary)] text-accent-on' : 'border border-[var(--border-soft)] text-[var(--text-1)]'
+              tab === id ? 'bg-[image:var(--grad-primary)] text-white' : 'border border-[var(--border-soft)] text-[var(--text-1)]'
             }`}
           >
             {label}
@@ -158,7 +158,7 @@ export function IntelligenceBoard({ tenantId }: IntelligenceBoardProps): JSX.Ele
                 >
                   <span
                     className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full"
-                    style={{ background: item.tone === 'coral' ? 'var(--brand-coral)' : item.tone === 'sky' ? 'var(--brand-sky)' : 'var(--brand-teal)' }}
+                    style={{ background: item.tone === 'orange' ? 'var(--commerce)' : item.tone === 'blue' ? 'var(--plasma)' : 'var(--memory)' }}
                   />
                   <div>
                     <p className="text-sm text-[var(--text-0)]">{item.text}</p>

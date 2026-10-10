@@ -1,5 +1,5 @@
 /**
- * Hero, proof strip, problem, and the three memory layers of the AfterBuy landing page.
+ * Hero, proof strip, problem, and the three memory layers.
  */
 
 'use client';
@@ -58,36 +58,36 @@ function TowerArt(): JSX.Element {
 }
 
 const STATS: ReadonlyArray<{ icon: ReactNode; value: string; count?: string; prefix?: string; suffix?: string; label: string }> = [
-  { icon: <Layers size={18} aria-hidden="true" />, value: '3', count: '3', label: 'Memory layers' },
-  { icon: <Brain size={18} aria-hidden="true" />, value: '∞', label: 'Buyers remembered' },
-  { icon: <Shield size={18} aria-hidden="true" />, value: '100%', count: '100', suffix: '%', label: 'Store isolation' },
-  { icon: <Zap size={18} aria-hidden="true" />, value: '<50ms', count: '50', prefix: '<', suffix: 'ms', label: 'Typical recall time' },
+  { icon: <Layers size={18} aria-hidden="true" />, value: '3', count: '3', label: 'Three Memory Layers' },
+  { icon: <Brain size={18} aria-hidden="true" />, value: '∞', label: 'Memories Stored' },
+  { icon: <Shield size={18} aria-hidden="true" />, value: '100%', count: '100', suffix: '%', label: 'Isolation Guarantee' },
+  { icon: <Zap size={18} aria-hidden="true" />, value: '<50ms', count: '50', prefix: '<', suffix: 'ms', label: 'Memory Recall' },
 ];
 
 const LAYERS = [
   {
     art: <NodeArt />,
-    kicker: 'Buyer memory',
-    title: 'Every buyer is remembered',
-    body: 'Preferences, objections and past orders are saved per buyer, so Remy opens the next chat already knowing them.',
+    kicker: 'Customer memory',
+    title: 'Customers are remembered',
+    body: 'Every preference, every objection, every purchase. Your AI knows them before they say hello.',
     tag: 'afterbuy-prod:tenant:{id}:customer:{id}',
-    tone: 'primary',
+    tone: 'violet',
   },
   {
     art: <GraphArt />,
-    kicker: 'Store insight',
-    title: 'Your store learns what works',
-    body: 'Patterns across buyers surface on their own: which offers land, which delays hurt, what to say next.',
+    kicker: 'Store intelligence',
+    title: 'Stores develop institutional memory',
+    body: 'Cross-customer patterns surface automatically. What worked. What did not. What will.',
     tag: 'afterbuy-prod:tenant:{id}',
-    tone: 'secondary',
+    tone: 'blue',
   },
   {
     art: <TowerArt />,
-    kicker: 'Platform view',
-    title: 'Operators see the whole picture',
-    body: 'Health, anomalies and activity across every store, together in one control view.',
+    kicker: 'Platform operations',
+    title: 'The platform sees everything',
+    body: 'System-wide health, anomaly detection, and operational intelligence. All in one control tower.',
     tag: 'afterbuy-prod:platform',
-    tone: 'highlight',
+    tone: 'gold',
   },
 ];
 
@@ -97,27 +97,28 @@ export function MemoryTop(): JSX.Element {
       <section id="hero" className="hero" data-crystal="hero">
         <div className="wrap hero-grid">
           <div className="hero-copy">
-            <p className="eyebrow">The Telegram store that remembers every buyer</p>
+            <p className="eyebrow">Commerce intelligence platform</p>
             <h1>
-              <span className="line-mask"><span className="hero-line grad-text">Every buyer,</span></span>
-              <span className="line-mask"><span className="hero-line grad-text">remembered</span></span>
-              <span className="line-mask"><span className="hero-line grad-text">on Telegram.</span></span>
+              <span className="line-mask"><span className="hero-line grad-text">Commerce</span></span>
+              <span className="line-mask"><span className="hero-line grad-text">That</span></span>
+              <span className="line-mask"><span className="hero-line grad-text">Remembers</span></span>
+              <span className="line-mask"><span className="hero-line grad-text">Everything.</span></span>
             </h1>
             <p className="lede">
-              AfterBuy gives your Telegram store a memory. What each buyer bought, asked and hesitated over is kept, so the next reply starts where the last one ended.
+              Three-layer AI memory. Every customer remembered. Every pattern learned. Every store optimized.
             </p>
             <div className="hero-cta">
               <Link href="/login" className="btn btn-fill">
-                Open your store
+                Get Started
                 <ArrowRight size={16} aria-hidden="true" />
               </Link>
               <a href="#showcase" className="btn btn-ghost">
-                See it work
+                Watch Demo
               </a>
             </div>
             <p className="hero-proof">
               <span className="spark" aria-hidden="true">✦</span>
-              Buyer Memory · Built on Hindsight by Vectorize
+              Memory-powered · Built on Hindsight by Vectorize
             </p>
           </div>
         </div>
@@ -149,12 +150,12 @@ export function MemoryTop(): JSX.Element {
       <section id="problem" className="problem" data-crystal="problem">
         <div className="problem-stage">
           <div className="problem-a">
-            <h2 className="grad-text">Every chat starts from scratch.</h2>
-            <p>This buyer has ordered from you 12 times. Your bot has no idea.</p>
+            <h2 className="grad-text">Every customer interaction starts from zero.</h2>
+            <p>Your store served this customer 12 times. Your AI does not know that.</p>
           </div>
           <div className="problem-b">
             <h2 className="grad-text">Not anymore.</h2>
-            <p>AfterBuy turns past chats into memory, so the next reply already knows the buyer.</p>
+            <p>Memory crystallizes the noise. The next reply already knows them.</p>
           </div>
         </div>
       </section>
@@ -163,7 +164,7 @@ export function MemoryTop(): JSX.Element {
         <div className="wrap">
           <p className="eyebrow">How it works</p>
           <h2 className="grad-text" data-split>
-            Memory at three levels. One platform.
+            Three layers of intelligence. One platform.
           </h2>
           <div className="how-grid reveal-group">
             {LAYERS.map((layer) => (

@@ -211,7 +211,7 @@ export default function ResellerAccountPage(): JSX.Element {
           <div className="flex flex-col items-center text-center">
             <button
               type="button"
-              className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-accent-solid text-xl font-semibold text-accent-on"
+              className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full bg-[var(--accent)] text-xl font-semibold text-white"
               aria-label="Change photo"
               onClick={() => fileRef.current?.click()}
               onDragOver={(event) => event.preventDefault()}
@@ -240,7 +240,7 @@ export default function ResellerAccountPage(): JSX.Element {
             {file ? (
               <button
                 type="button"
-                className="mt-1 min-h-11 rounded-[var(--r-md)] bg-accent-solid px-4 text-sm text-accent-on disabled:opacity-60"
+                className="mt-1 min-h-11 rounded-[var(--r-md)] bg-[var(--accent)] px-4 text-sm text-white disabled:opacity-60"
                 disabled={savingPhoto}
                 onClick={() => void savePhoto()}
               >
@@ -256,7 +256,7 @@ export default function ResellerAccountPage(): JSX.Element {
               <input id="account-name" className={fieldClass} value={displayName} onChange={(event) => setDisplayName(event.target.value)} />
               <button
                 type="submit"
-                className="min-h-11 rounded-[var(--r-md)] bg-accent-solid px-4 text-sm text-accent-on disabled:opacity-60"
+                className="min-h-11 rounded-[var(--r-md)] bg-[var(--accent)] px-4 text-sm text-white disabled:opacity-60"
                 disabled={savingName || displayName.trim().length < 2}
               >
                 {savingName ? 'Saving…' : 'Save'}
@@ -295,7 +295,7 @@ export default function ResellerAccountPage(): JSX.Element {
               </label>
               <button
                 type="submit"
-                className="min-h-11 rounded-[var(--r-md)] bg-accent-solid px-4 text-sm text-accent-on disabled:opacity-60"
+                className="min-h-11 rounded-[var(--r-md)] bg-[var(--accent)] px-4 text-sm text-white disabled:opacity-60"
                 disabled={savingPassword || !currentPassword || newPassword.length < 8 || !confirmPassword}
               >
                 {savingPassword ? 'Updating…' : 'Update password'}

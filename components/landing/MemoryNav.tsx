@@ -12,9 +12,9 @@ import { toggleTheme, useThemeDark } from '@/components/landing/useThemeDark';
 
 const LINKS = [
   { href: '#features', label: 'Features' },
-  { href: '#architecture', label: 'Trust' },
-  { href: '#how', label: 'How it works' },
-  { href: '#pricing', label: 'Get started' },
+  { href: '#architecture', label: 'Architecture' },
+  { href: '#how', label: 'How It Works' },
+  { href: '#pricing', label: 'Pricing' },
 ];
 
 export function MemoryNav(): JSX.Element {

@@ -9,7 +9,6 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { readTokenColor } from '@/lib/landing/palette';
 import { CSS2DObject, CSS2DRenderer } from 'three/addons/renderers/CSS2DRenderer.js';
 import { readLandingQuality } from '@/components/landing/quality';
 import { addStudioLights, createStage } from '@/components/landing/webgl-stage';
@@ -65,7 +64,7 @@ export default function FloatingMockup({ progressRef }: FloatingMockupProps): JS
     });
     addStudioLights(stage.scene, false);
 
-    const shell = new THREE.MeshStandardMaterial({ color: readTokenColor('--ink-rgb'), metalness: 0.65, roughness: 0.28 });
+    const shell = new THREE.MeshStandardMaterial({ color: '#141210', metalness: 0.65, roughness: 0.28 });
     const left = new THREE.Mesh(new THREE.BoxGeometry(3.15, 2.05, 0.08), shell);
     left.position.set(-1.15, 0.2, 0);
     left.rotation.y = 0.28;

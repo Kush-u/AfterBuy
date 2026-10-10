@@ -5,7 +5,6 @@
 
 import * as THREE from 'three';
 import { crystal } from '@/lib/landing/crystal-state';
-import { writeTokenUniform } from '@/lib/landing/palette';
 
 const POINT_VERT = /* glsl */ `
 attribute vec3 aStart;
@@ -67,9 +66,6 @@ precision highp float;
 
 uniform float uLight;
 uniform float uVelocity;
-uniform vec3 uColA;
-uniform vec3 uColB;
-uniform vec3 uColC;
 varying float vColor;
 varying float vAlpha;
 
@@ -81,9 +77,11 @@ void main() {
   float edge = smoothstep(0.5, 0.12, d);
   float core = smoothstep(0.22, 0.0, d);
 
-  // Palette comes from CSS tokens (--accent, --sky, --warm): base, middle, crest of the lattice.
-  vec3 col = mix(uColA, uColB, smoothstep(0.0, 1.0, vColor));
-  col = mix(col, uColC, smoothstep(1.0, 2.0, vColor));
+  vec3 blue = vec3(0.392, 0.216, 1.0);
+  vec3 violet = vec3(0.659, 0.333, 0.969);
+  vec3 gold = vec3(0.902, 0.706, 0.314);
+  vec3 col = mix(blue, violet, smoothstep(0.0, 1.0, vColor));
+  col = mix(col, gold, smoothstep(1.0, 2.0, vColor));
 
   float luma = dot(col, vec3(0.299, 0.587, 0.114));
   col = mix(vec3(luma), col, mix(1.0, 0.9, uLight));
@@ -130,14 +128,12 @@ const LINE_FRAG = /* glsl */ `
 precision highp float;
 
 uniform float uVelocity;
-uniform vec3 uColA;
-uniform vec3 uColHover;
 varying float vFade;
 varying float vHover;
 
 void main() {
   float alpha = vFade * (0.3 + vHover * 0.55 + uVelocity * 0.15);
-  vec3 col = mix(uColA, uColHover, vHover);
+  vec3 col = mix(vec3(0.392, 0.216, 1.0), vec3(0.72, 0.86, 1.0), vHover);
   gl_FragColor = vec4(col, clamp(alpha, 0.0, 0.9));
 }
 `;
@@ -157,10 +153,6 @@ uniform float uTime;
 uniform float uMesh;
 uniform float uLight;
 uniform float uAspect;
-uniform vec3 uVoid;
-uniform vec3 uTintA;
-uniform vec3 uTintB;
-uniform vec3 uTintC;
 
 float hash(vec2 p) {
   return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -194,16 +186,15 @@ void main() {
   float t = uTime * 0.045;
   float n = fbm(uv * 1.35 + vec2(t, -t * 0.55));
   float n2 = fbm(uv * 2.15 - vec2(t * 0.65, t * 0.25) + 4.0);
-  // Backdrop colours come from --void-rgb and --backdrop-*-rgb, which switch with the theme.
-  vec3 voidCol = uVoid;
-  vec3 tintA = uTintA;
-  vec3 tintB = uTintB;
-  vec3 tintC = uTintC;
+  vec3 voidCol = mix(vec3(0.008, 0.012, 0.039), vec3(0.941, 0.949, 1.0), uLight);
+  vec3 violet = vec3(0.28, 0.08, 0.78);
+  vec3 plasma = vec3(0.0, 0.62, 0.92);
+  vec3 gold = vec3(0.85, 0.52, 0.18);
   float ink = (0.28 + uMesh * 0.72) * (1.0 - uLight * 0.25);
   vec3 col = voidCol;
-  col = mix(col, tintA, smoothstep(0.38, 0.78, n) * 0.55 * ink);
-  col = mix(col, tintB, smoothstep(0.55, 0.92, n2) * 0.32 * ink);
-  col += tintC * smoothstep(0.74, 0.98, n) * 0.1 * uMesh;
+  col = mix(col, violet, smoothstep(0.38, 0.78, n) * 0.55 * ink);
+  col = mix(col, plasma, smoothstep(0.55, 0.92, n2) * 0.32 * ink);
+  col += gold * smoothstep(0.74, 0.98, n) * 0.1 * uMesh;
   float vignette = smoothstep(1.15, 0.25, length(vUv - 0.5));
   col = mix(voidCol, col, 0.35 + vignette * 0.65);
   gl_FragColor = vec4(col, 1.0);
@@ -304,20 +295,12 @@ export class MemoryCrystal {
     uScatter: { value: number };
     uLight: { value: number };
     uHover: { value: THREE.Vector3 };
-    uColA: { value: THREE.Color };
-    uColB: { value: THREE.Color };
-    uColC: { value: THREE.Color };
-    uColHover: { value: THREE.Color };
   };
   readonly backdropUniforms: {
     uTime: { value: number };
     uMesh: { value: number };
     uLight: { value: number };
     uAspect: { value: number };
-    uVoid: { value: THREE.Color };
-    uTintA: { value: THREE.Color };
-    uTintB: { value: THREE.Color };
-    uTintC: { value: THREE.Color };
   };
   private readonly points: THREE.Points;
   private readonly lines: THREE.LineSegments;
@@ -400,10 +383,6 @@ export class MemoryCrystal {
       uScatter: { value: 0 },
       uLight: { value: 0 },
       uHover: { value: new THREE.Vector3() },
-      uColA: { value: new THREE.Color() },
-      uColB: { value: new THREE.Color() },
-      uColC: { value: new THREE.Color() },
-      uColHover: { value: new THREE.Color() },
     };
 
     this.pointMat = new THREE.ShaderMaterial({
@@ -473,29 +452,7 @@ export class MemoryCrystal {
       uMesh: { value: 0.45 },
       uLight: { value: 0 },
       uAspect: { value: 1 },
-      uVoid: { value: new THREE.Color() },
-      uTintA: { value: new THREE.Color() },
-      uTintB: { value: new THREE.Color() },
-      uTintC: { value: new THREE.Color() },
     };
-    this.refreshPalette();
-  }
-
-  /**
-   * Re-reads every colour from the CSS tokens in app/globals.css.
-   *
-   * Called once on construction and again whenever `data-theme` flips, so the
-   * crystal and backdrop always match the active dark/light palette.
-   */
-  refreshPalette(): void {
-    writeTokenUniform('--accent-rgb', this.uniforms.uColA.value);
-    writeTokenUniform('--sky-rgb', this.uniforms.uColB.value);
-    writeTokenUniform('--warm-rgb', this.uniforms.uColC.value);
-    writeTokenUniform('--accent-soft-rgb', this.uniforms.uColHover.value);
-    writeTokenUniform('--void-rgb', this.backdropUniforms.uVoid.value);
-    writeTokenUniform('--backdrop-a-rgb', this.backdropUniforms.uTintA.value);
-    writeTokenUniform('--backdrop-b-rgb', this.backdropUniforms.uTintB.value);
-    writeTokenUniform('--backdrop-c-rgb', this.backdropUniforms.uTintC.value);
   }
 
   createBackdrop(): THREE.Mesh {

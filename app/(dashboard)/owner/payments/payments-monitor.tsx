@@ -46,7 +46,7 @@ function statusClass(status: string): string {
     return 'bg-[var(--red-soft)] text-[var(--red)]';
   }
   if (status === 'pending_verification') {
-    return 'bg-[var(--warm-soft)] text-[var(--warm)]';
+    return 'bg-[var(--amber-soft)] text-[var(--amber)]';
   }
   return 'bg-[var(--bg-raised)] text-[var(--text-2)]';
 }
@@ -170,7 +170,7 @@ export function PaymentsMonitor({ modeLabel }: PaymentsMonitorProps): JSX.Elemen
               type="button"
               onClick={() => setTab(item.id)}
               className={`rounded-md px-3 py-1.5 text-sm ${
-                tab === item.id ? 'bg-accent-solid text-accent-on' : 'bg-[var(--bg-raised)] text-[var(--text-2)] hover:bg-[var(--bg-hover)]'
+                tab === item.id ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-raised)] text-[var(--text-2)] hover:bg-[var(--bg-hover)]'
               }`}
             >
               {item.label}

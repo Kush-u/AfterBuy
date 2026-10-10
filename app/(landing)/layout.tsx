@@ -1,11 +1,13 @@
 /**
  * @file app/(landing)/layout.tsx
  *
- * Public landing shell. Fonts come from the root layout so landing and dashboard share one type system.
+ * Public landing shell. Geist lives here so the dashboard keeps Inter.
  */
 
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 import { LandingShell } from '@/components/landing/LandingShell';
 import './landing.css';
 
@@ -21,5 +23,9 @@ type LandingLayoutProps = {
 };
 
 export default function LandingLayout({ children }: LandingLayoutProps): JSX.Element {
-  return <LandingShell>{children}</LandingShell>;
+  return (
+    <div className={`${GeistSans.variable} ${GeistMono.variable} ${GeistSans.className}`}>
+      <LandingShell>{children}</LandingShell>
+    </div>
+  );
 }

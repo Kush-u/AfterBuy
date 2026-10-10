@@ -20,7 +20,7 @@ export function Toggle({ checked, onChange, label }: ToggleProps): JSX.Element {
       <span>{label}</span>
       <span className={`relative h-6 w-11 rounded-full transition-colors duration-200 ${checked ? 'bg-[var(--green)]' : 'bg-[var(--bg-raised)]'}`}>
         <motion.span
-          className="absolute top-0.5 h-5 w-5 rounded-full bg-paper"
+          className="absolute top-0.5 h-5 w-5 rounded-full bg-white"
           animate={{ x: checked ? 20 : 2 }}
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
         />

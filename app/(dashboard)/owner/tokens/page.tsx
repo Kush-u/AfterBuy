@@ -200,7 +200,7 @@ export default function OwnerTokensPage(): JSX.Element {
             type="button"
             disabled={pendingId === row.id}
             onClick={() => void revoke(row.id)}
-            className="text-sm text-[var(--red)] hover:text-danger/80 disabled:opacity-50"
+            className="text-sm text-[var(--red)] hover:text-red-300 disabled:opacity-50"
           >
             Revoke
           </button>
@@ -260,13 +260,13 @@ export default function OwnerTokensPage(): JSX.Element {
             type="button"
             disabled={creating}
             onClick={() => void createToken()}
-            className="mt-4 rounded-md bg-accent-solid px-4 py-2 text-sm font-medium text-accent-on hover:bg-accent-solid-hover disabled:opacity-50"
+            className="mt-4 rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-soft)] disabled:opacity-50"
           >
             {creating ? 'Creating…' : 'Generate token'}
           </button>
           {revealedToken ? (
-            <div className="mt-4 rounded-md border border-warm/40 bg-warm/10 p-4">
-              <p className="text-sm font-medium text-warm">This token will only be shown once. Copy it now.</p>
+            <div className="mt-4 rounded-md border border-amber-600/40 bg-amber-500/10 p-4">
+              <p className="text-sm font-medium text-amber-300">This token will only be shown once. Copy it now.</p>
               <p className="mt-2 font-mono text-lg tracking-widest text-[var(--text-1)]">{revealedToken}</p>
               <button
                 type="button"
@@ -290,7 +290,7 @@ export default function OwnerTokensPage(): JSX.Element {
             type="button"
             onClick={() => setTab(item.id)}
             className={`rounded-full px-3 py-1 text-sm ${
-              tab === item.id ? 'bg-accent-solid text-accent-on' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'
+              tab === item.id ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'
             }`}
           >
             {item.label}

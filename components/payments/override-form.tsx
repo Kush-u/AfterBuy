@@ -64,7 +64,7 @@ export function PaymentOverrideForm({ orderId }: OverrideFormProps): JSX.Element
           type="button"
           disabled={saving || reason.trim().length < 10}
           onClick={() => setConfirmAction('verify')}
-          className="rounded-md bg-success-solid px-3 py-1.5 text-sm text-paper disabled:opacity-50"
+          className="rounded-md bg-emerald-600 px-3 py-1.5 text-sm text-white disabled:opacity-50"
         >
           Force Verify
         </button>
@@ -72,13 +72,13 @@ export function PaymentOverrideForm({ orderId }: OverrideFormProps): JSX.Element
           type="button"
           disabled={saving || reason.trim().length < 10}
           onClick={() => setConfirmAction('fail')}
-          className="rounded-md bg-danger-solid px-3 py-1.5 text-sm text-paper disabled:opacity-50"
+          className="rounded-md bg-red-600 px-3 py-1.5 text-sm text-white disabled:opacity-50"
         >
           Force Fail
         </button>
       </div>
       {confirmAction ? (
-        <div className="mt-4 rounded-md border border-warm/50 bg-[var(--warm-soft)] p-4 text-sm text-warm">
+        <div className="mt-4 rounded-md border border-yellow-700 bg-[var(--amber-soft)] p-4 text-sm text-yellow-100">
           <p>
             Confirm {confirmAction === 'verify' ? 'force verify' : 'force fail'}? This writes an audit log entry.
           </p>
@@ -89,7 +89,7 @@ export function PaymentOverrideForm({ orderId }: OverrideFormProps): JSX.Element
               onClick={() => {
                 void submit(confirmAction);
               }}
-              className="rounded-md bg-accent-solid px-3 py-1.5 text-accent-on"
+              className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-white"
             >
               Confirm
             </button>

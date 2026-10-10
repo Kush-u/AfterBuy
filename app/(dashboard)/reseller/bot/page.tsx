@@ -60,21 +60,21 @@ function toPageError(payload: ApiErrorBody['error'], fallbackCode: string, fallb
  */
 function WebhookUrlNotPublicWarning(): JSX.Element {
   return (
-    <div className="mb-4 rounded-xl border border-warm/20 bg-warm/10 p-4">
+    <div className="mb-4 rounded-xl border border-amber-500/20 bg-amber-500/10 p-4">
       <div className="flex items-start gap-3">
-        <span className="text-lg text-warm">⚠️</span>
+        <span className="text-lg text-amber-400">⚠️</span>
         <div>
-          <p className="text-sm font-medium text-warm">Public URL required</p>
-          <p className="mt-1 text-sm text-warm/80">
+          <p className="text-sm font-medium text-amber-400">Public URL required</p>
+          <p className="mt-1 text-sm text-amber-400/80">
             Telegram needs a public HTTPS URL to connect your bot.
           </p>
-          <div className="mt-3 rounded-lg bg-shade/30 p-3 font-mono text-xs text-warm">
-            <p className="mb-1 text-warm/60"># In a new terminal:</p>
+          <div className="mt-3 rounded-lg bg-black/30 p-3 font-mono text-xs text-amber-300">
+            <p className="mb-1 text-amber-400/60"># In a new terminal:</p>
             <p>npm run tunnel</p>
-            <p className="mb-1 mt-2 text-warm/60"># Then restart:</p>
+            <p className="mb-1 mt-2 text-amber-400/60"># Then restart:</p>
             <p>npm run dev</p>
           </div>
-          <p className="mt-2 text-xs text-warm/60">
+          <p className="mt-2 text-xs text-amber-400/60">
             The tunnel script updates your .env.local automatically.
           </p>
         </div>
@@ -227,8 +227,8 @@ export default function ResellerBotPage(): JSX.Element {
       {loading || status === null ? (
         <p className="text-sm text-[var(--text-2)]">Loading bot status…</p>
       ) : status.pending ? (
-        <div className="rounded-lg border border-[var(--warm)]/20 bg-[var(--warm-soft)] px-6 py-8">
-          <h2 className="text-lg font-semibold text-[var(--warm)]">Account pending activation</h2>
+        <div className="rounded-lg border border-[var(--amber)]/20 bg-[var(--amber-soft)] px-6 py-8">
+          <h2 className="text-lg font-semibold text-[var(--amber)]">Account pending activation</h2>
           <p className="mt-2 text-sm text-[var(--text-2)]">
             Your account must be activated by the owner before you can connect a bot.
           </p>
@@ -268,7 +268,7 @@ export default function ResellerBotPage(): JSX.Element {
             type="button"
             disabled={saving}
             onClick={() => void disconnect()}
-            className="rounded-md bg-danger-solid px-4 py-2 text-sm font-medium text-paper hover:bg-danger-solid/90 disabled:opacity-60"
+            className="rounded-md bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-500 disabled:opacity-60"
           >
             Disconnect Bot
           </button>
@@ -289,13 +289,13 @@ export default function ResellerBotPage(): JSX.Element {
                 className={inputClass}
               />
             </label>
-            <p className="text-xs text-[var(--warm)]">
+            <p className="text-xs text-[var(--amber)]">
               Your bot token is encrypted and stored securely. It cannot be retrieved after connection.
             </p>
             <button
               type="submit"
               disabled={saving || token.length === 0}
-              className="rounded-md bg-accent-solid px-4 py-2 text-sm font-medium text-accent-on hover:bg-accent-solid-hover disabled:opacity-60"
+              className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-soft)] disabled:opacity-60"
             >
               {saving ? 'Connecting…' : 'Connect Bot'}
             </button>

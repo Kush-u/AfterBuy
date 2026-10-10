@@ -87,7 +87,7 @@ export function NotificationsPage(): JSX.Element {
           <button
             key={item}
             type="button"
-            className={`min-h-11 rounded-full px-3 text-sm capitalize ${filter === item ? 'bg-accent-solid text-accent-on' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
+            className={`min-h-11 rounded-full px-3 text-sm capitalize ${filter === item ? 'bg-[var(--accent)] text-white' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
             onClick={() => setFilter(item)}
           >
             {item}

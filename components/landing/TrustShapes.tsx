@@ -1,14 +1,13 @@
 /**
  * @file components/landing/TrustShapes.tsx
  *
- * Low-poly teal and sky solids drifting behind the trust pillars.
+ * Low-poly gold solids drifting behind the trust pillars.
  */
 
 'use client';
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { readTokenColor } from '@/lib/landing/palette';
 import { readLandingQuality } from '@/components/landing/quality';
 import { addStudioLights, createStage } from '@/components/landing/webgl-stage';
 
@@ -26,17 +25,17 @@ export default function TrustShapes(): JSX.Element {
 
     const wire = new THREE.Mesh(
       new THREE.IcosahedronGeometry(0.7, 0),
-      new THREE.MeshStandardMaterial({ color: readTokenColor('--accent-rgb'), metalness: 0.85, roughness: 0.25, wireframe: true }),
+      new THREE.MeshStandardMaterial({ color: '#e6c98a', metalness: 0.85, roughness: 0.25, wireframe: true }),
     );
     wire.position.set(-2.4, 0.4, 0);
     const gem = new THREE.Mesh(
       new THREE.OctahedronGeometry(0.85, 0),
-      new THREE.MeshStandardMaterial({ color: readTokenColor('--sky-rgb'), metalness: 1, roughness: 0.18, emissive: readTokenColor('--backdrop-b-rgb'), emissiveIntensity: 0.25 }),
+      new THREE.MeshStandardMaterial({ color: '#d4b483', metalness: 1, roughness: 0.18, emissive: '#a16207', emissiveIntensity: 0.25 }),
     );
     gem.position.set(2.2, -0.3, -0.4);
     const ring = new THREE.Mesh(
       new THREE.TorusGeometry(0.7, 0.05, 12, 40),
-      new THREE.MeshStandardMaterial({ color: readTokenColor('--paper-rgb'), metalness: 0.7, roughness: 0.3 }),
+      new THREE.MeshStandardMaterial({ color: '#fafaf9', metalness: 0.7, roughness: 0.3 }),
     );
     ring.position.set(0.2, 1.1, -1);
     stage.scene.add(wire, gem, ring);

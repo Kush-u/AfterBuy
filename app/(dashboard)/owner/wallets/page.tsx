@@ -132,7 +132,7 @@ export default function OwnerWalletsPage(): JSX.Element {
           </Link>
           <button
             type="button"
-            className="text-sm text-[var(--text-2)] hover:text-[var(--text-0)]"
+            className="text-sm text-[var(--text-2)] hover:text-white"
             onClick={() => {
               setAdjustId(row.walletId);
               setMode('credit');
@@ -221,21 +221,21 @@ export default function OwnerWalletsPage(): JSX.Element {
       )}
 
       {adjustId ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-shade/70 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
           <div className="w-full max-w-md rounded-lg border border-[var(--border)] bg-[var(--bg-card)] p-5">
             <h2 className="text-lg font-medium text-[var(--text-1)]">Adjust balance</h2>
             <div className="mt-4 flex gap-2">
               <button
                 type="button"
                 onClick={() => setMode('credit')}
-                className={`rounded-md px-3 py-1 text-sm ${mode === 'credit' ? 'bg-success-solid text-paper' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
+                className={`rounded-md px-3 py-1 text-sm ${mode === 'credit' ? 'bg-emerald-700 text-white' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
               >
                 Credit
               </button>
               <button
                 type="button"
                 onClick={() => setMode('debit')}
-                className={`rounded-md px-3 py-1 text-sm ${mode === 'debit' ? 'bg-danger-solid text-paper' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
+                className={`rounded-md px-3 py-1 text-sm ${mode === 'debit' ? 'bg-red-800 text-white' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
               >
                 Debit
               </button>
@@ -264,7 +264,7 @@ export default function OwnerWalletsPage(): JSX.Element {
                 type="button"
                 disabled={saving}
                 onClick={() => void submitAdjust()}
-                className="rounded-md bg-accent-solid px-4 py-2 text-sm text-accent-on disabled:opacity-50"
+                className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm text-white disabled:opacity-50"
               >
                 {saving ? 'Saving…' : 'Apply'}
               </button>

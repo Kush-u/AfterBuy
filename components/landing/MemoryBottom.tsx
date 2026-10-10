@@ -13,31 +13,31 @@ import { toggleTheme, useThemeDark } from '@/components/landing/useThemeDark';
 const TABS = [
   {
     id: 'owner',
-    label: 'Platform owner',
+    label: 'Platform Owner',
     points: [
-      'See activity across every store',
-      'Run the operations control tower',
+      'Aggregate intelligence across every store',
+      'Run the Operations Control Tower',
       'Spot patterns before they become incidents',
     ],
     panel: 'Control tower · 14 stores · anomaly quiet',
   },
   {
     id: 'store',
-    label: 'Reseller',
+    label: 'Reseller / Store',
     points: [
-      'Buyer insight on every thread',
-      'Recall for repeat incidents',
-      'Store patterns that build over time',
+      'Customer intelligence on every thread',
+      'Recovery memory for repeat incidents',
+      'Store patterns that compound over time',
     ],
-    panel: 'Buyer panel · preferences, objections, WHY?',
+    panel: 'Customer panel · preferences, objections, WHY?',
   },
   {
-    id: 'buyer',
-    label: 'Buyer',
+    id: 'customer',
+    label: 'End Customer',
     points: [
-      'A personal reply, not a canned script',
-      'Preferences remembered between orders',
-      'Offers that fit how they actually buy',
+      'A personal reply, not a generic script',
+      'Preferences remembered across visits',
+      'Offers that match how they actually buy',
     ],
     panel: 'Telegram thread · remembered, then answered',
   },
@@ -47,19 +47,19 @@ const STEPS = [
   {
     num: '01',
     title: 'Connect your Telegram bot',
-    body: 'Point AfterBuy at the bot you already run. No new checkout and nothing new for buyers to install.',
+    body: 'Point Buyer Memory at the bot you already run. No new checkout. No new app for customers.',
     icon: <Plug size={22} aria-hidden="true" />,
   },
   {
     num: '02',
-    title: 'Remy starts learning',
-    body: 'Every message, order and objection is saved to the right memory bank. Remy reads it in context.',
+    title: 'AI starts learning',
+    body: 'Every message, order, and objection lands in the right bank. grok-3 reads it in context.',
     icon: <Brain size={22} aria-hidden="true" />,
   },
   {
     num: '03',
-    title: 'Every buyer is remembered',
-    body: 'The next conversation starts from what already happened, so nobody has to repeat themselves.',
+    title: 'Commerce remembers',
+    body: 'The next conversation starts from what already happened. The crystal stays crystallized.',
     icon: <span className="spark" aria-hidden="true">✦</span>,
   },
 ];
@@ -76,9 +76,9 @@ export function MemoryBottom(): JSX.Element {
           <div>
             <p className="eyebrow">Trust</p>
             <h2 className="grad-text" data-split>
-              Many stores. Nothing shared.
+              Multi-tenant. Zero leakage.
             </h2>
-            <p className="lede">Three layers of isolation keep each store’s memory its own.</p>
+            <p className="lede">Three isolation layers. Mathematically enforced.</p>
             <pre className="smoke">
               <span>npm run memory:smoke</span>
               <span className="pass">✓ 3 PASS</span>
@@ -94,16 +94,16 @@ export function MemoryBottom(): JSX.Element {
           </div>
           <div className="rings" aria-hidden="true">
             <svg viewBox="0 0 420 420">
-              <circle className="ring platform" cx="210" cy="210" r="168" />
-              <circle className="ring store" cx="210" cy="210" r="112" />
-              <circle className="ring customer" cx="210" cy="210" r="58" />
+              <circle className="ring gold" cx="210" cy="210" r="168" />
+              <circle className="ring blue" cx="210" cy="210" r="112" />
+              <circle className="ring violet" cx="210" cy="210" r="58" />
               <circle className="orbit o1" cx="210" cy="42" r="4" />
               <circle className="orbit o2" cx="322" cy="210" r="3.5" />
               <circle className="orbit o3" cx="210" cy="152" r="3" />
             </svg>
-            <span className="ring-label platform">Platform</span>
-            <span className="ring-label store">Store</span>
-            <span className="ring-label customer">Buyer</span>
+            <span className="ring-label gold">Platform</span>
+            <span className="ring-label blue">Store</span>
+            <span className="ring-label violet">Customer</span>
           </div>
         </div>
       </section>
@@ -158,7 +158,7 @@ export function MemoryBottom(): JSX.Element {
       <section id="metrics" className="section metrics">
         <div className="wrap">
           <h2 className="grad-text" data-split>
-            Built for stores that live on Telegram
+            Built for the next generation of commerce
           </h2>
           <div className="metric-grid reveal-group">
             <article className="reveal">
@@ -167,15 +167,15 @@ export function MemoryBottom(): JSX.Element {
             </article>
             <article className="reveal">
               <p className="stat-num grad-text" data-count="100" data-suffix="%">100%</p>
-              <p>store isolation</p>
+              <p>bank isolation</p>
             </article>
             <article className="reveal">
               <p className="stat-num grad-text" data-count="50" data-prefix="<" data-suffix="ms">&lt;50ms</p>
-              <p>typical recall time</p>
+              <p>recall time</p>
             </article>
             <article className="reveal">
               <p className="stat-num grad-text">∞</p>
-              <p>buyers remembered</p>
+              <p>memories — no limit</p>
             </article>
           </div>
           <p className="built-with">
@@ -183,7 +183,7 @@ export function MemoryBottom(): JSX.Element {
             <span>Supabase</span>
             <span>Vercel</span>
             <span>Hindsight by Vectorize</span>
-            <span>Groq</span>
+            <span>Grok / xAI</span>
             <span>Telegram</span>
           </p>
         </div>
@@ -211,13 +211,13 @@ export function MemoryBottom(): JSX.Element {
 
       <section id="pricing" className="finale" data-crystal="finale">
         <div className="finale-copy">
-          <h2 className="grad-text">Selling should have a memory.</h2>
+          <h2 className="grad-text">Commerce should learn.</h2>
           <p className="finale-big grad-text">Now it does.</p>
           <Link href="/login" className="btn btn-grad btn-xl">
-            Open your store
+            Start Building Memory
             <ArrowRight size={18} aria-hidden="true" />
           </Link>
-          <p>Connect your bot and Buyer Memory starts working straight away.</p>
+          <p>No credit card required. Memory starts working immediately.</p>
         </div>
       </section>
 
@@ -237,14 +237,14 @@ export function MemoryBottom(): JSX.Element {
         <div className="wrap foot-grid">
           <div>
             <Link href="#hero" className="mem-logo">
-              <span className="mem-mark" aria-hidden="true">AB</span>
+              <span className="mem-mark" aria-hidden="true">BT</span>
               <span className="mem-word">AfterBuy</span>
             </Link>
-            <p>The Telegram store that remembers every buyer.</p>
+            <p>Commerce intelligence with a memory that stays in its bank.</p>
           </div>
           <nav aria-label="Footer">
             <a href="#features">Features</a>
-            <a href="#architecture">Trust</a>
+            <a href="#architecture">Architecture</a>
             <Link href="/api-docs">Docs</Link>
             <a href="https://github.com/Kush-u/AfterBuy">GitHub</a>
           </nav>

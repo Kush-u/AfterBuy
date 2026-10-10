@@ -76,7 +76,7 @@ export default async function OwnerFulfillmentPage(): Promise<JSX.Element> {
         <span>
           {row.order.createdAt.toLocaleString()}
           {isManualFulfillmentOverdue(row.order.createdAt) ? (
-            <span className="ml-2 text-xs text-[var(--warm)]">Reminder due</span>
+            <span className="ml-2 text-xs text-[var(--amber)]">Reminder due</span>
           ) : null}
         </span>
       ),

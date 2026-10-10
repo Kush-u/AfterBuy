@@ -129,7 +129,7 @@ export default function ResellerDeliveriesPage(): JSX.Element {
             <button
               type="button"
               onClick={() => void deliver(row.orderId)}
-              className="rounded-md bg-accent-solid px-2 py-1 text-xs text-accent-on"
+              className="rounded-md bg-[var(--accent)] px-2 py-1 text-xs text-white"
             >
               Deliver
             </button>

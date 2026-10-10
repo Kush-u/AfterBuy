@@ -5,7 +5,6 @@
  */
 
 import * as THREE from 'three';
-import { writeTokenUniform } from '@/lib/landing/palette';
 import particlesVert from '@/shaders/particles.vert.glsl';
 import particlesFrag from '@/shaders/particles.frag.glsl';
 
@@ -39,8 +38,6 @@ export function createParticles(scene: THREE.Scene, count: number, themeDark: bo
       uMouse: { value: new THREE.Vector2() },
       uPixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
       uTheme: { value: themeDark ? 0 : 1 },
-      uGlow: { value: writeTokenUniform('--accent-soft-rgb', new THREE.Color()) },
-      uGlowDeep: { value: writeTokenUniform('--accent-rgb', new THREE.Color()) },
     },
     vertexShader: particlesVert,
     fragmentShader: particlesFrag,

@@ -110,7 +110,7 @@ export function StoreIntelligencePanel({ tenantId }: StoreIntelligencePanelProps
         </button>
       </div>
       {data.degraded ? (
-        <div className="rounded-[var(--r-md)] border border-[var(--warm)]/20 bg-[var(--warm-soft)] px-4 py-2 text-xs text-[var(--warm)]">
+        <div className="rounded-[var(--r-md)] border border-[var(--amber)]/20 bg-[var(--amber-soft)] px-4 py-2 text-xs text-[var(--amber)]">
           Memory service offline — showing live data only
         </div>
       ) : null}

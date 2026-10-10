@@ -87,8 +87,8 @@ export function CommandPalette({ role }: { readonly role: UserRole }): JSX.Eleme
   }
 
   return (
-    <div className="fixed inset-0 z-[80] flex items-start justify-center bg-[rgb(var(--ink-rgb)/0.62)] p-4 pt-[12vh] backdrop-blur-md">
-      <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--border-glow)] bg-[var(--surface-1)] shadow-[0_24px_80px_rgb(var(--accent-rgb)/0.25)]">
+    <div className="fixed inset-0 z-[80] flex items-start justify-center bg-[rgba(2,3,10,0.62)] p-4 pt-[12vh] backdrop-blur-md">
+      <div className="w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--border-glow)] bg-[var(--surface-1)] shadow-[0_24px_80px_rgba(100,55,255,0.25)]">
         <input
           autoFocus
           value={query}

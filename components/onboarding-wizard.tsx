@@ -39,16 +39,16 @@ type Step = 1 | 2 | 3;
 
 const STEP_COPY: Record<Step, { readonly quote: string; readonly sub: string }> = {
   1: {
-    quote: 'Your store. Your brand. Your buyers.',
-    sub: 'AfterBuy is built for Telegram resellers who want every buyer remembered.',
+    quote: 'Your store. Your brand. Your customers.',
+    sub: 'Join the platform built for resellers who mean business.',
   },
   2: {
-    quote: 'Every sale remembered. Every pattern noticed.',
-    sub: 'Buyer Memory keeps track of your store so you never miss a signal.',
+    quote: 'Every sale remembered. Every pattern learned. Go.',
+    sub: 'Buyer Memory watches your store so you never miss a signal.',
   },
   3: {
-    quote: 'You are all set. Your store is open.',
-    sub: 'Remy is ready to help the moment your first buyer says hello.',
+    quote: 'The curtain rises. The platform is yours.',
+    sub: 'Intelligence activated. Commerce begins now.',
   },
 };
 
@@ -66,7 +66,7 @@ function StepDots({ step }: { readonly step: Step }): JSX.Element {
               aria-hidden="true"
               className={
                 active
-                  ? 'h-2 w-8 rounded-full bg-accent transition-all duration-300'
+                  ? 'h-2 w-8 rounded-full bg-purple-600 transition-all duration-300'
                   : 'auth-dot-idle h-2 w-2 rounded-full transition-all duration-300'
               }
             />
@@ -93,7 +93,7 @@ function LaunchButton({
       return;
     }
     gsap.to(launchBtnRef.current, {
-      boxShadow: '0 0 20px 4px rgb(var(--accent-rgb)/0.5)',
+      boxShadow: '0 0 20px 4px rgba(124,58,237,0.5)',
       duration: 1,
       repeat: -1,
       yoyo: true,
@@ -316,7 +316,7 @@ export function OnboardingWizard(): JSX.Element {
               {step === 3 ? (
                 <div>
                   <h1 className={headingClass}>You&apos;re almost ready!</h1>
-                  <dl className="mt-5 space-y-2 rounded-xl border border-accent/20 bg-accent/5 p-4">
+                  <dl className="mt-5 space-y-2 rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
                     <div>
                       <dt className="text-xs text-muted-foreground">Name</dt>
                       <dd className="text-sm text-foreground">{displayName.trim()}</dd>
@@ -335,7 +335,7 @@ export function OnboardingWizard(): JSX.Element {
                   <label className="mt-4 flex cursor-pointer items-start gap-3 text-sm text-foreground">
                     <input
                       type="checkbox"
-                      className="mt-0.5 h-4 w-4 accent-[var(--accent-solid)]"
+                      className="mt-0.5 h-4 w-4 accent-purple-600"
                       checked={accepted}
                       onChange={(event) => setAccepted(event.target.checked)}
                     />

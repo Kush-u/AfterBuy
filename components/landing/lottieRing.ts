@@ -1,7 +1,7 @@
 /**
  * @file components/landing/lottieRing.ts
  *
- * A single accent ring pulse used as the hover micro-animation on feature cards.
+ * A single gold ring pulse used as the hover micro-animation on feature cards.
  */
 
 export const lottieRing = {
@@ -44,7 +44,7 @@ export const lottieRing = {
             { ty: 'el', p: { a: 0, k: [0, 0] }, s: { a: 0, k: [62, 62] } },
             {
               ty: 'st',
-              c: { a: 0, k: [0.059, 0.463, 0.431, 1] },
+              c: { a: 0, k: [0.631, 0.384, 0.027, 1] },
               o: { a: 0, k: 100 },
               w: { a: 0, k: 4 },
               lc: 2,

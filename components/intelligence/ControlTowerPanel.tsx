@@ -217,7 +217,7 @@ export function ControlTowerPanel(): JSX.Element {
           {degraded ? (
             <div
               role="status"
-              className="rounded-[var(--r-md)] border border-[var(--warm)]/30 bg-[var(--warm-soft)] px-4 py-3 text-sm text-[var(--text-1)]"
+              className="rounded-[var(--r-md)] border border-[var(--amber)]/30 bg-[var(--amber-soft)] px-4 py-3 text-sm text-[var(--text-1)]"
             >
               Memory layer degraded. Platform intelligence is unavailable until the memory service responds.
             </div>
@@ -231,12 +231,12 @@ export function ControlTowerPanel(): JSX.Element {
               <span className="relative flex h-4 w-4" aria-hidden="true">
                 <span
                   className={`absolute inline-flex h-full w-full motion-safe:animate-ping rounded-full opacity-50 ${
-                    degraded ? 'bg-[var(--warm)]' : 'bg-[var(--success)]'
+                    degraded ? 'bg-[var(--amber)]' : 'bg-[var(--success)]'
                   }`}
                 />
                 <span
                   className={`relative inline-flex h-4 w-4 rounded-full ${
-                    degraded ? 'bg-[var(--warm)]' : 'bg-[var(--success)]'
+                    degraded ? 'bg-[var(--amber)]' : 'bg-[var(--success)]'
                   }`}
                 />
               </span>

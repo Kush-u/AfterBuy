@@ -79,7 +79,7 @@ export default function InviteResellerPage(): JSX.Element {
         <button
           type="submit"
           disabled={loading}
-          className="rounded-md bg-accent-solid px-4 py-2 text-sm font-medium text-accent-on hover:bg-accent-solid-hover focus:outline-none focus:ring-2 focus:ring-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-60"
+          className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-soft)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] disabled:cursor-not-allowed disabled:opacity-60"
         >
           {loading ? 'Sending…' : 'Send Invite'}
         </button>
@@ -88,7 +88,7 @@ export default function InviteResellerPage(): JSX.Element {
         <div className="mt-8 max-w-lg rounded-lg border border-[var(--border)] bg-[var(--bg-card)] p-4">
           <p className="text-sm text-[var(--text-2)]">Share this link with your reseller. They will use it to create their account.</p>
           <p className="mt-2 font-mono text-sm text-[var(--text-1)] break-all">{inviteUrl}</p>
-          <p className="mt-2 text-xs text-[var(--warm)]">Link expires in 7 days</p>
+          <p className="mt-2 text-xs text-[var(--amber)]">Link expires in 7 days</p>
           <button
             type="button"
             onClick={() => void copyLink()}

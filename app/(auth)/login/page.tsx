@@ -215,7 +215,7 @@ function LoginForm(): JSX.Element {
           role="tab"
           aria-selected={tab === 'signin'}
           className={tab === 'signin'
-            ? 'flex-1 cursor-pointer rounded-lg bg-accent-solid px-4 py-1.5 text-sm font-medium text-accent-on'
+            ? 'flex-1 cursor-pointer rounded-lg bg-purple-600 px-4 py-1.5 text-sm font-medium text-white'
             : 'flex-1 cursor-pointer rounded-lg px-4 py-1.5 text-sm text-muted-foreground'}
           onClick={() => {
             setTab('signin');
@@ -229,7 +229,7 @@ function LoginForm(): JSX.Element {
           role="tab"
           aria-selected={tab === 'signup'}
           className={tab === 'signup'
-            ? 'flex-1 cursor-pointer rounded-lg bg-accent-solid px-4 py-1.5 text-sm font-medium text-accent-on'
+            ? 'flex-1 cursor-pointer rounded-lg bg-purple-600 px-4 py-1.5 text-sm font-medium text-white'
             : 'flex-1 cursor-pointer rounded-lg px-4 py-1.5 text-sm text-muted-foreground'}
           onClick={() => {
             setTab('signup');
@@ -360,7 +360,7 @@ function LoginForm(): JSX.Element {
                 className={fieldClass}
               />
             </label>
-            <p className="auth-alert-amber flex items-start gap-2.5 rounded-xl border border-warm/30 bg-warm/10 px-4 py-3 text-[13px]">
+            <p className="auth-alert-amber flex items-start gap-2.5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-[13px]">
               <InfoMark />
               <span>Account creation requires an invitation from the store owner.</span>
             </p>
@@ -391,8 +391,8 @@ function LoginForm(): JSX.Element {
         <p
           className={`mt-4 flex w-full items-start gap-2.5 rounded-xl px-4 py-3 text-[13px] ${
             tone === 'amber'
-              ? 'auth-alert-amber border border-warm/30 bg-warm/10'
-              : 'auth-alert-red border border-danger/30 bg-danger/10'
+              ? 'auth-alert-amber border border-amber-500/30 bg-amber-500/10'
+              : 'auth-alert-red border border-red-500/30 bg-red-500/10'
           }`}
           role="alert"
         >
@@ -461,8 +461,8 @@ function GoogleMark(): JSX.Element {
 }
 
 const LOGIN_STATS = [
-  { value: '3', label: 'Memory Layers' },
-  { value: '100%', label: 'Store-Isolated Memory' },
+  { value: '171', label: 'Tests Passing' },
+  { value: '21', label: 'Migrations Live' },
   { value: '4', label: 'Payment Methods' },
   { value: '60s', label: 'Bot Deployment' },
 ] as const;
@@ -479,7 +479,7 @@ export default function LoginPage(): JSX.Element {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: reduceMotion ? 0 : 0.6, delay: reduceMotion ? 0 : 0.3, ease: 'easeOut' }}
         >
-          Every buyer, remembered.
+          Commerce should learn. Now it does.
         </motion.p>
         <motion.div
           className="mt-10 grid w-full max-w-sm grid-cols-2 gap-x-8 gap-y-6 text-left"

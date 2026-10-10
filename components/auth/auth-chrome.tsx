@@ -14,13 +14,13 @@ export const glassCardClass =
   'auth-glass relative z-10 w-full max-w-[420px] rounded-2xl border p-8 shadow-2xl backdrop-blur-xl';
 
 export const fieldClass =
-  'h-11 w-full rounded-xl border border-accent/30 bg-background px-4 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-[var(--muted-foreground)] focus:border-accent focus:ring-2 focus:ring-accent/20 focus-visible:outline-none';
+  'h-11 w-full rounded-xl border border-purple-500/30 bg-background px-4 text-sm text-foreground outline-none transition-all duration-200 placeholder:text-[var(--muted-foreground)] focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus-visible:outline-none';
 
 export const submitClass =
-  'inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-xl bg-accent-solid text-sm font-medium text-accent-on transition-all duration-200 hover:bg-accent-solid-hover hover:shadow-lg hover:shadow-accent/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60';
+  'inline-flex h-11 w-full cursor-pointer items-center justify-center rounded-xl bg-gradient-to-r from-purple-600 to-violet-600 text-sm font-medium text-white transition-all duration-200 hover:from-purple-500 hover:to-violet-500 hover:shadow-lg hover:shadow-purple-500/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400 disabled:cursor-not-allowed disabled:opacity-60';
 
 export const googleClass =
-  'auth-google-btn inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border text-sm font-medium text-foreground transition-all duration-200 hover:bg-paper/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent disabled:cursor-not-allowed disabled:opacity-60';
+  'auth-google-btn inline-flex h-11 w-full cursor-pointer items-center justify-center gap-2 rounded-xl border text-sm font-medium text-foreground transition-all duration-200 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-purple-400 disabled:cursor-not-allowed disabled:opacity-60';
 
 export const quoteClass = 'text-4xl font-light leading-tight text-foreground';
 
@@ -39,7 +39,7 @@ function ParticleField(): JSX.Element {
       {PARTICLES.map((particle) => (
         <span
           key={`${particle.left}-${particle.top}`}
-          className="ab-particle absolute h-1 w-1 rounded-full bg-accent/20"
+          className="ab-particle absolute h-1 w-1 rounded-full bg-purple-500/20"
           style={{
             left: particle.left,
             top: particle.top,
@@ -68,7 +68,7 @@ export function AuthLeftPanel({ children }: AuthLeftPanelProps): JSX.Element {
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute bottom-[-4rem] right-[-2rem] h-64 w-64 rounded-full bg-accent/15 blur-3xl"
+        className="pointer-events-none absolute bottom-[-4rem] right-[-2rem] h-64 w-64 rounded-full bg-purple-600/15 blur-3xl"
       />
       <ParticleField />
       <div className="relative z-10 flex w-full max-w-lg flex-col items-center text-center">
