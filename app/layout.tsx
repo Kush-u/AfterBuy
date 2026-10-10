@@ -22,10 +22,10 @@ export const metadata: Metadata = {
     template: '%s — AfterBuy',
   },
   description: 'AfterBuy — the Telegram store that remembers every buyer.',
-  // SVG only: the mark is geometric and scales cleanly from 16px up.
   icons: {
-    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
-    shortcut: '/favicon.svg',
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
   },
 };
 

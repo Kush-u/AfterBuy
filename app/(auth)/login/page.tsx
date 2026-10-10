@@ -16,7 +16,7 @@ import { ROUTES, dashboardHomeForRole, isSafeNextPath } from '@/lib/navigation';
 import { createBrowserSupabaseClient } from '@/lib/supabase/client';
 import type { UserRole } from '@/modules/identity/types';
 import { AuthLeftPanel, AuthRightPanel, fieldClass, glassCardClass, googleClass, quoteClass, submitClass } from '@/components/auth/auth-chrome';
-import { AnimatedAbMark } from '@/components/ui/animated-ab-mark';
+import { AnimatedCrown } from '@/components/ui/animated-crown';
 
 function isUserRole(value: unknown): value is UserRole {
   return value === 'owner' || value === 'reseller' || value === 'staff';
@@ -206,7 +206,7 @@ function LoginForm(): JSX.Element {
 
   return (
     <div className="flex w-full flex-col items-center">
-      <AnimatedAbMark size={36} float={false} />
+      <AnimatedCrown size={36} float={false} />
       <h1 className="mt-3 text-xl font-semibold text-foreground">AfterBuy</h1>
 
       <div className="auth-tabs mt-4 flex w-full rounded-xl p-1" role="tablist" aria-label="Account">

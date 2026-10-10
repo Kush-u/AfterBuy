@@ -14,7 +14,7 @@ import { useRouter } from 'next/navigation';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { gsap, prefersReducedMotion, useGSAP } from '@/lib/landing/gsap';
 import { Button } from '@/components/ui/Button';
-import { AnimatedAbMark } from '@/components/ui/animated-ab-mark';
+import { AnimatedCrown } from '@/components/ui/animated-crown';
 import {
   AuthLeftPanel,
   AuthRightPanel,
@@ -232,7 +232,7 @@ export function OnboardingWizard(): JSX.Element {
               {step === 1 ? (
                 <form onSubmit={continueFromName}>
                   <div className="mb-4 flex justify-center">
-                    <AnimatedAbMark size={40} float={false} />
+                    <AnimatedCrown size={40} float={false} />
                   </div>
                   <h1 className={headingClass}>Welcome to AfterBuy</h1>
                   <p className="mt-1 text-sm text-muted-foreground">What should we call you?</p>
