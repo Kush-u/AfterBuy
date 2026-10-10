@@ -114,7 +114,7 @@ export function NotificationBell({ role }: NotificationBellProps): JSX.Element {
             key={badge}
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
-            className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-[var(--red)] px-1 text-[10px] text-white"
+            className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-danger-solid px-1 text-[10px] text-paper"
           >
             {badge}
           </motion.span>

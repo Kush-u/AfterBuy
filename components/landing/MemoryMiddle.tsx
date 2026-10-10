@@ -1,5 +1,5 @@
 /**
- * Product chapters, live chat, and the feature bento.
+ * Product chapters, live chat, and the feature bento of the AfterBuy landing page.
  */
 
 'use client';
@@ -15,22 +15,22 @@ const CHAPTERS = [
   {
     id: 'ch1',
     num: '01',
-    title: 'Before & After Memory',
-    body: 'Toggle between no-memory and full-memory mode. Watch your AI transform from generic to personal.',
-    points: ['Recalled preferences', 'Known objections', 'AI recommendation'],
+    title: 'Before and after Buyer Memory',
+    body: 'Switch memory off and on. Watch Remy go from a generic answer to one that sounds like it knows the buyer.',
+    points: ['Recalled preferences', 'Known objections', 'A suggested next move'],
   },
   {
     id: 'ch2',
     num: '02',
-    title: 'Why did the AI say that?',
-    body: 'Every recommendation has evidence. The WHY? button shows you exactly which memories the AI used.',
-    points: ['Evidence chain', 'Type badges', 'Powered by Hindsight'],
+    title: 'Why did Remy say that?',
+    body: 'Every suggestion comes with evidence. The WHY? button shows exactly which memories Remy used.',
+    points: ['Evidence trail', 'Memory type badges', 'Powered by Hindsight'],
   },
   {
     id: 'ch3',
     num: '03',
-    title: 'Never solve the same problem twice',
-    body: 'Type an incident. The system recalls every time this happened before and what fixed it.',
+    title: 'Fix a problem once',
+    body: 'Describe an incident. AfterBuy recalls every time it happened before and what fixed it.',
     points: ['Incident memory', 'Recovery patterns', 'Suggested resolution'],
   },
 ];
@@ -49,7 +49,7 @@ function CustomerMock(): JSX.Element {
       <div className="mock-card">Prefers bulk orders of 50 or more. Reorders every other Friday.</div>
       <p className="mock-kicker">Known objections</p>
       <div className="mock-card warn">Price-sensitive unless a quantity break is on the table.</div>
-      <p className="mock-kicker">AI recommendation</p>
+      <p className="mock-kicker">Remy suggests</p>
       <div className="mock-card">
         Lead with a 10% break at 40 units. She converted on that offer last month.
         <div className="mock-row">
@@ -64,7 +64,7 @@ function CustomerMock(): JSX.Element {
 function InspectorMock(): JSX.Element {
   return (
     <div className="mock mock-modal" aria-hidden="true">
-      <p className="mock-kicker">Memory inspector</p>
+      <p className="mock-kicker">Buyer Memory inspector</p>
       <h3>Why this recommendation?</h3>
       <p className="mock-lead">Lead with quantity pricing. She bought bulk twice and asked about discounts.</p>
       <p className="mock-kicker">Evidence from memory</p>
@@ -74,7 +74,7 @@ function InspectorMock(): JSX.Element {
       </div>
       <div className="mock-card">
         Objected to single-unit pricing in March.
-        <span className="badge gold">objection</span>
+        <span className="badge warm">objection</span>
       </div>
       <p className="powered">Powered by Hindsight</p>
     </div>
@@ -84,7 +84,7 @@ function InspectorMock(): JSX.Element {
 function RecoveryMock(): JSX.Element {
   return (
     <div className="mock" aria-hidden="true">
-      <p className="mock-kicker">Commerce recovery</p>
+      <p className="mock-kicker">Incident recall</p>
       <div className="mock-input">Payment webhook timed out</div>
       <div className="mock-card">
         <strong>Seen 4 times</strong>
@@ -140,7 +140,7 @@ function ChatDemo(): JSX.Element {
 
   return (
     <div className="chat-shell" ref={root}>
-      <div className="bubble user">What should I offer this customer?</div>
+      <div className="bubble user">What should I offer this buyer?</div>
       <div className="bubble ai">
         <span className={showBadge ? 'mem-badge is-on' : 'mem-badge'}>✦ Memory</span>
         <p>{text || ' '}</p>
@@ -159,11 +159,11 @@ function ChatDemo(): JSX.Element {
 }
 
 const SMALL = [
-  { icon: <Shield size={20} aria-hidden="true" />, title: 'Bank Isolation', body: 'Zero cross-tenant leakage. Mathematically guaranteed.' },
-  { icon: <CircuitBoard size={20} aria-hidden="true" />, title: 'Fail-Open Design', body: 'Memory enriches. It never blocks commerce.' },
-  { icon: <Webhook size={20} aria-hidden="true" />, title: 'Universal Event API', body: 'Any source, any memory bank. One endpoint.' },
-  { icon: <Send size={20} aria-hidden="true" />, title: 'Telegram Native', body: 'Your bot, your customers, your memory.' },
-  { icon: <Brain size={20} aria-hidden="true" />, title: 'Grok AI', body: 'grok-3 with full memory context on every message.' },
+  { icon: <Shield size={20} aria-hidden="true" />, title: 'Store isolation', body: 'Each store keeps its own memory bank. Nothing is shared across stores.' },
+  { icon: <CircuitBoard size={20} aria-hidden="true" />, title: 'Memory never blocks a sale', body: 'If memory is unavailable, orders and replies carry on as normal.' },
+  { icon: <Webhook size={20} aria-hidden="true" />, title: 'One event API', body: 'Send events from any source into the right memory. One endpoint.' },
+  { icon: <Send size={20} aria-hidden="true" />, title: 'Made for Telegram', body: 'Your bot, your buyers, your memory.' },
+  { icon: <Brain size={20} aria-hidden="true" />, title: 'Fast answers', body: 'Remy replies through Groq, with the buyer’s full memory context on every message.' },
 ];
 
 export function MemoryMiddle(): JSX.Element {
@@ -198,7 +198,7 @@ export function MemoryMiddle(): JSX.Element {
                 <h2 className="grad-text">{CHAPTERS[1]?.title}</h2>
                 <p>{CHAPTERS[1]?.body}</p>
                 <a className="btn btn-ghost" href="#chat">
-                  See the evidence chain
+                  See the evidence trail
                   <ArrowRight size={16} aria-hidden="true" />
                 </a>
               </div>
@@ -231,11 +231,11 @@ export function MemoryMiddle(): JSX.Element {
       <section id="chat" className="section chat-section">
         <div className="wrap chat-layout">
           <div>
-            <p className="eyebrow">Live demo</p>
+            <p className="eyebrow">Meet Remy</p>
             <h2 className="grad-text" data-split>
-              AI that knows your customers.
+              An assistant that knows your buyers.
             </h2>
-            <p className="lede">The ✦ Memory badge means your AI recalled history before responding.</p>
+            <p className="lede">The ✦ Memory badge means Remy recalled the buyer&rsquo;s history before answering.</p>
           </div>
           <ChatDemo />
         </div>
@@ -245,13 +245,13 @@ export function MemoryMiddle(): JSX.Element {
         <div className="wrap">
           <p className="eyebrow">Capabilities</p>
           <h2 className="grad-text" data-split>
-            Everything your store needs to learn.
+            Everything your store needs to remember.
           </h2>
           <div className="bento reveal-group">
-            <article className="bento-card large reveal tone-violet" data-cursor="hover">
+            <article className="bento-card large reveal tone-primary" data-cursor="hover">
               <p className="eyebrow">Learning</p>
-              <h3>Outcome Learning Loop</h3>
-              <p>When customers convert or reject, the AI learns and store memory updates automatically.</p>
+              <h3>Outcome learning loop</h3>
+              <p>When a buyer converts or says no, Remy learns from it and your store memory updates on its own.</p>
               <div className="flow" aria-hidden="true">
                 <span />
                 <span />
@@ -260,10 +260,10 @@ export function MemoryMiddle(): JSX.Element {
                 <i />
               </div>
             </article>
-            <article className="bento-card large reveal tone-blue" data-cursor="hover">
+            <article className="bento-card large reveal tone-secondary" data-cursor="hover">
               <p className="eyebrow">Operations</p>
-              <h3>Operations Control Tower</h3>
-              <p>Platform-wide memory intelligence. A god-view for owners.</p>
+              <h3>Operations control tower</h3>
+              <p>Memory health and activity across every store, in one view for platform owners.</p>
               <div className="tower" aria-hidden="true">
                 <strong data-count="12840">0</strong>
                 <em>memories live</em>

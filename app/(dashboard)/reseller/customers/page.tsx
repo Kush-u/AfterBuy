@@ -112,7 +112,7 @@ export default function ResellerCustomersPage(): JSX.Element {
           <button type="button" className="text-[var(--green)]" onClick={() => void act(row.id, 'add')}>
             + Add
           </button>
-          <button type="button" className="text-[var(--amber)]" onClick={() => void act(row.id, 'deduct')}>
+          <button type="button" className="text-[var(--warm)]" onClick={() => void act(row.id, 'deduct')}>
             − Deduct
           </button>
           <button
@@ -168,7 +168,7 @@ export default function ResellerCustomersPage(): JSX.Element {
         <DataTable columns={columns} rows={rows} rowKey={(row) => row.id} emptyMessage="No buyers yet." />
       )}
       {history ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-shade/60 p-4">
           <div className="max-h-[80vh] w-full max-w-lg overflow-y-auto rounded-lg border border-[var(--border)] bg-[var(--bg-page)] p-5">
             <h2 className="text-lg font-semibold">Transaction log</h2>
             <ul className="mt-3 space-y-2 text-sm">

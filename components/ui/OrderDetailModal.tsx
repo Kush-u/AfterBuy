@@ -84,7 +84,7 @@ export function OrderDetailModal({
         <button
           type="button"
           aria-label="Close order details"
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-shade/60 backdrop-blur-sm"
           onClick={handleClose}
         />
         <motion.aside
@@ -239,7 +239,7 @@ function DetailRow({
     <div className="flex items-start justify-between border-b border-[var(--border)] py-3 last:border-0">
       <span className="text-xs font-medium uppercase tracking-wider text-[var(--text-3)]">{label}</span>
       <span
-        className={`flex max-w-[60%] items-start justify-end gap-2 break-all text-right text-sm ${isTotal ? 'font-semibold text-[var(--amber)]' : 'text-[var(--text-1)]'}`}
+        className={`flex max-w-[60%] items-start justify-end gap-2 break-all text-right text-sm ${isTotal ? 'font-semibold text-[var(--warm)]' : 'text-[var(--text-1)]'}`}
       >
         {value}
         {copyText ? <CopyButton text={copyText} /> : null}
@@ -342,7 +342,7 @@ function OwnerManageActions({ actions }: { readonly actions: DrawerActions }): J
         type="button"
         disabled={actions.isBusy}
         onClick={actions.onCancel}
-        className="w-full rounded-[var(--r-md)] border border-[var(--red)]/20 bg-[var(--red-soft)] py-3 font-medium text-[var(--red)] hover:bg-red-500/20 disabled:opacity-60"
+        className="w-full rounded-[var(--r-md)] border border-[var(--red)]/20 bg-[var(--red-soft)] py-3 font-medium text-[var(--red)] hover:bg-danger/20 disabled:opacity-60"
       >
         Cancel Order
       </button>

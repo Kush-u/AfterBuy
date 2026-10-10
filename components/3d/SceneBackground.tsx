@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 function indexColor(id: number): string {
-  return id % 3 === 0 ? '#A855F7' : '#6437FF';
+  return id % 3 === 0 ? 'var(--brand-sky)' : 'var(--brand-teal)';
 }
 
 const PARTICLES = Array.from({ length: 30 }, (_, index) => ({
@@ -84,24 +84,24 @@ export function SceneBackground(): JSX.Element {
       <div
         ref={orb1}
         className="absolute -left-24 -top-24 h-[600px] w-[600px] rounded-full will-change-transform"
-        style={{ background: 'radial-gradient(circle, rgba(139,92,246,0.28), transparent 68%)', filter: 'blur(8px)' }}
+        style={{ background: 'radial-gradient(circle, rgb(var(--accent-rgb)/0.28), transparent 68%)', filter: 'blur(8px)' }}
       />
       <div
         ref={orb2}
         className="absolute -bottom-16 -right-10 h-[400px] w-[400px] rounded-full will-change-transform"
-        style={{ background: 'radial-gradient(circle, rgba(79,70,229,0.22), transparent 68%)', filter: 'blur(8px)' }}
+        style={{ background: 'radial-gradient(circle, rgb(var(--sky-rgb)/0.22), transparent 68%)', filter: 'blur(8px)' }}
       />
       <div
         ref={orb3}
         className="absolute right-[12%] top-1/3 h-[300px] w-[300px] rounded-full will-change-transform"
-        style={{ background: 'radial-gradient(circle, rgba(245,158,11,0.12), transparent 70%)', filter: 'blur(10px)' }}
+        style={{ background: 'radial-gradient(circle, rgb(var(--warm-rgb)/0.12), transparent 70%)', filter: 'blur(10px)' }}
       />
       <div
         ref={grid}
         className="absolute -inset-8 will-change-transform opacity-[0.35]"
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            'linear-gradient(rgb(var(--paper-rgb)/0.03) 1px, transparent 1px), linear-gradient(90deg, rgb(var(--paper-rgb)/0.03) 1px, transparent 1px)',
           backgroundSize: '40px 40px',
         }}
       />
@@ -113,7 +113,7 @@ export function SceneBackground(): JSX.Element {
           const y1 = (dot.id * 53) % 100;
           const x2 = (next.id * 37) % 100;
           const y2 = (next.id * 53) % 100;
-          return <line key={`link-${dot.id}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#6437FF" strokeWidth="0.2" />;
+          return <line key={`link-${dot.id}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke="var(--brand-teal)" strokeWidth="0.2" />;
         })}
       </svg>
       {PARTICLES.map((dot) => (

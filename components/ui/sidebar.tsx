@@ -214,7 +214,7 @@ export function Sidebar({
       <button
         type="button"
         aria-label="Close navigation"
-        className={`fixed inset-0 z-30 bg-black/60 md:hidden ${open ? 'block' : 'hidden'}`}
+        className={`fixed inset-0 z-30 bg-shade/60 md:hidden ${open ? 'block' : 'hidden'}`}
         onClick={onClose}
       />
       <aside
@@ -267,7 +267,7 @@ export function Sidebar({
                       aria-current={active ? 'page' : undefined}
                       className={`flex min-h-11 cursor-pointer items-center gap-2.5 rounded-lg border-l-2 px-3 py-2 text-sm transition-colors duration-150 ${
                         active
-                          ? 'border-[var(--electric)] bg-[var(--surface-3)] font-medium text-[var(--text-0)]'
+                          ? 'border-[var(--brand-teal)] bg-[var(--surface-3)] font-medium text-[var(--text-0)]'
                           : 'border-transparent text-[var(--text-2)] hover:bg-[var(--surface-2)] hover:text-[var(--text-0)]'
                       }`}
                     >
@@ -277,7 +277,7 @@ export function Sidebar({
                         <motion.span
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--amber)] px-1 text-[10px] font-semibold text-black"
+                          className="ml-auto flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--warm)] px-1 text-[10px] font-semibold text-[rgb(var(--on-warm-rgb))]"
                           aria-label={`${item.badge} pending`}
                         >
                           {item.badge}
@@ -298,7 +298,7 @@ export function Sidebar({
               className="avatar-ring flex h-9 w-9 shrink-0 items-center justify-center rounded-full p-[2px]"
               aria-label="Open account"
             >
-              <span className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-[var(--accent)] text-xs font-semibold text-white">
+              <span className="flex h-full w-full items-center justify-center overflow-hidden rounded-full bg-accent-solid text-xs font-semibold text-accent-on">
                 {avatarUrl ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={avatarUrl} alt="" className="h-full w-full object-cover" />

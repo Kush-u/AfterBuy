@@ -76,7 +76,7 @@ function statusClass(status: string): string {
     return 'text-[var(--green)]';
   }
   if (status === 'pending') {
-    return 'text-[var(--amber)]';
+    return 'text-[var(--warm)]';
   }
   return 'text-[var(--red)]';
 }
@@ -87,7 +87,7 @@ function auditDotClass(eventType: string): string {
     return 'bg-[var(--red)]';
   }
   if (lowered.includes('pend')) {
-    return 'bg-[var(--amber)]';
+    return 'bg-[var(--warm)]';
   }
   return 'bg-[var(--green)]';
 }
@@ -223,7 +223,7 @@ export default function ResellerDepositsPage(): JSX.Element {
               <div className="mt-4 grid gap-3 sm:grid-cols-3">
                 <p className="text-sm text-[var(--green)]">Available {formatUsdtDisplay(data.wallet.availableMinor)}</p>
                 <p className="text-sm text-[var(--text-2)]">Reserved {formatUsdtDisplay(data.wallet.reservedMinor ?? '0')}</p>
-                <p className="text-sm text-[var(--amber)]">Pending deposits {data.deposits.pending}</p>
+                <p className="text-sm text-[var(--warm)]">Pending deposits {data.deposits.pending}</p>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
                 <Link href={payments.binance ? ROUTES.reseller.settings : ROUTES.reseller.settings} className="ab-btn-primary">

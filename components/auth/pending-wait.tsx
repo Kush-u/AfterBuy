@@ -68,15 +68,15 @@ export function PendingWait({ supportContact }: PendingWaitProps): JSX.Element {
   return (
     <div className="login-card relative z-10 max-w-md text-center">
       <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-soft)]">AfterBuy</p>
-      <h1 className="mt-3 text-2xl font-semibold text-white">Account Pending Approval</h1>
-      <p className="mt-3 text-sm leading-6 text-white/70">
+      <h1 className="mt-3 text-2xl font-semibold text-[var(--text-0)]">Your account is awaiting approval</h1>
+      <p className="mt-3 text-sm leading-6 text-[var(--text-2)]">
         The store owner will review and activate your account. You will receive access once approved.
       </p>
-      <p className="mt-4 text-xs text-white/45" aria-live="polite">
+      <p className="mt-4 text-xs text-[var(--text-3)]" aria-live="polite">
         {checking ? 'Checking…' : 'We check for approval every 30 seconds.'}
       </p>
       {contact.length > 0 ? (
-        <a href={contact.startsWith('http') || contact.includes('@') ? (contact.includes('@') && !contact.startsWith('mailto:') ? `mailto:${contact}` : contact) : contact} className="mt-4 inline-flex min-h-11 items-center text-sm text-[var(--accent-soft)] hover:text-white">
+        <a href={contact.startsWith('http') || contact.includes('@') ? (contact.includes('@') && !contact.startsWith('mailto:') ? `mailto:${contact}` : contact) : contact} className="mt-4 inline-flex min-h-11 items-center text-sm text-[var(--accent-soft)] hover:text-[var(--text-0)]">
           Contact support
         </a>
       ) : null}

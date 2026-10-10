@@ -82,7 +82,7 @@ export function SupplierOrderActions({ orderId, canAct }: SupplierOrderActionsPr
           onClick={() => {
             void post(API_ROUTES.supplierManualComplete(orderId), { deliveryData, note });
           }}
-          className="rounded-md bg-emerald-600 px-3 py-1.5 text-sm text-white disabled:opacity-50"
+          className="rounded-md bg-success-solid px-3 py-1.5 text-sm text-paper disabled:opacity-50"
         >
           Mark as Completed
         </button>
@@ -92,7 +92,7 @@ export function SupplierOrderActions({ orderId, canAct }: SupplierOrderActionsPr
           onClick={() => {
             void post(API_ROUTES.supplierManualFail(orderId), { note });
           }}
-          className="rounded-md bg-red-600 px-3 py-1.5 text-sm text-white disabled:opacity-50"
+          className="rounded-md bg-danger-solid px-3 py-1.5 text-sm text-paper disabled:opacity-50"
         >
           Mark as Failed
         </button>
@@ -102,7 +102,7 @@ export function SupplierOrderActions({ orderId, canAct }: SupplierOrderActionsPr
           onClick={() => {
             void post(API_ROUTES.supplierResubmit(orderId), {});
           }}
-          className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-sm text-white disabled:opacity-50"
+          className="rounded-md bg-accent-solid px-3 py-1.5 text-sm text-accent-on disabled:opacity-50"
         >
           Re-submit to Supplier
         </button>

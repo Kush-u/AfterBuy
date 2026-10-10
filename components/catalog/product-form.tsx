@@ -278,7 +278,7 @@ export function ProductForm({
       <button
         type="submit"
         disabled={submitting}
-        className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-soft)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] disabled:opacity-60"
+        className="rounded-md bg-accent-solid px-4 py-2 text-sm font-medium text-accent-on hover:bg-accent-solid-hover focus:outline-none focus:ring-2 focus:ring-[var(--accent)] disabled:opacity-60"
       >
         {submitting ? 'Saving…' : mode === 'create' ? 'Create product' : 'Save changes'}
       </button>

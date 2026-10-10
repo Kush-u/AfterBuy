@@ -112,7 +112,7 @@ export default function InvitePage({ params }: InvitePageProps): JSX.Element {
           </div>
         ) : null}
         {state.kind === 'accepted' ? (
-          <div className="mt-4 rounded-[var(--r-md)] border border-[var(--amber)]/20 bg-[var(--amber-soft)] px-4 py-3 text-sm text-[var(--amber)]">
+          <div className="mt-4 rounded-[var(--r-md)] border border-[var(--warm)]/20 bg-[var(--warm-soft)] px-4 py-3 text-sm text-[var(--warm)]">
             Account created! Pending owner approval.
           </div>
         ) : null}

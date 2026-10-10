@@ -8,6 +8,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { readTokenColor } from '@/lib/landing/palette';
 import { readLandingQuality } from '@/components/landing/quality';
 import { addStudioLights, createStage } from '@/components/landing/webgl-stage';
 
@@ -33,31 +34,31 @@ export default function HowItWorksScene({ stepRef }: HowItWorksSceneProps): JSX.
     const stage = createStage(host, { dpr: quality.dpr, fov: 38, z: 4.2 });
     addStudioLights(stage.scene, false);
 
-    const gold = new THREE.MeshStandardMaterial({
-      color: '#e6c98a',
+    const accentMat = new THREE.MeshStandardMaterial({
+      color: readTokenColor('--accent-rgb'),
       metalness: 0.9,
       roughness: 0.2,
-      emissive: '#a16207',
+      emissive: readTokenColor('--backdrop-a-rgb'),
       emissiveIntensity: 0.35,
     });
     const ink = new THREE.MeshStandardMaterial({
-      color: '#1c1917',
+      color: readTokenColor('--ink-rgb'),
       metalness: 0.55,
       roughness: 0.32,
-      emissive: '#a16207',
+      emissive: readTokenColor('--backdrop-a-rgb'),
       emissiveIntensity: 0.18,
     });
     const coinMat = new THREE.MeshStandardMaterial({
-      color: '#d4b483',
+      color: readTokenColor('--sky-rgb'),
       metalness: 1,
       roughness: 0.18,
-      emissive: '#a16207',
+      emissive: readTokenColor('--backdrop-b-rgb'),
       emissiveIntensity: 0.4,
     });
 
     const connect = new THREE.Group();
-    const torus = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.08, 24, 80), gold);
-    const node = new THREE.Mesh(new THREE.SphereGeometry(0.22, 24, 24), new THREE.MeshStandardMaterial({ color: '#fafaf9', metalness: 0.4, roughness: 0.25 }));
+    const torus = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.08, 24, 80), accentMat);
+    const node = new THREE.Mesh(new THREE.SphereGeometry(0.22, 24, 24), new THREE.MeshStandardMaterial({ color: readTokenColor('--paper-rgb'), metalness: 0.4, roughness: 0.25 }));
     node.position.set(0.95, 0.15, 0);
     connect.add(torus, node);
 
@@ -65,7 +66,7 @@ export default function HowItWorksScene({ stepRef }: HowItWorksSceneProps): JSX.
     const slab = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.9, 0.12), ink);
     const label = new THREE.Mesh(
       new THREE.PlaneGeometry(1.05, 0.55),
-      new THREE.MeshBasicMaterial({ color: '#e6c98a', toneMapped: false }),
+      new THREE.MeshBasicMaterial({ color: readTokenColor('--accent-soft-rgb'), toneMapped: false }),
     );
     label.position.set(0, 0.35, 0.08);
     product.add(slab, label);
@@ -76,7 +77,7 @@ export default function HowItWorksScene({ stepRef }: HowItWorksSceneProps): JSX.
     coin.rotation.x = Math.PI / 2.2;
     const coinRing = new THREE.Mesh(
       new THREE.TorusGeometry(0.55, 0.03, 12, 48),
-      new THREE.MeshBasicMaterial({ color: '#fff6e4', toneMapped: false }),
+      new THREE.MeshBasicMaterial({ color: readTokenColor('--paper-rgb'), toneMapped: false }),
     );
     earn.add(coin, coinRing);
     earn.scale.setScalar(0.001);
@@ -84,7 +85,7 @@ export default function HowItWorksScene({ stepRef }: HowItWorksSceneProps): JSX.
     stage.scene.add(connect, product, earn);
     const groups = [connect, product, earn];
     const geometries = [torus.geometry, node.geometry, slab.geometry, label.geometry, coin.geometry, coinRing.geometry];
-    const materials = [gold, ink, coinMat, node.material, label.material, coinRing.material];
+    const materials = [accentMat, ink, coinMat, node.material, label.material, coinRing.material];
 
     let visible = true;
     const observer = new IntersectionObserver((entries) => {

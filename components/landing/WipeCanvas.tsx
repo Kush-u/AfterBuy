@@ -8,6 +8,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { writeTokenUniform } from '@/lib/landing/palette';
 import transitionVert from '@/shaders/transition.vert.glsl';
 import transitionFrag from '@/shaders/transition.frag.glsl';
 
@@ -35,6 +36,9 @@ export default function WipeCanvas({ progressRef }: WipeCanvasProps): JSX.Elemen
     const material = new THREE.ShaderMaterial({
       uniforms: {
         uProgress: { value: 0 },
+        uInk: { value: writeTokenUniform('--void-rgb', new THREE.Color()) },
+        uRimA: { value: writeTokenUniform('--accent-rgb', new THREE.Color()) },
+        uRimB: { value: writeTokenUniform('--sky-rgb', new THREE.Color()) },
         uTime: { value: 0 },
       },
       vertexShader: transitionVert,

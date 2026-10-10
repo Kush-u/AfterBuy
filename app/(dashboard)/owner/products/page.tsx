@@ -182,7 +182,7 @@ export default function OwnerProductsPage(): JSX.Element {
                   onClick={() =>
                     void setStatus(row.id, row.status === 'published' ? 'paused' : 'published')
                   }
-                  className="text-xs font-medium text-[var(--text-2)] hover:text-white disabled:opacity-60"
+                  className="text-xs font-medium text-[var(--text-2)] hover:text-[var(--text-0)] disabled:opacity-60"
                 >
                   {busy ? 'Updating…' : toggleLabel}
                 </button>
@@ -214,7 +214,7 @@ export default function OwnerProductsPage(): JSX.Element {
         actions={
           <Link
             href={ROUTES.owner.productNew}
-            className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-medium text-white hover:bg-[var(--accent-soft)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
+            className="rounded-md bg-accent-solid px-4 py-2 text-sm font-medium text-accent-on hover:bg-accent-solid-hover focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
           >
             Add Product
           </Link>
@@ -228,7 +228,7 @@ export default function OwnerProductsPage(): JSX.Element {
             onClick={() => setTab(item.id)}
             className={`rounded-md px-3 py-1.5 text-sm ${
               tab === item.id
-                ? 'bg-[var(--accent)] text-white'
+                ? 'bg-accent-solid text-accent-on'
                 : 'border border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
             }`}
           >

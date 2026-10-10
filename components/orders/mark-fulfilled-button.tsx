@@ -67,13 +67,13 @@ export function MarkFulfilledButton({ orderId, noteEnabled = false }: MarkFulfil
         type="button"
         onClick={() => setConfirming(true)}
         disabled={saving}
-        className="rounded-md bg-emerald-600 px-3 py-1.5 text-sm text-white disabled:opacity-50"
+        className="rounded-md bg-success-solid px-3 py-1.5 text-sm text-paper disabled:opacity-50"
       >
         Mark Fulfilled
       </button>
       {error ? <p className="mt-2 text-sm text-[var(--red)]">{error}</p> : null}
       {confirming ? (
-        <div className="mt-3 rounded-md border border-yellow-700 bg-[var(--amber-soft)] p-3 text-sm text-yellow-100">
+        <div className="mt-3 rounded-md border border-warm/50 bg-[var(--warm-soft)] p-3 text-sm text-warm">
           <p>Mark this order as fulfilled? The customer will be notified.</p>
           <div className="mt-2 flex gap-2">
             <button
@@ -82,7 +82,7 @@ export function MarkFulfilledButton({ orderId, noteEnabled = false }: MarkFulfil
               onClick={() => {
                 void submit();
               }}
-              className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-white"
+              className="rounded-md bg-accent-solid px-3 py-1.5 text-accent-on"
             >
               Confirm
             </button>

@@ -153,7 +153,7 @@ export default function OwnerResellersPage(): JSX.Element {
             onClick={() => setStatus(value)}
             className={`min-h-11 cursor-pointer rounded-full px-4 text-sm ${
               status === value
-                ? 'bg-[var(--accent)] text-white'
+                ? 'bg-accent-solid text-accent-on'
                 : 'bg-[var(--bg-raised)] text-[var(--text-2)] hover:text-[var(--text-1)]'
             }`}
           >
@@ -211,7 +211,7 @@ export default function OwnerResellersPage(): JSX.Element {
                   <tr key={row.tenantId} className="border-t border-[var(--border)] hover:bg-[var(--bg-raised)]">
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--accent)] text-xs font-semibold text-white">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent-solid text-xs font-semibold text-accent-on">
                           {initials(row.displayName)}
                         </span>
                         <div>

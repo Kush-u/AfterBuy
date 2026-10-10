@@ -40,7 +40,7 @@ export function GlowCard({ children, className, delay = 0 }: GlowCardProps): JSX
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
-          background: `radial-gradient(420px circle at ${spot.x}% ${spot.y}%, rgba(139,92,246,0.18), transparent 42%)`,
+          background: `radial-gradient(420px circle at ${spot.x}% ${spot.y}%, rgb(var(--accent-rgb)/0.18), transparent 42%)`,
         }}
       />
       <div className="relative">{children}</div>

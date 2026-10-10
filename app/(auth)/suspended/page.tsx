@@ -22,8 +22,8 @@ export default function SuspendedPage(): JSX.Element {
         <ThemeToggle />
       </div>
       <div className="login-card relative z-10 max-w-md text-center">
-        <h1 className="text-2xl font-semibold text-white">Account suspended</h1>
-        <p className="mt-3 text-sm leading-6 text-white/70">
+        <h1 className="text-2xl font-semibold text-[var(--text-0)]">Account suspended</h1>
+        <p className="mt-3 text-sm leading-6 text-[var(--text-2)]">
           This reseller account is not approved. Contact the store owner if you think this is a mistake.
         </p>
         <button type="button" onClick={() => void signOut()} className="login-google mt-6">

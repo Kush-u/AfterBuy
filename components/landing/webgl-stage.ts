@@ -7,6 +7,7 @@
  */
 
 import * as THREE from 'three';
+import { readTokenColor } from '@/lib/landing/palette';
 
 export type Stage = {
   readonly scene: THREE.Scene;
@@ -92,15 +93,18 @@ export function createStage(host: HTMLElement, options: StageOptions): Stage {
 }
 
 export function addStudioLights(scene: THREE.Scene, intense: boolean): void {
-  const ambient = new THREE.AmbientLight(0xf6f1e7, 0.45);
-  const hemi = new THREE.HemisphereLight(0xf6f1e7, 0x1c1917, 0.7);
-  const key = new THREE.DirectionalLight(0xfff8ee, intense ? 4.2 : 2.8);
+  // Lights are tinted from the CSS tokens: neutral paper for fill, warm and sky for accents.
+  const paper = readTokenColor('--paper-rgb');
+  const ink = readTokenColor('--ink-rgb');
+  const ambient = new THREE.AmbientLight(paper, 0.45);
+  const hemi = new THREE.HemisphereLight(paper, ink, 0.7);
+  const key = new THREE.DirectionalLight(paper, intense ? 4.2 : 2.8);
   key.position.set(4.5, 6.2, 3.4);
-  const gold = new THREE.PointLight(0xe8d5a3, intense ? 90 : 48, 16, 2);
-  gold.position.set(-3.1, 1.4, 2.2);
-  const violet = new THREE.PointLight(0x6d5cff, intense ? 36 : 18, 14, 2);
-  violet.position.set(2.6, -1.2, -2.4);
-  scene.add(ambient, hemi, key, gold, violet);
+  const warmLight = new THREE.PointLight(readTokenColor('--warm-rgb'), intense ? 90 : 48, 16, 2);
+  warmLight.position.set(-3.1, 1.4, 2.2);
+  const skyLight = new THREE.PointLight(readTokenColor('--sky-rgb'), intense ? 36 : 18, 14, 2);
+  skyLight.position.set(2.6, -1.2, -2.4);
+  scene.add(ambient, hemi, key, warmLight, skyLight);
 }
 
 const lookAt = new THREE.Vector3();

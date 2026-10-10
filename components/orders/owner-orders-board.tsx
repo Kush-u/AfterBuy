@@ -144,7 +144,7 @@ export function OwnerOrdersBoard({ stats }: OwnerOrdersBoardProps): JSX.Element 
       render: (row) => (
         <span>
           {formatRelativeTime(row.createdAt)}
-          {row.overdue ? <span className="ml-2 text-xs text-[var(--amber)]">Overdue</span> : null}
+          {row.overdue ? <span className="ml-2 text-xs text-[var(--warm)]">Overdue</span> : null}
         </span>
       ),
     },
@@ -204,7 +204,7 @@ export function OwnerOrdersBoard({ stats }: OwnerOrdersBoardProps): JSX.Element 
             type="button"
             onClick={() => setStore(value)}
             className={`min-h-11 cursor-pointer rounded-full px-3 text-xs ${
-              store === value ? 'bg-[var(--accent)] text-white' : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
+              store === value ? 'bg-accent-solid text-accent-on' : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
             }`}
           >
             {label}
@@ -239,7 +239,7 @@ export function OwnerOrdersBoard({ stats }: OwnerOrdersBoardProps): JSX.Element 
             type="button"
             onClick={() => setTab(item.id)}
             className={`rounded-full px-3 py-1 text-xs ${
-              tab === item.id ? 'bg-[var(--accent)] text-white' : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
+              tab === item.id ? 'bg-accent-solid text-accent-on' : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
             }`}
           >
             {item.label}

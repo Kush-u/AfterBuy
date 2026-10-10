@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import { usePrefersReducedMotion } from '@/lib/use-reduced-motion';
 
 /**
- * Thin violet bar under the top bar that tracks page scroll.
+ * Thin accent bar under the top bar that tracks page scroll.
  */
 export function ScrollProgress(): JSX.Element {
   const barRef = useRef<HTMLDivElement>(null);

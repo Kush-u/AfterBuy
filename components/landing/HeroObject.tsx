@@ -1,12 +1,13 @@
 /**
  * @file components/landing/HeroObject.tsx
  *
- * Faceted crystal with the iridescent shader. Disposed by the caller.
+ * Faceted crystal with the iridescent shader, coloured from the AfterBuy CSS tokens. Disposed by the caller.
  */
 
 import * as THREE from 'three';
 import iridescentVert from '@/shaders/iridescent.vert.glsl';
 import iridescentFrag from '@/shaders/iridescent.frag.glsl';
+import { readTokenColor, writeTokenUniform } from '@/lib/landing/palette';
 
 export type Crystal = {
   update: (delta: number, elapsed: number, hover: number, themeDark: boolean) => void;
@@ -25,6 +26,11 @@ export function createCrystal(scene: THREE.Scene, options: CrystalOptions): Crys
       uTime: { value: 0 },
       uHover: { value: 0 },
       uTheme: { value: options.themeDark ? 0 : 1 },
+      // Colours are read from the CSS tokens so the object follows the active palette.
+      uAccent: { value: writeTokenUniform('--accent-rgb', new THREE.Color()) },
+      uSky: { value: writeTokenUniform('--sky-rgb', new THREE.Color()) },
+      uWarm: { value: writeTokenUniform('--warm-rgb', new THREE.Color()) },
+      uDeep: { value: writeTokenUniform('--backdrop-a-rgb', new THREE.Color()) },
     },
     vertexShader: iridescentVert,
     fragmentShader: iridescentFrag,
@@ -36,17 +42,17 @@ export function createCrystal(scene: THREE.Scene, options: CrystalOptions): Crys
   const detail = options.mobile ? 1 : 2;
   const gem = new THREE.Mesh(new THREE.OctahedronGeometry(1.28, detail), material);
   const ringMaterial = new THREE.MeshStandardMaterial({
-    color: '#e6c98a',
+    color: readTokenColor('--accent-soft-rgb'),
     metalness: 1,
     roughness: 0.22,
-    emissive: '#a16207',
+    emissive: readTokenColor('--backdrop-a-rgb'),
     emissiveIntensity: options.variant === 'finale' ? 0.85 : 0.45,
   });
   const ring = new THREE.Mesh(new THREE.TorusGeometry(1.72, 0.012, 12, options.mobile ? 64 : 140), ringMaterial);
   ring.rotation.set(Math.PI / 2.4, 0.2, 0.4);
   const wire = new THREE.Mesh(
     new THREE.OctahedronGeometry(1.62, 0),
-    new THREE.MeshBasicMaterial({ color: '#e6c98a', wireframe: true, transparent: true, opacity: 0.28, toneMapped: false }),
+    new THREE.MeshBasicMaterial({ color: readTokenColor('--sky-rgb'), wireframe: true, transparent: true, opacity: 0.28, toneMapped: false }),
   );
 
   const group = new THREE.Group();

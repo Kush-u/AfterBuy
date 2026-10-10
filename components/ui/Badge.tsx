@@ -20,7 +20,7 @@ type BadgeProps = {
 
 const VARIANT_CLASS: Record<BadgeVariant, string> = {
   success: 'bg-[var(--green-soft)] text-[var(--green)] border-[var(--green)]/20',
-  warning: 'bg-[var(--amber-soft)] text-[var(--amber)] border-[var(--amber)]/20',
+  warning: 'bg-[var(--warm-soft)] text-[var(--warm)] border-[var(--warm)]/20',
   danger: 'bg-[var(--red-soft)] text-[var(--red)] border-[var(--red)]/20',
   accent: 'bg-[var(--accent-glow)] text-[var(--accent-soft)] border-[var(--accent)]/20',
   neutral: 'bg-[var(--bg-raised)] text-[var(--text-2)] border-[var(--border-soft)]',

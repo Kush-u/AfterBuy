@@ -121,7 +121,7 @@ export default function ResellerDashboardPage(): JSX.Element {
         <PeriodPills value={period} onChange={setPeriod} />
       </div>
       {data?.profileStatus === 'pending' || data?.tenantStatus === 'pending' ? (
-        <div className="rounded-[var(--r-md)] border border-[var(--amber)]/20 bg-[var(--amber-soft)] px-4 py-3 text-sm text-[var(--amber)]">
+        <div className="rounded-[var(--r-md)] border border-[var(--warm)]/20 bg-[var(--warm-soft)] px-4 py-3 text-sm text-[var(--warm)]">
           Account pending owner activation. Contact support.
         </div>
       ) : null}

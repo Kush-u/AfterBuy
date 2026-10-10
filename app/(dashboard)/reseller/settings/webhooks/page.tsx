@@ -163,7 +163,7 @@ export default function ResellerWebhooksPage(): JSX.Element {
         actions={
           <button
             type="button"
-            className="rounded-md bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white hover:bg-[var(--accent-soft)]"
+            className="rounded-md bg-accent-solid px-3 py-2 text-sm font-medium text-accent-on hover:bg-accent-solid-hover"
             onClick={() => setShowForm(true)}
           >
             Add Webhook
@@ -172,8 +172,8 @@ export default function ResellerWebhooksPage(): JSX.Element {
       />
       {error ? <p className="mb-4 text-sm text-[var(--red)]">{error}</p> : null}
       {rawSecret ? (
-        <div className="mb-6 rounded-lg border border-amber-500/40 bg-amber-500/10 p-4">
-          <p className="text-sm font-semibold text-amber-200">
+        <div className="mb-6 rounded-lg border border-warm/40 bg-warm/10 p-4">
+          <p className="text-sm font-semibold text-warm">
             This key will only be shown once. Copy it now and store it securely.
           </p>
           <pre className="mt-3 overflow-x-auto rounded-md bg-[var(--bg-page)] p-3 text-sm text-[var(--text-1)]">{rawSecret}</pre>
@@ -208,7 +208,7 @@ export default function ResellerWebhooksPage(): JSX.Element {
             <button
               type="submit"
               disabled={saving}
-              className="rounded-md bg-[var(--accent)] px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
+              className="rounded-md bg-accent-solid px-3 py-2 text-sm font-medium text-accent-on disabled:opacity-50"
             >
               {saving ? 'Saving…' : 'Add webhook'}
             </button>

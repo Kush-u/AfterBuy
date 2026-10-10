@@ -82,7 +82,7 @@ export function DashboardShell({
         transition={{ type: 'spring', stiffness: 260, damping: 30 }}
       >
         {uiDemo ? (
-          <div className="flex items-center justify-center gap-3 bg-[var(--amber-soft)] px-4 py-2 text-center text-sm text-[var(--amber)]">
+          <div className="flex items-center justify-center gap-3 bg-[var(--warm-soft)] px-4 py-2 text-center text-sm text-[var(--warm)]">
             DEMO MODE — sample memory is on screen for this session.
             <button type="button" className="underline" onClick={() => setUiDemo(false)}>
               Dismiss

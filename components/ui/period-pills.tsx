@@ -40,7 +40,7 @@ export function PeriodPills({ value, onChange }: PeriodPillsProps): JSX.Element 
             onClick={() => onChange(item.id)}
             className={`inline-flex rounded-full px-3 py-1 text-xs ${
               isActive
-                ? 'bg-[var(--accent)] text-white'
+                ? 'bg-accent-solid text-accent-on'
                 : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
             }`}
           >

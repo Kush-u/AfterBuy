@@ -161,14 +161,14 @@ export default function OwnerWalletDetailPage({ params }: PageProps): JSX.Elemen
           <button
             type="button"
             onClick={() => setMode('credit')}
-            className={`rounded-md px-3 py-1 text-sm ${mode === 'credit' ? 'bg-emerald-700 text-white' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
+            className={`rounded-md px-3 py-1 text-sm ${mode === 'credit' ? 'bg-success-solid text-paper' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
           >
             Credit
           </button>
           <button
             type="button"
             onClick={() => setMode('debit')}
-            className={`rounded-md px-3 py-1 text-sm ${mode === 'debit' ? 'bg-red-800 text-white' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
+            className={`rounded-md px-3 py-1 text-sm ${mode === 'debit' ? 'bg-danger-solid text-paper' : 'bg-[var(--bg-raised)] text-[var(--text-2)]'}`}
           >
             Debit
           </button>
@@ -191,7 +191,7 @@ export default function OwnerWalletDetailPage({ params }: PageProps): JSX.Elemen
           type="button"
           disabled={saving}
           onClick={() => void submitAdjust()}
-          className="mt-3 rounded-md bg-[var(--accent)] px-4 py-2 text-sm text-white disabled:opacity-50"
+          className="mt-3 rounded-md bg-accent-solid px-4 py-2 text-sm text-accent-on disabled:opacity-50"
         >
           Apply
         </button>

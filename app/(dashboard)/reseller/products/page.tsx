@@ -283,7 +283,7 @@ export default function ResellerProductsPage(): JSX.Element {
           onClick={() => setTab('available')}
           className={`rounded-md px-3 py-1.5 text-sm ${
             tab === 'available'
-              ? 'bg-[var(--accent)] text-white'
+              ? 'bg-accent-solid text-accent-on'
               : 'border border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-2)]'
           }`}
         >
@@ -294,7 +294,7 @@ export default function ResellerProductsPage(): JSX.Element {
           onClick={() => setTab('store')}
           className={`rounded-md px-3 py-1.5 text-sm ${
             tab === 'store'
-              ? 'bg-[var(--accent)] text-white'
+              ? 'bg-accent-solid text-accent-on'
               : 'border border-[var(--border)] bg-[var(--bg-card)] text-[var(--text-2)]'
           }`}
         >
@@ -323,7 +323,7 @@ export default function ResellerProductsPage(): JSX.Element {
             <button
               type="button"
               onClick={() => void applyMarkup()}
-              className="rounded-md bg-[var(--accent)] px-3 py-2 text-sm text-white"
+              className="rounded-md bg-accent-solid px-3 py-2 text-sm text-accent-on"
             >
               Apply to All Products
             </button>
@@ -357,7 +357,7 @@ export default function ResellerProductsPage(): JSX.Element {
               margin?.tone === 'error'
                 ? 'text-[var(--red)]'
                 : margin?.tone === 'low'
-                  ? 'text-[var(--amber)]'
+                  ? 'text-[var(--warm)]'
                   : 'text-[var(--green)]';
             return (
               <article key={row.id} className="rounded-lg border border-[var(--border)] bg-[var(--bg-card)] p-4">
@@ -403,7 +403,7 @@ export default function ResellerProductsPage(): JSX.Element {
                     type="button"
                     disabled={savingId === row.id}
                     onClick={() => void savePrice(row)}
-                    className="rounded-md bg-[var(--accent)] px-3 py-1.5 text-sm text-white disabled:opacity-60"
+                    className="rounded-md bg-accent-solid px-3 py-1.5 text-sm text-accent-on disabled:opacity-60"
                   >
                     {row.listing ? 'Save price' : 'Add to My Store'}
                   </button>

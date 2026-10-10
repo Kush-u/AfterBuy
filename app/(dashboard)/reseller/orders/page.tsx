@@ -44,7 +44,7 @@ function badgeClass(badge: Row['badge']): string {
     return 'bg-[var(--green-soft)] text-[var(--green)]';
   }
   if (badge === 'pending') {
-    return 'bg-[var(--amber-soft)] text-[var(--amber)]';
+    return 'bg-[var(--warm-soft)] text-[var(--warm)]';
   }
   if (badge === 'failed') {
     return 'bg-[var(--red-soft)] text-[var(--red)]';
@@ -177,7 +177,7 @@ export default function ResellerOrdersPage(): JSX.Element {
             }}
             className={`rounded-full px-3 py-1 text-xs ${
               status === item.id
-                ? 'bg-[var(--accent)] text-white'
+                ? 'bg-accent-solid text-accent-on'
                 : 'text-[var(--text-2)] hover:bg-[var(--bg-raised)]'
             }`}
           >

@@ -77,7 +77,7 @@ export function OrderActions({
           onClick={() => {
             void post(API_ROUTES.fulfillmentRetryDelivery(orderId));
           }}
-          className="mt-3 rounded-md bg-[var(--accent)] px-3 py-1.5 text-sm text-white disabled:opacity-50"
+          className="mt-3 rounded-md bg-accent-solid px-3 py-1.5 text-sm text-accent-on disabled:opacity-50"
         >
           Retry Delivery
         </button>
@@ -106,14 +106,14 @@ export function OrderActions({
           onClick={() => {
             void post(API_ROUTES.orderNote(orderId), { note });
           }}
-          className="mt-2 rounded-md bg-[var(--bg-hover)] px-3 py-1.5 text-sm text-white disabled:opacity-50"
+          className="mt-2 rounded-md bg-[var(--bg-hover)] px-3 py-1.5 text-sm text-[var(--text-0)] disabled:opacity-50"
         >
           Save note
         </button>
       </div>
       {canCancel ? (
-        <div className="mt-6 rounded-md border border-red-900 bg-red-950/40 p-4">
-          <h3 className="text-sm font-medium text-red-300">Danger zone</h3>
+        <div className="mt-6 rounded-md border border-danger/40 bg-danger/10 p-4">
+          <h3 className="text-sm font-medium text-danger">Danger zone</h3>
           <p className="mt-1 text-sm text-[var(--text-2)]">Cancel this order and release any wallet reservation.</p>
           <button
             type="button"
@@ -121,7 +121,7 @@ export function OrderActions({
             onClick={() => {
               void post(API_ROUTES.orderCancel(orderId), { reason: 'Cancelled by owner' });
             }}
-            className="mt-3 rounded-md bg-red-600 px-3 py-1.5 text-sm text-white disabled:opacity-50"
+            className="mt-3 rounded-md bg-danger-solid px-3 py-1.5 text-sm text-paper disabled:opacity-50"
           >
             Cancel Order
           </button>

@@ -166,11 +166,11 @@ export function OwnerHome({
             <ul className="space-y-2 text-sm text-[var(--text-2)]">
               <li className="flex justify-between">
                 <span>Payment mode</span>
-                <span className={paymentLive ? 'text-[var(--green)]' : 'text-[var(--amber)]'}>{paymentLive ? 'Live' : 'Demo'}</span>
+                <span className={paymentLive ? 'text-[var(--green)]' : 'text-[var(--warm)]'}>{paymentLive ? 'Live' : 'Demo'}</span>
               </li>
               <li className="flex justify-between">
                 <span>Supplier mode</span>
-                <span className={supplierLive ? 'text-[var(--green)]' : 'text-[var(--amber)]'}>{supplierLive ? 'Live' : 'Demo'}</span>
+                <span className={supplierLive ? 'text-[var(--green)]' : 'text-[var(--warm)]'}>{supplierLive ? 'Live' : 'Demo'}</span>
               </li>
               <li className="flex justify-between">
                 <span>Bots connected</span>

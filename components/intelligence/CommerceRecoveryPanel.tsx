@@ -92,7 +92,7 @@ export function CommerceRecoveryPanel({ tenantId }: CommerceRecoveryPanelProps):
       });
       window.dispatchEvent(
         new CustomEvent('ab:memory-activity', {
-          detail: { text: `Recovery searched for ${incidentType.toLowerCase()}`, tone: 'orange' },
+          detail: { text: `Recovery searched for ${incidentType.toLowerCase()}`, tone: 'coral' },
         }),
       );
     } catch {
@@ -138,7 +138,7 @@ export function CommerceRecoveryPanel({ tenantId }: CommerceRecoveryPanelProps):
         </div>
       </Card>
       {result?.degraded ? (
-        <div className="rounded-[var(--r-md)] border border-[var(--amber)]/20 bg-[var(--amber-soft)] px-4 py-2 text-xs text-[var(--amber)]">
+        <div className="rounded-[var(--r-md)] border border-[var(--warm)]/20 bg-[var(--warm-soft)] px-4 py-2 text-xs text-[var(--warm)]">
           Memory service offline — showing live data only
         </div>
       ) : null}
