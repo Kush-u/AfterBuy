@@ -224,7 +224,7 @@ export function Sidebar({
       >
         <div className="flex h-14 items-center justify-between border-b border-[var(--border)] px-3">
           <span className="flex min-w-0 items-center gap-2">
-            <img src="/logo.png" alt="AfterBuy" className="h-8 w-8 object-contain" />
+            <img src="/logo.svg" alt="AfterBuy" className="h-8 w-8 object-contain" />
             {collapsed ? null : (
               <p className="truncate text-sm font-semibold tracking-tight text-[var(--text-0)]">Buyer Memory</p>
             )}

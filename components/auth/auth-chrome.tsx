@@ -7,7 +7,7 @@
  */
 
 import type { ReactNode } from 'react';
-import { AnimatedCrown } from '@/components/ui/animated-crown';
+import { AnimatedAbMark } from '@/components/ui/animated-ab-mark';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export const glassCardClass =
@@ -57,7 +57,7 @@ type AuthLeftPanelProps = {
 };
 
 /**
- * Full-height brand panel: crown, wordmark, drifting particles, and slot for the quote.
+ * Full-height brand panel: mark, wordmark, drifting particles, and slot for the quote.
  */
 export function AuthLeftPanel({ children }: AuthLeftPanelProps): JSX.Element {
   return (
@@ -72,7 +72,7 @@ export function AuthLeftPanel({ children }: AuthLeftPanelProps): JSX.Element {
       />
       <ParticleField />
       <div className="relative z-10 flex w-full max-w-lg flex-col items-center text-center">
-        <AnimatedCrown size={100} float />
+        <AnimatedAbMark size={100} float />
         <p className="auth-wordmark mt-4 text-xs font-semibold uppercase tracking-[0.3em]">
           AFTERBUY
         </p>
