@@ -1,8 +1,8 @@
-# Black Tier Circle — Master Plan
+# AfterBuy — Master Plan
 
 Version 1.0 · 21 September 2026
 
-Black Tier Circle is a multi-tenant Telegram reseller platform. The owner sells digital products (ebooks, handwritten notes) through their own Telegram bot. Resellers connect their own Telegram bots, prepay a USDT wallet via admin-generated top-up tokens, and sell the owner's products to their own customers.
+AfterBuy is a multi-tenant Telegram reseller platform. The owner sells digital products (ebooks, handwritten notes) through their own Telegram bot. Resellers connect their own Telegram bots, prepay a USDT wallet via admin-generated top-up tokens, and sell the owner's products to their own customers.
 
 This document is the product and engineering plan. Phase 0 implements only repository setup, scaffolding, environment configuration, module skeletons, fake adapters, and the database foundation. Later phases must not be pulled forward.
 

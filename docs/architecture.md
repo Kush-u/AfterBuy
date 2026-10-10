@@ -1,6 +1,6 @@
 # Architecture
 
-High-level Phase 0 / target runtime for Black Tier Circle.
+High-level Phase 0 / target runtime for AfterBuy.
 
 ```
                          +------------------+

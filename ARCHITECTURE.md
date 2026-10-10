@@ -1,328 +1,196 @@
-# Black Tier Circle — Architecture
+# AfterBuy Architecture
 
-> Technical architecture reference for Black Tier Circle.  
-> See also: [README.md](./README.md) · [INNOVATION.md](./INNOVATION.md)
+Technical reference for AfterBuy, the Telegram store that remembers every buyer.
+See also: [README.md](./README.md), [docs/master-plan.md](./docs/master-plan.md), [docs/decisions.md](./docs/decisions.md).
 
----
+## Goals
 
-## System Overview
+Every design choice serves one of four properties:
 
-Black Tier Circle is a **multi-tenant SaaS platform** built on Next.js 14 with Supabase as the primary data layer. Every architectural decision prioritizes three properties:
+1. **Tenant isolation.** One reseller never sees another reseller's data, bots or memory.
+2. **Correct money.** Amounts are integers, balances cannot go negative, and history is immutable.
+3. **Reliable fulfilment.** Delivery runs on scheduled jobs and is safe to retry.
+4. **Secrets stay on the server.** Tokens are encrypted at rest and never reach the browser.
 
-1. **Tenant isolation** — one reseller can never see another's data
-2. **Operational reliability** — fulfillment runs on automated cycles, not manual triggers
-3. **Security by default** — secrets never touch the browser, tokens encrypted at rest
+## System overview
 
----
+```mermaid
+flowchart TB
+  subgraph Clients
+    buyer([Buyer in Telegram])
+    staff([Owner and reseller dashboards])
+    ext([Reseller systems via API key])
+  end
 
-## Request Flow
+  subgraph App["Next.js 14 on Vercel"]
+    webhook["/api/webhooks/*"]
+    dash["Dashboards (app/(dashboard))"]
+    v1["/api/v1/*"]
+    cronapi["Cron endpoints"]
+    assistant["/api/assistant and /api/intelligence/*"]
+    modules["Domain modules (modules/*)"]
+  end
 
-### Customer Purchase Flow (Telegram Bot)
+  subgraph Data
+    pg[(Supabase Postgres<br/>RLS, wallet functions)]
+    store[(Private storage<br/>product files)]
+  end
 
-```
-Customer sends message
-        │
-        ▼
-POST /api/webhooks/telegram/[botConnectionId]
-        │
-        ├─► Lookup bot_connection by ID
-        ├─► Decrypt bot token (AES-256-GCM)
-        ├─► Verify update_id not in processed_telegram_updates (idempotency)
-        ├─► Insert update_id into processed_telegram_updates
-        ├─► Resolve tenant_id from bot_connection
-        │
-        ▼
-    grammY Handler
-        │
-        ├─► /shop → Fetch reseller_listings for this tenant
-        ├─► Quantity select → Reserve wallet balance (wallet_reservations)
-        ├─► Payment method selection:
-        │       ├─ Wallet: debit ledger_transaction immediately
-        │       ├─ Binance Pay: create payment_claim, poll for confirmation
-        │       ├─ BEP20/TRC20: create payment_claim, await webhook/manual confirm
-        │
-        ▼
-    Order Created (status: pending_fulfillment)
-        │
-        ▼
-POST /api/fulfillment/process  ← cron: every 2 minutes
-        │
-        ├─► Fetch all pending_fulfillment orders
-        ├─► For each order:
-        │       ├─ Supplier API product? → Call supplier adapter immediately
-        │       ├─ Manual delivery? → Flag for owner action
-        │       └─ Record fulfillment_attempt
-        │
-        ▼
-    Order status → completed
-    Delivery sent to customer in Telegram
+  buyer --> tgapi[Telegram Bot API] --> webhook
+  staff --> dash
+  ext --> v1
+  webhook --> modules
+  dash --> modules
+  v1 --> modules
+  cronapi --> modules
+  assistant --> modules
+  modules --> pg
+  modules --> store
+  modules --> bin[Binance Pay]
+  modules --> bsc[BSC and TRC20 verification]
+  modules --> sup[Supplier APIs]
+  assistant --> hind[Hindsight memory banks]
+  assistant --> groq[Groq model]
+  scheduler([External cron]) -->|Bearer CRON_SECRET| cronapi
 ```
 
-### Reseller Onboarding Flow
+Routes live in `app/`. Business rules live in `modules/*`, each with an `index.ts` as its only public surface. Third-party services sit behind `integrations/*`, each with a typed client and a sandbox implementation so tests never hit a real API.
 
-```
-Reseller receives invitation link
-        │
-        ▼
-    Accepts invitation → Creates profile (Supabase Auth)
-        │
-        ▼
-    Reseller Dashboard → "Connect Bot" flow
-        │
-        ├─► Paste BotFather token
-        ├─► Server validates token with Telegram API
-        ├─► Encrypt token: AES-256-GCM with BOT_TOKEN_ENCRYPTION_KEY
-        ├─► Store in bot_connections (encrypted_token, iv, auth_tag)
-        ├─► Register webhook: setWebhook({url: APP_URL/api/webhooks/telegram/{id}})
-        │
-        ▼
-    Bot is live — reseller's customers can now purchase
-    Time from token paste to live bot: < 60 seconds
-```
+## Roles and access
 
----
+| Role | Home | Notes |
+| --- | --- | --- |
+| `owner` | `/owner` | Platform owner. Full access. |
+| `reseller` | `/reseller` | Must be `active`. New accounts start `pending` and wait for approval. |
+| `staff` | n/a | Reserved role, accepted by the identity module. |
 
-## Database Architecture
+`middleware.ts` gates every request. The role is read from the JWT `app_metadata` only. `user_metadata` can be edited by the signed-in user, so it is never trusted. A Postgres trigger (`0023_profile_role_guard.sql`) also stops anyone changing their own role or status.
 
-### Design Principles
+## Orders: four independent tracks
 
-- **Bigint monetary precision**: All USDT amounts stored as minor units (1 USDT = 1,000,000). No floating point arithmetic for money — ever.
-- **Double-entry ledger**: Every balance change creates two `ledger_transaction` rows (debit + credit). Balance is always sum of ledger, never a stored field that can drift.
-- **Immutable order events**: `order_events` is append-only. Order history is never deleted or updated — only new status events are appended.
-- **Idempotency**: `processed_telegram_updates` prevents double-processing of Telegram webhook deliveries.
+An order does not have one status. It has four, each with its own state machine, and every transition appends a row to `order_events`.
 
-### Row Level Security Model
+| Track | What it answers |
+| --- | --- |
+| `payment_status` | Has the buyer paid? |
+| `funding_status` | Has the reseller's wholesale cost been reserved or debited? |
+| `fulfillment_status` | Has the product been prepared (file, inventory unit, manual, supplier)? |
+| `delivery_status` | Has it reached the buyer (Telegram or API)? |
 
-Every table with tenant-scoped data enforces RLS policies at the PostgreSQL level:
+Prices are snapshotted on the order at creation (`quoted_retail_price`, `quoted_wholesale_price`), so later catalogue edits never change an existing order. `idempotency_key` makes API order creation safe to retry.
 
-```sql
--- Example: customers table
-CREATE POLICY "Tenants see only their customers"
-ON customers FOR ALL
-USING (tenant_id = auth.jwt() ->> 'tenant_id');
+## Money and the wallet
 
--- Platform owner sees all (service role bypasses RLS)
--- Resellers only ever see their own tenant's rows
-```
+- Amounts are `bigint` USDT minor units: `1 USDT = 1_000_000`. No floating point anywhere. All arithmetic goes through `lib/money.ts`.
+- `wallets` hold `balance_total` and `balance_reserved`, with checks that neither is negative and reserved never exceeds total. Available balance is `total - reserved`.
+- `ledger_transactions` is append-only. Each row stores a signed `amount` and the `balance_after`. Corrections are new reversal rows, never edits.
+- Every balance change runs inside a Postgres function (`0004_wallet_functions.sql`): `redeem_topup_token`, `reserve_wallet_funds`, `consume_wallet_reservation`, `release_wallet_reservation`, `manual_wallet_credit`, `manual_wallet_debit`. The check and the write happen in one transaction, so concurrent requests cannot overspend.
+- Top-up tokens are 12-digit, single-use, generated with `crypto.randomBytes`.
 
-### Table Relationships
+## Telegram bots
 
-```
-profiles (1) ──── (1) tenants
-tenants (1) ──── (N) bot_connections
-tenants (1) ──── (N) customers
-tenants (1) ──── (N) reseller_listings ──── (N) products (owner)
-customers (1) ──── (N) orders
-orders (1) ──── (N) order_events          [append-only]
-orders (1) ──── (N) fulfillment_attempts
-orders (1) ──── (N) delivery_attempts
-customers (1) ──── (1) wallets
-wallets (1) ──── (N) ledger_transactions  [double-entry]
-products (N) ──── (1) suppliers
-```
+Each reseller connects their own bot. The connect flow:
 
----
+1. The reseller pastes a BotFather token.
+2. The server validates it with Telegram.
+3. The token is encrypted with AES-256-GCM (random 96-bit IV, auth tag stored alongside) using `BOT_TOKEN_ENCRYPTION_KEY`.
+4. The webhook is registered at `NEXT_PUBLIC_APP_URL/api/webhooks/telegram/{botId}` together with a per-bot `secret_token`.
 
-## Multi-Tenant Bot Architecture
+On every update the route first checks the `X-Telegram-Bot-Api-Secret-Token` header with a constant-time comparison, rejects anything that fails, resolves the store from the bot record, and only then runs the grammY handlers. Updates are de-duplicated so a redelivered webhook cannot create a second order. Plaintext tokens are held in memory for one request and are never logged.
 
-### Webhook Isolation
+Short-lived in-memory caches keep hot reads cheap (for example the bot context, cached for 120 seconds). They are per instance, so TTLs are kept short.
 
-Each Telegram bot registered on the platform gets its own unique webhook URL:
+## Payments
 
-```
-https://blacktiercircle.vercel.app/api/webhooks/telegram/{bot_connection_uuid}
-```
+| Method | How it is verified |
+| --- | --- |
+| Wallet | Reserved and consumed through the wallet functions above. |
+| Binance Pay | Signed webhook (`BinancePay-Signature` is checked before anything else) plus a claim check. |
+| USDT BEP20 / TRC20 | Buyer submits a transaction hash. The claim is verified on-chain (`integrations/bsc`). |
+| Demo | Sandbox method used for evaluation. |
 
-The `bot_connection_uuid` is a UUID generated at registration time. It:
-- Is not guessable (UUID v4)
-- Never contains tenant information directly (resolved from DB lookup)
-- Is unique per bot registration, not per tenant
+A `payment_claims` row stores the evidence for each attempt. Owners can review and override claims from the payments monitor.
 
-### Token Security Model
+## Fulfilment and suppliers
 
-```typescript
-// Encryption at registration time
-const iv = crypto.randomBytes(12);
-const cipher = crypto.createCipheriv('aes-256-gcm', encryptionKey, iv);
-const encryptedToken = Buffer.concat([cipher.update(token), cipher.final()]);
-const authTag = cipher.getAuthTag();
+`/api/fulfillment/process` runs every two minutes, picks up paid orders and delivers them according to the product's `delivery_type`:
 
-// Stored: { encrypted_token, iv, auth_tag } — never the plaintext
-// Decrypted: only at request time, held in memory for the duration of one request
-// Never logged, never serialized to response
+- `file_reusable`: signed URL to a private storage object
+- `inventory_unit`: one unit from stock
+- `manual`: flagged for the owner
+- `supplier_api`: purchased from a supplier at once
+
+Supplier adapters (ProdSeller, Canboso, generic) implement one interface. `integrations/supplier/supplier-client.ts` picks the adapter by matching the API key prefix, and falls back to the generic adapter. Every attempt is recorded in `fulfillment_attempts` and `delivery_attempts`.
+
+## Public API (`/api/v1`)
+
+Resellers integrate with API keys (`ab_live_` and `ab_test_` prefixes; only a hash is stored). Endpoints cover products, orders, wallet and webhooks. The tenant always comes from the key, never from the request body. Order creation and wallet changes accept idempotency keys, rate limits are set in `lib/api-config.ts`, and outgoing webhooks are signed with the `X-AB-Signature` header.
+
+## Buyer Memory
+
+Buyer Memory is built on Hindsight by Vectorize. Memory is split into three banks:
+
+```text
+{prefix}:platform                              platform-wide patterns
+{prefix}:tenant:{tenantId}                     one store's patterns
+{prefix}:tenant:{tenantId}:customer:{id}       one buyer's history
 ```
 
----
+`{prefix}` is `HINDSIGHT_BANK_PREFIX` (default `afterbuy-prod`).
 
-## Supplier Adapter System
+- **Server-side only.** Bank ids are built by `resolvePlatformMemoryBank`, `resolveTenantMemoryBank` and `resolveCustomerMemoryBank` from the authenticated session. A bank id from the browser is never accepted.
+- **Fails open.** If Hindsight is missing or down, calls return empty results and a degraded flag. Orders and replies are never blocked.
+- **Evidence.** Remy's suggestions carry the memories they used, which the **WHY?** view shows.
+- **Learning loop.** When a buyer converts or declines, the outcome is written back (`lib/outcome-learning-loop.ts`).
 
-Universal adapter pattern with auto-detection from API key prefix:
+Remy, the assistant, runs through `app/api/assistant/route.ts`. It recalls from the buyer's bank, prepends the top memories to the system prompt on the server, and calls Groq. The API key never leaves the server.
 
-```typescript
-export function createSupplierAdapter(apiKey: string): SupplierAdapter {
-  if (apiKey.startsWith('psk_')) return new ProdSellerAdapter(apiKey);
-  if (apiKey.startsWith('tgb_')) return new CanbosoAdapter(apiKey);
-  return new GenericAdapter(apiKey);
-}
-```
+`npm run memory:smoke` checks that a bank cannot read another store's memories.
 
-### Adapter Interface
+## Scheduled jobs
 
-```typescript
-interface SupplierAdapter {
-  listProducts(): Promise<SupplierProduct[]>;
-  purchase(productId: string, quantity: number): Promise<PurchaseResult>;
-  checkStock(productId: string): Promise<number>;
-}
-```
+Cron endpoints accept `Authorization: Bearer $CRON_SECRET` (or `?secret=` for services that cannot set headers), or a signed-in owner session for "Run now" buttons. In production a missing secret means the request is refused.
 
-### Canboso Adapter (Primary)
+| Endpoint | Every | Purpose |
+| --- | --- | --- |
+| `/api/fulfillment/process` | 2 minutes | Deliver paid orders |
+| `/api/supplier/reconcile` | 15 minutes | Reconcile with the supplier |
+| `/api/supplier/sync` | 30 minutes | Sync the supplier catalogue |
+| `/api/bots/health` | 30 minutes | Check every bot webhook |
 
-```
-GET  /api/v2/telegram-buyer/products    → catalog sync
-POST /api/v2/telegram-buyer/purchase    → instant fulfillment
-```
+Vercel's free plan only allows daily crons, so an external scheduler calls these. See [docs/cron-setup.md](./docs/cron-setup.md).
 
----
+## Database
 
-## MemoryOS Architecture
+- Migrations are in `supabase/migrations/`, numbered and applied in order. Existing migrations are never edited; changes ship as new files.
+- Row Level Security is on for tenant data. The service role is used only on the server (`lib/supabase/admin.ts`).
+- Money columns are `bigint` with `>= 0` checks. Ledger and order event tables have no `updated_at`.
+- Product files live in a private storage bucket and are only reachable through signed URLs.
 
-See [INNOVATION.md](./INNOVATION.md) for the full MemoryOS specification.
+## Frontend
 
-### Memory Bank Naming Convention
-
-```
-{prefix}:platform                           ← Layer 1
-{prefix}:tenant:{tenantId}                  ← Layer 2  
-{prefix}:tenant:{tenantId}:customer:{id}    ← Layer 3
-```
-
-Where `{prefix}` = `HINDSIGHT_BANK_PREFIX` env var (e.g. `btc-prod`).
-
-### API Endpoint Security
-
-Bank IDs are **never accepted from the browser**. They are always resolved server-side:
-
-```typescript
-// app/api/assistant/route.ts
-// ✅ Correct: bank ID derived from server-side session
-const session = await getServerSession();
-const bankId = resolveCustomerMemoryBank(session.tenantId, session.customerId);
-
-// ❌ Never: const bankId = req.body.bankId  ← not in codebase
-```
-
----
-
-## Caching Strategy
-
-| Data Type | Cache Duration | Strategy |
-|-----------|---------------|---------|
-| Product catalog | 60 seconds | In-memory per bot context |
-| Customer record | 30 seconds | In-memory per bot context |
-| Bot context (tenant, config) | 120 seconds | In-memory per bot context |
-| Supplier catalog | Until next sync cron | Database cache in `supplier_products` |
-
----
-
-## Automated Jobs
-
-All cron endpoints are secured with `CRON_SECRET` header validation:
-
-```typescript
-// Middleware on all /api/fulfillment/*, /api/supplier/*, /api/bots/*
-const secret = req.headers.get('x-cron-secret');
-if (secret !== process.env.CRON_SECRET) {
-  return Response.json({ error: 'Unauthorized' }, { status: 401 });
-}
-```
-
-| Endpoint | Interval | Purpose |
-|----------|---------|---------|
-| `/api/fulfillment/process` | Every 2 min | Process pending orders, trigger delivery |
-| `/api/supplier/reconcile` | Every 15 min | Reconcile order status with supplier |
-| `/api/supplier/sync` | Every 30 min | Sync supplier product catalog |
-| `/api/bots/health` | Every 30 min | Verify all bot webhooks are responsive |
-
----
-
-## Frontend Architecture
-
-### Design System
-
-- **Theme**: CSS custom properties for all colors; dark and light both first-class
-- **Toggle**: 0.35s crossfade transition; light mode is default
-- **Sidebar**: 220px expanded / 64px collapsed; mobile overlay
-- **Scrollbar**: Custom 3px violet platform-wide
-- **Background**: SceneBackground component — floating orbs + parallax grid + particle field
-- **Landing page**: Stone-and-gold liquid-glass aesthetic; Cormorant + Montserrat fonts
-
-### RIA Chat Architecture (Assistant)
-
-```
-AssistantPage (session management)
-  │
-  ├─ localStorage key: 'btc-chat-sessions'
-  ├─ Max sessions: 10 (sliding window)
-  ├─ Each session: { id: UUID, title: string, messages: Message[] }
-  │
-  └─ AssistantChat (message rendering)
-       │
-       ├─ Memory badge: shown when response.memoryUsed === true
-       ├─ Quick prompts: MemoryOS-relevant questions
-       └─ POST /api/assistant → { message, memoryUsed, sessionId }
-```
-
----
+- **Framework.** Next.js App Router with server components by default, client components for interactive screens.
+- **Theming.** Dark is the default and light is a first-class theme. Every colour is a CSS custom property in `app/globals.css`, switched by `data-theme` on `<html>`. Colours are stored as space-separated RGB channels (for example `--accent-rgb: 45 212 191`) so Tailwind can apply opacity (`rgb(var(--accent-rgb) / <alpha-value>)`). The chosen theme is kept in `localStorage` under `afterbuy-theme`.
+- **Typography.** Outfit for display, Work Sans for body, JetBrains Mono for code, loaded with `next/font`.
+- **Brand mark.** `public/logo.svg` and `public/favicon.svg`; the animated React mark is `components/ui/animated-ab-mark.tsx`.
+- **Landing page.** A WebGL "memory crystal" built with three.js and custom GLSL. It reads its palette from the same CSS tokens through `lib/landing/palette.ts` and refreshes when the theme changes. It has a mobile fallback, an adaptive pixel ratio, and respects `prefers-reduced-motion`.
+- **Remy chat.** Sessions are kept in `localStorage` (`afterbuy-chat-sessions`, capped at ten) and messages go to `POST /api/assistant`.
 
 ## Deployment
 
-```
-GitHub Push
-    │
-    ▼
-Vercel (automatic deploy)
-    │
-    ├─ Build: next build (TypeScript strict, no errors)
-    ├─ Environment: all secrets in Vercel Environment Variables
-    ├─ Region: Singapore (closest to India user base)
-    │
-    ▼
-Production: blacktiercircle.vercel.app
-    │
-    └─ External cron: cron-job.org pings all 4 endpoints on schedule
+```text
+git push -> Vercel build (next build) -> production
+                                       -> external cron calls the four job endpoints
 ```
 
----
+All secrets live in Vercel environment variables. `NEXT_PUBLIC_APP_URL` must be the production origin so bot webhooks and invite links point at the right place.
 
-## Migration History
+## Quality gates
 
-21 migrations applied, in order, with no rollbacks:
+Every change must pass:
 
-```
-0001 · Initial schema — profiles, tenants
-0002 · Bot connections + webhook infrastructure  
-0003 · Product catalog + assets
-0004 · Customer records + wallet system
-0005 · Order lifecycle + events
-0006 · Ledger double-entry system
-0007 · Fulfillment + delivery attempt tracking
-0008 · Payment claims (Binance Pay + USDT)
-0009 · Supplier system + adapters
-0010 · Reseller listings + margins
-0011 · Invitation system
-0012 · API keys
-0013 · Audit log
-0014 · Platform + tenant settings
-0015 · Topup tokens (12-digit wallet recharge)
-0016 · Processed updates (idempotency)
-0017 · Webhook endpoints registry
-0018 · Wallet reservations (checkout holds)
-0019 · Notifications
-0020 · Supplier products cache
-0021 · RLS policy hardening across all tables
+```bash
+npm run type-check && npm run lint && npm run test && npm run build
 ```
 
----
-
-*Architecture maintained by Kushal Chaudhari — [linkedin.com/in/kush0090](https://linkedin.com/in/kush0090)*
+Money, tokens, encryption, the order state machine and the wallet each have unit tests, and tests use the fake Supabase, Binance and supplier clients in `tests/fixtures/` instead of real services.

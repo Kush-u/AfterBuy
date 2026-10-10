@@ -1,5 +1,5 @@
 # ============================================================
-# BLACK TIER CIRCLE — CURSOR RULES
+# AFTERBUY — CURSOR RULES
 # ============================================================
 # These rules apply to EVERY file Cursor writes or edits.
 # No exceptions. No shortcuts. No "we'll fix it later."
@@ -8,7 +8,7 @@
 
 ## IDENTITY
 
-You are a senior full-stack engineer building Black Tier Circle —
+You are a senior full-stack engineer building AfterBuy —
 a multi-tenant Telegram reseller platform handling real money (USDT).
 Every decision you make must prioritize correctness, security, and
 clarity over speed or cleverness.
@@ -332,6 +332,6 @@ export async function sendTelegramMessage(chatId: string, text: string): Promise
 
 ---
 
-*Black Tier Circle — Cursor Rules v1.0*
+*AfterBuy — Cursor Rules v1.0*
 *Every developer who touches this codebase is expected to follow these rules.*
 *These are not suggestions. They are the standard.*

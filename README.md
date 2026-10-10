@@ -1,450 +1,212 @@
-<div align="center">
+# AfterBuy
 
-<img src="public/logo.png" alt="Black Tier Circle" width="120" />
+**The Telegram store that remembers every buyer.**
 
-# Black Tier Circle
+AfterBuy is a multi-tenant platform for selling digital products through Telegram bots. A platform owner curates a catalogue, resellers connect their own bots and sell it on, and every buyer is remembered: what they bought, what they asked, what put them off. Remy, the built-in assistant, uses that memory (Buyer Memory) so the next reply starts where the last one ended.
 
-### Production-Grade Multi-Tenant Telegram Commerce Platform  
-### with Three-Layer Persistent AI Memory (MemoryOS)
-
-[![Live Platform](https://img.shields.io/badge/Live%20Platform-blacktiercircle.vercel.app-6d28d9?style=for-the-badge&logo=vercel)](https://blacktiercircle.vercel.app)
-[![Telegram Bot](https://img.shields.io/badge/Telegram%20Bot-@blacktiercirclebot-2CA5E0?style=for-the-badge&logo=telegram)](https://t.me/blacktiercirclebot)
-[![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org)
-[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?style=for-the-badge&logo=supabase)](https://supabase.com)
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=for-the-badge&logo=vercel)](https://vercel.com)
-[![Tests](https://img.shields.io/badge/Tests-171%20Passing-22c55e?style=for-the-badge)](#testing)
-[![Security](https://img.shields.io/badge/Security-AES--256--GCM-ef4444?style=for-the-badge)](#security)
-
-> **HackWithHyderabad 3.0** · A fully deployed, production-grade platform solving a real market crisis in India's $2B+ digital reseller economy.
-
-**[Live Demo](https://blacktiercircle.vercel.app)** · **[Telegram Bot](https://t.me/blacktiercirclebot)** · **[Try the Demo](./DEMO.md)** · **[Architecture](./ARCHITECTURE.md)** · **[Innovation](./INNOVATION.md)**
-
-</div>
+Production URL placeholder: `https://afterbuy.vercel.app`
 
 ---
 
-## 🔓 Evaluation Access
+## Who it is for
 
-The live platform is configured for open evaluation. Sign up at [blacktiercircle.vercel.app](https://blacktiercircle.vercel.app) with any email — you receive full platform admin access instantly, with no approval gate.
+| Role | What they do in AfterBuy |
+| --- | --- |
+| **Platform owner** | Runs the catalogue, invites resellers, tops up wallets with tokens, connects suppliers, watches payments and bot health. |
+| **Reseller** | Connects a Telegram bot in minutes, sets their own prices, and sees orders, buyers and wallet balance. |
+| **Buyer** | Shops inside Telegram, pays by wallet, Binance Pay or USDT, and gets the product delivered in the chat. |
 
-> This is intentional for evaluation. In production, new reseller accounts require owner approval before activation. A violet **Demo Mode** banner in the dashboard confirms evaluation access is active. All features — bots, orders, wallets, supplier API, AI intelligence, MemoryOS — are fully functional.
+## Features
 
-## Executive Summary
+**For owners**
+- Master product catalogue with private file storage and signed delivery links
+- Supplier integrations with automatic adapter selection from the API key prefix (ProdSeller, Canboso, generic)
+- Reseller invitations, approval, suspension and wallet top-up tokens
+- Payment monitoring and manual overrides, fulfilment queue, bot health view
+- Platform-wide memory and an operations control tower
 
-Black Tier Circle is a **production-deployed, multi-tenant Telegram commerce platform** that allows digital product resellers to launch a fully-featured Telegram shop in under 60 seconds — with zero coding, zero infrastructure management, and zero custody of customer funds by the platform.
+**For resellers**
+- Paste a BotFather token and the bot is live; the token is encrypted at rest
+- Own pricing per product, on top of the owner's wholesale price
+- Orders, deliveries, buyers, deposits and a USDT wallet with a full ledger
+- Public REST API (`/api/v1`) with API keys, idempotency keys and signed webhooks
+- Remy, the assistant, with store-level memory
 
-The platform introduces **MemoryOS**: a novel three-layer persistent AI memory architecture (Platform → Tenant → Customer) powered by vector embeddings, giving every reseller an AI business assistant (RIA) with genuine long-term context — not generic chatbot responses.
+**For buyers (inside Telegram)**
+- Browse the shop, pick a quantity, pay and receive the product in the same chat
+- Payment by wallet balance, Binance Pay, USDT on BEP20 or USDT on TRC20
+- Order history, wallet, referrals and support commands
 
-**Status:** Fully deployed at [blacktiercircle.vercel.app](https://blacktiercircle.vercel.app) with live Telegram bot at [@blacktiercirclebot](https://t.me/blacktiercirclebot).
+**Buyer Memory**
+- Three memory layers: platform, store, and individual buyer
+- Every store has its own memory bank, resolved on the server and never taken from the browser
+- A **WHY?** view shows which memories Remy used for a suggestion
+- Memory fails open: if the memory service is down, orders and replies carry on
 
----
+## Architecture
 
-## The Problem We Solve
+```mermaid
+flowchart LR
+  buyer([Buyer on Telegram]) -->|message| tg[Telegram Bot API]
+  tg -->|webhook, secret token| api[Next.js on Vercel<br/>app/api]
 
-### India's Digital Reseller Crisis
+  owner([Owner and resellers]) -->|HTTPS| ui[Dashboards<br/>app/dashboard]
+  ui --> api
+  reseller_sys([Reseller systems]) -->|API key| v1[/api/v1/]
+  v1 --> api
 
-India has an estimated **15–20 million active digital product sellers** operating through Telegram — selling OTT subscriptions, software licenses, gift cards, and digital credentials to millions of buyers daily. This is a largely undocumented but economically significant informal economy.
+  api --> modules[Domain modules<br/>orders, wallet, payments,<br/>catalog, fulfilment, bots]
+  modules --> db[(Supabase Postgres<br/>RLS, ledger, storage)]
+  modules --> pay[Binance Pay<br/>BSC and TRC20 checks]
+  modules --> sup[Supplier APIs]
+  api --> mem[Hindsight<br/>memory banks]
+  api --> llm[Groq<br/>Remy replies]
 
-**The manual reality for every reseller:**
-
-| Task | Manual Effort | With Black Tier Circle |
-|------|--------------|----------------------|
-| Set up a shop bot | 3–7 days (coding required) | 60 seconds (paste token) |
-| Payment infrastructure | Custom build or trust a middleman | Built-in (4 payment methods) |
-| Inventory management | Spreadsheets / manual tracking | Automated with supplier APIs |
-| Order fulfillment | Manual delivery per order | Automated (2-min cron cycle) |
-| Customer history | None | Full per-customer AI memory |
-| Business intelligence | Zero visibility | RIA with persistent memory |
-
-**The market catalyst:** In August 2026, Billgang and Antistock — the two dominant platforms serving this exact market — simultaneously executed exit scams. Thousands of active resellers lost their entire infrastructure overnight with no viable alternative. Black Tier Circle is that alternative: non-custodial, India-first, built for Telegram.
-
----
-
-## What Makes This Different
-
-### 1. True Multi-Tenancy with Bot Isolation
-Each reseller operates their own independent Telegram bot. Webhooks are isolated per `bot_connection_id`. Row Level Security enforces zero data crossover between tenants at the database level. The platform owner never sees customer conversations.
-
-### 2. MemoryOS — Three-Layer AI Memory
-The AI assistant doesn't just answer questions — it *remembers*. Every interaction is stored in the appropriate memory bank via vector embeddings. A customer asking "what did I buy last month?" gets a real answer from their personal memory bank. A reseller asking "what are my best-selling products?" gets data synthesized from their store's memory history. See [INNOVATION.md](./INNOVATION.md) for full technical depth.
-
-### 3. Non-Custodial Architecture
-Black Tier Circle never holds reseller funds. Resellers pre-fund their own USDT wallet and transact independently. The platform takes a subscription fee, not a cut of every transaction — aligning incentives with reseller success.
-
-### 4. Production-Grade from Day One
-26+ database tables, 21 applied migrations, 171 passing tests, AES-256-GCM bot token encryption, automated cron jobs for fulfillment and reconciliation. This is not a demo — it's deployed infrastructure.
-
----
-
-## Architecture Overview
-
-See [ARCHITECTURE.md](./ARCHITECTURE.md) for the complete technical breakdown.
-
-```
-┌─────────────────────────────────────────────────────────────────────┐
-│                        BLACK TIER CIRCLE                            │
-│                                                                     │
-│  ┌─────────────────┐  ┌──────────────────┐  ┌───────────────────┐  │
-│  │  Platform Owner  │  │    Resellers     │  │    Customers      │  │
-│  │  Dashboard       │  │    Dashboard     │  │  (Telegram Bot)   │  │
-│  │  (Admin Panel)   │  │  (Tenant Panel)  │  │  @their_own_bot   │  │
-│  └────────┬─────────┘  └────────┬─────────┘  └────────┬──────────┘  │
-│           │                     │                     │             │
-│  ┌────────▼─────────────────────▼─────────────────────▼──────────┐  │
-│  │                   Next.js 14 API Layer                        │  │
-│  │                                                               │  │
-│  │  /api/webhooks/telegram/[botConnectionId]  ← per-bot         │  │
-│  │  /api/assistant          ← RIA + MemoryOS                    │  │
-│  │  /api/fulfillment/process ← cron: every 2 min                │  │
-│  │  /api/supplier/reconcile  ← cron: every 15 min               │  │
-│  │  /api/bots/health         ← cron: every 30 min               │  │
-│  │  /api/supplier/sync       ← cron: every 30 min               │  │
-│  └───────────────────────────────┬───────────────────────────────┘  │
-│                                  │                                   │
-│  ┌───────────────────────────────▼───────────────────────────────┐  │
-│  │                Supabase (PostgreSQL)                          │  │
-│  │  Row Level Security · Auth · Storage · Real-time              │  │
-│  │  26+ tables · 21 migrations · bigint monetary precision       │  │
-│  └──────────────┬─────────────────────────┬───────────────────────┘  │
-│                 │                         │                          │
-│  ┌──────────────▼──────┐   ┌─────────────▼────────┐                 │
-│  │  Hindsight/Vectorize │   │   Supplier Adapters   │                 │
-│  │  MemoryOS Banks      │   │   ProdSeller/Canboso  │                 │
-│  │  Vector Embeddings   │   │   Auto-detect by key  │                 │
-│  └─────────────────────┘   └──────────────────────┘                 │
-└─────────────────────────────────────────────────────────────────────┘
+  cron[External cron] -->|Bearer CRON_SECRET| api
 ```
 
----
+How a purchase moves:
 
-## MemoryOS — The AI Intelligence Layer
+1. The buyer messages the bot. Telegram calls `POST /api/webhooks/telegram/[botId]`.
+2. The route checks the `X-Telegram-Bot-Api-Secret-Token` header before doing anything else, then resolves the store from the bot record.
+3. The order is created and paid by wallet, Binance Pay or a USDT claim that is verified on-chain.
+4. A cron-driven fulfilment job delivers the product, from a stored file, a manual step, or a supplier API.
+5. The completed purchase is written to that buyer's memory bank so the next conversation can recall it.
 
-> Full technical specification in [INNOVATION.md](./INNOVATION.md)
+More detail is in [ARCHITECTURE.md](./ARCHITECTURE.md).
 
-MemoryOS is a **three-layer persistent memory architecture** built on [Hindsight by Vectorize](https://vectorize.io) — a managed vector embedding service. It gives the RIA (Reseller Intelligence Assistant) genuine long-term memory across every session.
+## Tech stack
 
-```
-MEMORY LAYER HIERARCHY
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Layer 1 · Platform     btc-prod:platform
-  └─ Global market intelligence, cross-tenant trends
-  
-Layer 2 · Tenant       btc-prod:tenant:{tenantId}
-  └─ Store sales history, product performance, reseller strategy
-  
-Layer 3 · Customer     btc-prod:tenant:{tenantId}:customer:{customerId}
-  └─ Individual purchase history, preferences, support context
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
+| Layer | Technology |
+| --- | --- |
+| Framework | Next.js 14 (App Router), React 18, TypeScript (strict) |
+| Styling and motion | Tailwind CSS, CSS custom properties for dark and light themes, GSAP, Framer Motion, three.js |
+| Data and auth | Supabase (Postgres, Row Level Security, Auth, private Storage) |
+| Telegram | grammY |
+| Memory | Hindsight by Vectorize |
+| Assistant model | Groq (`openai/gpt-oss-20b`) |
+| Validation | Zod |
+| Tests | Vitest |
+| Hosting | Vercel, with an external cron service |
 
-### Real Example
+## Getting started
 
-**Reseller asks RIA:** *"What cart recovery tactics work best for my store?"*
+### Prerequisites
 
-RIA performs a semantic search across the tenant's memory bank, retrieves the most relevant historical interactions and performance data, and responds with store-specific insights — not generic advice. The `→ Memory` badge in the UI shows when the response is grounded in stored context.
+- Node.js 20 or later
+- A Supabase project
+- A Telegram bot token from [@BotFather](https://t.me/BotFather) for testing
+- Optional: Hindsight and Groq keys for Buyer Memory and Remy
 
-```typescript
-// lib/hindsight.ts — Memory bank resolution
-export function resolveCustomerMemoryBank(tenantId: string, customerId: string): string {
-  return `${process.env.HINDSIGHT_BANK_PREFIX}:tenant:${tenantId}:customer:${customerId}`;
-}
-
-// Semantic recall — server-side only, bank ID never from browser
-export async function recallCustomerExperience(bankId: string, query: string) {
-  const hindsight = new HindsightClient({ apiKey: process.env.HINDSIGHT_API_KEY });
-  return hindsight.recall({ bankId, query, topK: 5 });
-}
-```
-
----
-
-## MemoryOS in Action — Before vs. After
-
-Memory is not a feature in Black Tier Circle. It is the product.
-
-**Without MemoryOS:**
-> Customer: "What should I buy?"
-> RIA: "I can help you find products. What are you interested in?"
-> _(No context. No history. No personalization.)_
-
-**With MemoryOS (three-layer recall active):**
-> Customer: "What should I buy?"
-> RIA: "Hey Rahul — based on your last two top-ups and the Spotify Premium you bought in August, you might want to look at the Netflix 1-month plan. Your wallet has enough balance."
-> _(Platform context + Tenant catalog + Customer history — all retrieved in a single Hindsight query.)_
-
-The three layers resolve in order: **Platform bank** → global product knowledge and platform policies. **Tenant bank** → reseller-specific catalog, pricing, and configuration. **Customer bank** → individual purchase history, wallet activity, and preferences. The closest semantic match across all three surfaces in every RIA response.
-
-Without memory, every conversation starts from zero. With Hindsight, RIA knows the customer before they finish typing.
-
----
-
-## Why This Is Not a Chatbot
-
-Most AI integrations bolt a chatbot onto an existing product. Black Tier Circle inverts this: the memory layer is the core infrastructure, and the rest of the platform is built around it.
-
-- **Resellers** get a support agent that knows their entire catalog and every customer's history — without training anything.
-- **Customers** get responses that feel like a human who has been managing their account for months.
-- **The platform** gets compounding value: every interaction makes the next one better.
-
-This is what persistent memory enables that a stateless LLM call never could.
-
----
-
-## Feature Set
-
-### Platform Owner
-- ✅ Master product catalog with stock management
-- ✅ Supplier integration — ProdSeller, Canboso, Generic adapters (auto-detected by key prefix)
-- ✅ Reseller network management and invitation system
-- ✅ Revenue analytics across all tenants
-- ✅ Platform-wide bot health monitoring dashboard
-- ✅ RIA with platform-level memory (cross-tenant intelligence)
-
-### Reseller Dashboard
-- ✅ Connect any Telegram bot in under 60 seconds (paste BotFather token → live)
-- ✅ Custom pricing margin per product (buy at owner price, sell at own price)
-- ✅ Store analytics, order history, customer management
-- ✅ Wallet top-up token generation (12-digit codes for customer recharge)
-- ✅ RIA chatbot with persistent store-level memory
-- ✅ Multi-session chat history (localStorage with 10-session cap)
-- ✅ Dark/light theme with 0.35s crossfade transition
-
-### Customer Telegram Bot Experience
-- ✅ Full command suite: `/start /menu /shop /wallet /deposit /orders /profile /support /refer /find /terms /api`
-- ✅ 9 main menu buttons with inline keyboard navigation
-- ✅ Quantity selector (1 to min(stock, 10)) before payment
-- ✅ 4 payment methods: Wallet balance · Binance Pay · USDT BEP20 · USDT TRC20
-- ✅ Instant automated delivery for supplier API products post-payment
-- ✅ Full order history and real-time status in-bot
-- ✅ Referral system with tracking
-
-### Automated Infrastructure
-- ✅ Fulfillment processor: every 2 minutes
-- ✅ Supplier reconciliation: every 15 minutes
-- ✅ Bot health monitoring: every 30 minutes
-- ✅ Supplier catalog sync: every 30 minutes
-- ✅ Smart caching — products (60s), customer data (30s), bot context (120s)
-
----
-
-## Tech Stack
-
-| Layer | Technology | Decision Rationale |
-|-------|-----------|-------------------|
-| Framework | Next.js 14.2 + TypeScript (strict) | App Router, API routes, Vercel-native |
-| Database | Supabase PostgreSQL | Row Level Security, auth, real-time subscriptions |
-| Bot Framework | grammY | Modern, TypeScript-first Telegram framework |
-| AI Memory | Hindsight by Vectorize | Managed vector embeddings, persistent memory banks |
-| AI Inference | Groq API (`openai/gpt-oss-20b`) | Fast inference, low latency for chat responses |
-| Payments | Binance Pay + USDT BEP20/TRC20 | Crypto-native, no Indian banking friction |
-| UI Components | Tailwind CSS + shadcn/ui | Rapid, accessible, consistent |
-| Animation | Framer Motion + GSAP + ScrollTrigger + Lenis | Fluid page transitions, smooth scroll |
-| 3D / WebGL | Three.js + custom GLSL shaders | React 18 compatible (avoided R3F/React 19 conflict) |
-| Deployment | Vercel | Edge network, automatic preview deploys |
-| Cron | cron-job.org | External cron, survives Vercel function timeouts |
-
----
-
-## Database Schema
-
-**26+ tables across 21 applied migrations. All monetary values as bigint minor units (1 USDT = 1,000,000) — no floating point errors.**
-
-```
-CORE IDENTITY
-  profiles              User accounts (Supabase Auth)
-  tenants               Reseller organizations
-  invitations           Reseller onboarding tokens
-  api_keys              External API access
-
-BOT INFRASTRUCTURE  
-  bot_connections       Telegram bot registrations (token AES-256-GCM encrypted)
-  processed_telegram_updates  Idempotency table (prevents double-processing)
-  webhook_endpoints     Registered webhook URLs
-
-COMMERCE
-  products              Master product catalog (owner-managed)
-  product_assets        Digital delivery files / credentials
-  reseller_listings     Per-tenant product pricing and margin
-  suppliers             External supplier accounts
-  supplier_products     Supplier catalog cache
-
-CUSTOMERS & ORDERS
-  customers             Per-tenant customer records
-  orders                Order lifecycle management
-  order_events          Immutable order audit trail
-  delivery_attempts     Fulfillment attempt log
-  fulfillment_attempts  Retry tracking with backoff
-
-PAYMENTS
-  wallets               Customer USDT balance accounts
-  ledger_transactions   Double-entry accounting ledger
-  topup_tokens          12-digit wallet recharge codes
-  payment_claims        Pending payment verifications
-  wallet_reservations   Fund holds during checkout
-
-PLATFORM
-  platform_settings     Global configuration
-  tenant_settings       Per-reseller configuration
-  notifications         In-app notification queue
-  audit_log             Complete action audit trail
-```
-
----
-
-## Security
-
-Every layer is secured by design, not by convention.
-
-| Threat | Mitigation |
-|--------|-----------|
-| Bot token exposure | AES-256-GCM encryption at rest; decrypted only at request time |
-| Cross-tenant data access | PostgreSQL Row Level Security on all tables |
-| Secret exposure to browser | Zero `NEXT_PUBLIC_` prefix on any sensitive key |
-| Memory bank manipulation | Bank IDs resolved server-side from authenticated session only |
-| Unauthorized cron execution | `CRON_SECRET` header validation on all cron endpoints |
-| Replay attacks on webhooks | `processed_telegram_updates` idempotency table |
-| Key exposure in version control | `.env.local` gitignored; verified via `git log --all -- .env.local` |
-| API key leakage in code | All keys via `process.env.*` — confirmed via `git grep "gsk_" HEAD` |
-
----
-
-## Project Structure
-
-```
-Black-Tier-Circle/
-├── app/
-│   ├── api/
-│   │   ├── assistant/            # RIA chatbot endpoint + MemoryOS integration
-│   │   ├── webhooks/
-│   │   │   └── telegram/[id]/    # Per-bot isolated webhook handler
-│   │   ├── fulfillment/
-│   │   │   └── process/          # Order fulfillment cron (2-min cycle)
-│   │   ├── supplier/
-│   │   │   ├── reconcile/        # Supplier reconciliation (15-min cycle)
-│   │   │   └── sync/             # Catalog sync (30-min cycle)
-│   │   ├── intelligence/
-│   │   │   ├── customer/         # Customer memory read/write
-│   │   │   └── store/            # Store memory read/write
-│   │   └── bots/
-│   │       └── health/           # Bot health check cron (30-min cycle)
-│   ├── dashboard/                # Platform owner pages
-│   ├── reseller/                 # Reseller tenant pages
-│   └── (landing)/                # Public marketing landing page
-├── components/
-│   ├── assistant/
-│   │   ├── assistant-page.tsx    # Multi-session chat with localStorage persistence
-│   │   ├── assistant-chat.tsx    # Chat message rendering + Memory badge
-│   │   └── assistant-chat-input.tsx
-│   ├── intelligence/             # MemoryOS UI components
-│   └── ui/                       # shadcn/ui component library
-├── lib/
-│   ├── hindsight.ts              # MemoryOS client + three-layer bank resolution
-│   ├── telegram/                 # grammY bot handlers (all 9 menu flows)
-│   └── supabase/                 # Database client, server client, types
-├── scripts/
-│   ├── seed-memory-demo.ts       # Seeds all three memory layers with demo data
-│   ├── seed-platform-bank.ts     # Platform-level memory seeder
-│   └── test-memory-isolation.ts  # Verifies tenant memory isolation
-└── supabase/
-    └── migrations/               # 0001–0021 (all applied)
-```
-
----
-
-## Local Development
+### Setup
 
 ```bash
-# 1. Clone
-git clone https://github.com/Luvoia-Web/Black-Tier-Circle.git
-cd Black-Tier-Circle
-
-# 2. Install (legacy-peer-deps required for grammY + shadcn compatibility)
+# 1. Clone and install (.npmrc already sets legacy-peer-deps for grammY)
+git clone https://github.com/Kush-u/AfterBuy.git
+cd AfterBuy
 npm install
 
-# 3. Configure environment
+# 2. Configure the environment
 cp .env.example .env.local
-# Fill in credentials (see Environment Variables below)
+# fill in the values described below
 
-# 4. Apply database migrations
-# Run migrations/0001 through migrations/0021 in Supabase SQL Editor in order
+# 3. Apply the database migrations
+# Run every file in supabase/migrations/ in numeric order
+# (Supabase SQL Editor or the Supabase CLI). 0022 is intentionally absent.
 
-# 5. Seed MemoryOS demo data
-npm run memory:seed
-
-# 6. Verify memory isolation
-npm run memory:smoke
-
-# 7. Start development server
+# 4. Start the dev server
 npm run dev
 ```
 
-### Environment Variables
+Open <http://localhost:3000>. Sign in with Google, then set `profiles.role` to `owner` for your own row in Supabase. There is no public sign-up; resellers join through owner invitations.
 
-```env
-# ── Supabase ─────────────────────────────────────────────────
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJ...
-SUPABASE_SERVICE_ROLE_KEY=eyJ...          # Server-side only
+Optional steps:
 
-# ── Security ──────────────────────────────────────────────────
-BOT_TOKEN_ENCRYPTION_KEY=                  # 32-byte hex — AES-256-GCM
-CRON_SECRET=                               # Cron endpoint auth header
-
-# ── App ───────────────────────────────────────────────────────
-NEXT_PUBLIC_APP_URL=https://blacktiercircle.vercel.app
-
-# ── AI / MemoryOS ─────────────────────────────────────────────
-# IMPORTANT: NO NEXT_PUBLIC_ prefix — server-side only
-GROQ_API_KEY=gsk_...                       # Groq inference API
-HINDSIGHT_API_KEY=hsk_...                  # Hindsight vector memory
-HINDSIGHT_API_URL=https://...
-HINDSIGHT_ENABLED=true
-HINDSIGHT_BANK_PREFIX=btc-prod             # Namespace for memory banks
+```bash
+npm run memory:seed    # seed demo Buyer Memory data
+npm run memory:smoke   # verify that memory banks stay isolated
+npm run tunnel         # expose localhost over HTTPS (ngrok) so Telegram can reach webhooks
 ```
 
----
+See [docs/local-development.md](./docs/local-development.md) for the tunnel workflow.
 
-## Live Demo
+### Environment variables
 
-| Resource | Link |
-|---------|------|
-| Platform Dashboard | [blacktiercircle.vercel.app](https://blacktiercircle.vercel.app) |
-| Telegram Bot | [@blacktiercirclebot](https://t.me/blacktiercirclebot) |
-| GitHub Repository | [Luvoia-Web/Black-Tier-Circle](https://github.com/Luvoia-Web/Black-Tier-Circle) |
+Copy `.env.example` to `.env.local`. Never commit `.env.local`.
 
-**To test the bot:** Open Telegram → search `@blacktiercirclebot` → send `/start`
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Supabase project URL |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Supabase anon key (browser-safe, protected by RLS) |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key. Server only, never exposed to the browser |
+| `NEXT_PUBLIC_APP_URL` | Public origin of the app, for example `https://afterbuy.vercel.app`. Used for webhooks and invite links |
+| `BOT_TOKEN_ENCRYPTION_KEY` | 32-byte hex key used for AES-256-GCM encryption of bot tokens |
+| `CRON_SECRET` | Shared secret for cron endpoints |
+| `GROQ_API_KEY` | Groq key for Remy. Server only |
+| `HINDSIGHT_API_KEY` | Hindsight key for Buyer Memory. Server only |
+| `HINDSIGHT_API_URL` | Hindsight API base URL |
+| `HINDSIGHT_ENABLED` | Set to `true` to turn Buyer Memory on |
+| `HINDSIGHT_BANK_PREFIX` | Namespace for memory banks, `afterbuy-prod` by default |
+| `BSCSCAN_API_KEY` | Optional. Verifies USDT BEP20 payments |
+| `ACTIVE_SUPPLIER` | Optional. Selects the active supplier |
+| `SUPPLIER_1_API_KEY` | Optional. Supplier API key |
+| `SUPPLIER_1_BASE_URL` | Optional. Supplier API base URL |
 
-> **Demo Mode Active:** Sign up with any email to get instant full admin access. The platform runs with `NEXT_PUBLIC_DEMO_MODE=true` for evaluation — no approval workflow, no restrictions.
+### Scheduled jobs
 
----
+Four endpoints must be called on a schedule with `Authorization: Bearer $CRON_SECRET`. Setup steps are in [docs/cron-setup.md](./docs/cron-setup.md).
 
-## Market Context
+| Endpoint | Every | Purpose |
+| --- | --- | --- |
+| `/api/fulfillment/process` | 2 minutes | Deliver paid orders |
+| `/api/supplier/reconcile` | 15 minutes | Reconcile orders with the supplier |
+| `/api/supplier/sync` | 30 minutes | Sync the supplier catalogue |
+| `/api/bots/health` | 30 minutes | Check every bot webhook |
 
-| Metric | Data |
-|--------|------|
-| Digital product sellers on Telegram (India est.) | 15–20 million |
-| Market catalyst | Billgang + Antistock exit scams (August 2026) |
-| Platform model | ₹2,000/month subscription per reseller |
-| Revenue model | Subscription + optional transaction fee |
-| Competitive positioning | Non-custodial · India-first · Instant setup |
-| Primary currency | USDT (crypto-native, bypasses INR friction) |
+## Scripts
 
----
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Production build |
+| `npm run type-check` | TypeScript strict check |
+| `npm run lint` | ESLint through `next lint` |
+| `npm run test` | Run the Vitest suite |
 
-## Built By
+Every change should pass `type-check`, `lint`, `test` and `build`.
 
-**Kushal Chaudhari** — Solo founder, BTech CSE (AI/ML), Nashik, India  
-Building AI-native infrastructure for India's informal digital economy.
+## Project layout
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-kush0090-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/kush0090)
+```text
+app/            Routes: landing, auth, owner and reseller dashboards, API
+components/     Shared UI, landing page, intelligence panels
+modules/        Domain logic: orders, wallet, payments, catalog, bots, identity ...
+integrations/   Telegram, Binance, BSC, supplier adapters
+lib/            Money, tokens, encryption, hindsight, logger, helpers
+jobs/           Scheduled job handlers
+shaders/        GLSL used by the landing page
+supabase/       SQL migrations and seed data
+tests/          Unit tests and fakes for external services
+docs/           Plans, runbooks and integration notes
+```
 
----
+## Security
 
-<div align="center">
+- Bot tokens are encrypted with AES-256-GCM and only decrypted for the length of a request.
+- Telegram and Binance webhooks verify their signature or secret before any processing.
+- All money is stored as `bigint` minor units (1 USDT = 1,000,000). Ledger rows are never updated or deleted.
+- Row Level Security is enabled on tenant data, and tenant and role are always derived on the server.
+- Secrets live in server-only environment variables and are never logged.
 
-**[ARCHITECTURE.md](./ARCHITECTURE.md)** · **[INNOVATION.md](./INNOVATION.md)**
+## Documentation
 
-*Black Tier Circle — Every reseller deserves enterprise-grade infrastructure.*
+- [ARCHITECTURE.md](./ARCHITECTURE.md): system design
+- [docs/master-plan.md](./docs/master-plan.md): product and engineering plan
+- [docs/decisions.md](./docs/decisions.md): design decisions
+- [docs/cron-setup.md](./docs/cron-setup.md): scheduled jobs
+- [docs/secret-rotation.md](./docs/secret-rotation.md): rotating secrets
+- [docs/integrations](./docs/integrations): Binance and BSC notes
 
-</div>
+## License
+
+[MIT](./LICENSE)

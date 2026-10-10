@@ -9,31 +9,31 @@ We use cron-job.org (free) to run our jobs on the correct schedule.
 ### 1. Sign up
 Go to https://cron-job.org and create a free account.
 
-### 2. Create these 3 cron jobs
+### 2. Create these 4 cron jobs
 
 #### Job 1: Process Orders (every 2 minutes)
-- Title: BTC Process Orders
+- Title: AfterBuy Process Orders
 - URL: https://YOUR_VERCEL_URL/api/fulfillment/process
 - Schedule: Every 2 minutes (*/2 * * * *)
 - Method: GET
 - Header: Authorization: Bearer YOUR_CRON_SECRET
 
 #### Job 2: Reconcile Supplier (every 15 minutes)
-- Title: BTC Supplier Reconcile
+- Title: AfterBuy Supplier Reconcile
 - URL: https://YOUR_VERCEL_URL/api/supplier/reconcile
 - Schedule: Every 15 minutes (*/15 * * * *)
 - Method: GET
 - Header: Authorization: Bearer YOUR_CRON_SECRET
 
-#### Job 4: Supplier Sync (every 30 minutes)
-- Title: BTC Supplier Sync
-- URL: https://blacktiercircle.vercel.app/api/supplier/sync
+#### Job 3: Supplier Sync (every 30 minutes)
+- Title: AfterBuy Supplier Sync
+- URL: https://YOUR_VERCEL_URL/api/supplier/sync
 - Schedule: Every 30 minutes (*/30 * * * *)
 - Method: GET
 - Header: Authorization: Bearer YOUR_CRON_SECRET
 
-#### Job 3: Bot Health Check (every 30 minutes)
-- Title: BTC Bot Health
+#### Job 4: Bot Health Check (every 30 minutes)
+- Title: AfterBuy Bot Health
 - URL: https://YOUR_VERCEL_URL/api/bots/health
 - Schedule: Every 30 minutes (*/30 * * * *)
 - Method: GET
