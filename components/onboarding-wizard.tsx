@@ -25,13 +25,13 @@ import {
   submitClass,
 } from '@/components/auth/auth-chrome';
 
-const TERMS = `Black Tier Circle is a multi-tenant platform for selling digital products through Telegram.
+const TERMS = `AfterBuy is a multi-tenant platform for selling digital products through Telegram.
 
 Payments are collected in USDT (BEP20), Binance Pay, or reseller wallet balance. You are responsible for the prices you set, the products you offer, and the support you provide to your customers.
 
 Resellers pay the platform wholesale price and keep the margin between wholesale and the price shown in their bot. Wallet top-ups use tokens issued by the platform owner.
 
-Digital goods are delivered automatically after payment. Completed orders are final: Black Tier Circle does not offer refunds on delivered products.
+Digital goods are delivered automatically after payment. Completed orders are final: AfterBuy does not offer refunds on delivered products.
 
 You agree to keep your bot token private, to use the platform lawfully, and to the Privacy Policy. The platform owner may suspend an account that abuses payments, suppliers, or customers.`;
 
@@ -44,7 +44,7 @@ const STEP_COPY: Record<Step, { readonly quote: string; readonly sub: string }> 
   },
   2: {
     quote: 'Every sale remembered. Every pattern learned. Go.',
-    sub: 'MemoryOS watches your store so you never miss a signal.',
+    sub: 'Buyer Memory watches your store so you never miss a signal.',
   },
   3: {
     quote: 'The curtain rises. The platform is yours.',
@@ -234,7 +234,7 @@ export function OnboardingWizard(): JSX.Element {
                   <div className="mb-4 flex justify-center">
                     <AnimatedCrown size={40} float={false} />
                   </div>
-                  <h1 className={headingClass}>Welcome to Black Tier Circle</h1>
+                  <h1 className={headingClass}>Welcome to AfterBuy</h1>
                   <p className="mt-1 text-sm text-muted-foreground">What should we call you?</p>
                   <label className="mb-1.5 mt-6 block text-xs font-medium text-muted-foreground" htmlFor="onboarding-name">
                     Name

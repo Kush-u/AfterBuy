@@ -39,7 +39,7 @@ function ParticleField(): JSX.Element {
       {PARTICLES.map((particle) => (
         <span
           key={`${particle.left}-${particle.top}`}
-          className="btc-particle absolute h-1 w-1 rounded-full bg-purple-500/20"
+          className="ab-particle absolute h-1 w-1 rounded-full bg-purple-500/20"
           style={{
             left: particle.left,
             top: particle.top,
@@ -74,7 +74,7 @@ export function AuthLeftPanel({ children }: AuthLeftPanelProps): JSX.Element {
       <div className="relative z-10 flex w-full max-w-lg flex-col items-center text-center">
         <AnimatedCrown size={100} float />
         <p className="auth-wordmark mt-4 text-xs font-semibold uppercase tracking-[0.3em]">
-          BLACK TIER CIRCLE
+          AFTERBUY
         </p>
         {children}
       </div>

@@ -1,7 +1,7 @@
 /**
  * @file lib/intelligence-session.ts
  *
- * Session resolution for MemoryOS routes.
+ * Session resolution for Buyer Memory routes.
  * Tenant id always comes from the authenticated user, never the request body.
  *
  * @module Intelligence

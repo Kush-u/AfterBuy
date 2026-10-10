@@ -189,16 +189,16 @@ export function OwnerHome({
           <Card>
             <h2 className="mb-3 text-sm font-semibold">Quick Actions</h2>
             <div className="grid grid-cols-2 gap-2">
-              <MagneticButton href={ROUTES.owner.productNew} className="btc-btn-primary w-full text-center text-xs">
+              <MagneticButton href={ROUTES.owner.productNew} className="ab-btn-primary w-full text-center text-xs">
                 <Package size={12} className="mr-1 inline" aria-hidden="true" /> Add Product
               </MagneticButton>
-              <Link href={ROUTES.owner.resellersInvite} className="btc-btn-secondary text-center text-xs">
+              <Link href={ROUTES.owner.resellersInvite} className="ab-btn-secondary text-center text-xs">
                 <Users size={12} className="mr-1 inline" /> Invite
               </Link>
-              <Link href={ROUTES.owner.tokens} className="btc-btn-secondary text-center text-xs">
+              <Link href={ROUTES.owner.tokens} className="ab-btn-secondary text-center text-xs">
                 <KeyRound size={12} className="mr-1 inline" /> Token
               </Link>
-              <Link href={ROUTES.owner.settings} className="btc-btn-secondary text-center text-xs">
+              <Link href={ROUTES.owner.settings} className="ab-btn-secondary text-center text-xs">
                 <Settings size={12} className="mr-1 inline" /> Settings
               </Link>
             </div>

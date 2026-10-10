@@ -207,7 +207,7 @@ function LoginForm(): JSX.Element {
   return (
     <div className="flex w-full flex-col items-center">
       <AnimatedCrown size={36} float={false} />
-      <h1 className="mt-3 text-xl font-semibold text-foreground">Black Tier Circle</h1>
+      <h1 className="mt-3 text-xl font-semibold text-foreground">AfterBuy</h1>
 
       <div className="auth-tabs mt-4 flex w-full rounded-xl p-1" role="tablist" aria-label="Account">
         <button

@@ -6,7 +6,7 @@
  *
  * Delivery rules:
  * - POST JSON payload to reseller's webhook URL
- * - Include X-BTC-Signature header (HMAC-SHA256 of payload + webhook secret)
+ * - Include X-AB-Signature header (HMAC-SHA256 of payload + webhook secret)
  * - Retry up to 3 times on failure (exponential backoff: 10s, 30s, 90s)
  * - Mark webhook as failed after 3 failures — don't retry indefinitely
  *

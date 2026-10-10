@@ -1,7 +1,7 @@
 /**
  * @file lib/navigation.ts
  *
- * Centralized route definitions for the Black Tier Circle dashboard.
+ * Centralized route definitions for the AfterBuy dashboard.
  * All internal links must reference these constants — never hardcode paths.
  * This makes route changes a one-line edit.
  *

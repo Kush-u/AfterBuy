@@ -16,7 +16,7 @@ type InputProps = InputHTMLAttributes<HTMLInputElement>;
  * @param props - Native input attributes
  */
 export function Input({ className = '', ...rest }: InputProps): JSX.Element {
-  return <input {...rest} className={`btc-input ${className}`} />;
+  return <input {...rest} className={`ab-input ${className}`} />;
 }
 
 export default Input;

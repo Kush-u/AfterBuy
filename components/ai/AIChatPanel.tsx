@@ -22,13 +22,13 @@ type AIChatPanelProps = {
  */
 export function AIChatPanel({ thinking, onExpand, onClose, panelRef, children }: AIChatPanelProps): JSX.Element {
   return (
-    <div ref={panelRef} className="ai-panel" role="dialog" aria-label="BTC Assistant">
+    <div ref={panelRef} className="ai-panel" role="dialog" aria-label="Remy">
       <span className="ai-panel-orb ai-panel-orb-a" aria-hidden="true" />
       <span className="ai-panel-orb ai-panel-orb-b" aria-hidden="true" />
       <header className="ai-panel-head">
         <AIOrb size={36} thinking={thinking} />
         <div className="min-w-0 flex-1">
-          <p className="ai-panel-title">✦ BT Memory AI</p>
+          <p className="ai-panel-title">✦ Remy</p>
           <p className="ai-panel-powered">Memory Active · Powered by Hindsight</p>
           <p className="ai-status">
             <span className={`ai-status-dot${thinking ? ' is-busy' : ''}`} aria-hidden="true" />

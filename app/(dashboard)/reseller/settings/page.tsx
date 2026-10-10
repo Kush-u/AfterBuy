@@ -201,12 +201,12 @@ export default function ResellerSettingsPage(): JSX.Element {
                 value={token}
                 onChange={(event) => setToken(event.target.value)}
                 placeholder="Bot token"
-                className="btc-input"
+                className="ab-input"
               />
-              <button type="submit" className="btc-btn-primary" disabled={busy === 'bot'}>
+              <button type="submit" className="ab-btn-primary" disabled={busy === 'bot'}>
                 Connect
               </button>
-              <button type="button" onClick={() => void disconnectBot()} className="btc-btn-secondary" disabled={busy === 'bot'}>
+              <button type="button" onClick={() => void disconnectBot()} className="ab-btn-secondary" disabled={busy === 'bot'}>
                 Disconnect
               </button>
             </form>

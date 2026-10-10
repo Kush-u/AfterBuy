@@ -15,7 +15,7 @@ import { lottieRing } from '@/components/landing/lottieRing';
 const FEATURES: readonly { title: string; body: string; icon: ReactNode }[] = [
   {
     title: 'Your Own Branded Bot',
-    body: 'Customers never see Black Tier Circle. Your name, your brand.',
+    body: 'Customers never see AfterBuy. Your name, your brand.',
     icon: <Bot aria-hidden="true" />,
   },
   {

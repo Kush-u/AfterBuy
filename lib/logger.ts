@@ -13,7 +13,7 @@ type LogLevel = 'debug' | 'info' | 'warn' | 'error';
 
 type LogFields = Readonly<Record<string, string | number | boolean | null>>;
 
-const SERVICE = 'black-tier-circle';
+const SERVICE = 'afterbuy';
 
 const SENSITIVE_KEY = /token|secret|password|authorization|apikey|api_key|binance|cookie|private/i;
 

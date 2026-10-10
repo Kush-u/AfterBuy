@@ -22,7 +22,7 @@ create table platform_settings (
   bep20_enabled               boolean default true,
 
   -- Platform info
-  platform_name               text default 'Black Tier Circle',
+  platform_name               text default 'AfterBuy',
   support_contact             text,
   support_telegram            text,
 

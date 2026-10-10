@@ -212,7 +212,7 @@ export default function OwnerTokensPage(): JSX.Element {
 
   return (
     <>
-      <DocumentTitle title="Deposit Tokens — Black Tier Circle" />
+      <DocumentTitle title="Deposit Tokens — AfterBuy" />
       <PageHeader
         title="Deposit Tokens"
         description="Generate one-use 12-digit tokens to credit reseller wallets"

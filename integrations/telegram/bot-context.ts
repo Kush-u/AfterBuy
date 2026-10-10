@@ -71,7 +71,7 @@ export async function resolveBotContext(
   const tenant = tenantId ? await getTenantSettings(supabase, tenantId) : null;
   const payments = await resolveOrderPayments(supabase, tenantId);
 
-  const storeName = tenant?.storeName?.trim() || platform.platformName || 'Black Tier Circle';
+  const storeName = tenant?.storeName?.trim() || platform.platformName || 'AfterBuy';
 
   return {
     isOwnerBot: tenantId === null,

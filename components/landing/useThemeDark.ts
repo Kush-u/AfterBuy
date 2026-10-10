@@ -31,7 +31,7 @@ export function toggleTheme(origin?: ThemeOrigin): void {
   const apply = (): void => {
     root.setAttribute('data-theme', next);
     try {
-      localStorage.setItem('btc-theme', next);
+      localStorage.setItem('afterbuy-theme', next);
     } catch {
       /* private mode */
     }

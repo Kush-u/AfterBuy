@@ -11,10 +11,10 @@ export const API_CONFIG = {
   version: 'v1' as const,
   baseUrl: '/api/v1',
 
-  /** API key format: btc_live_{32 random hex chars} or btc_test_{32 random hex chars} */
+  /** API key format: ab_live_{32 random hex chars} or ab_test_{32 random hex chars} */
   keyPrefix: {
-    live: 'btc_live_',
-    test: 'btc_test_',
+    live: 'ab_live_',
+    test: 'ab_test_',
   },
   keyLength: 40, // prefix + 32 hex chars (approximate; live/test prefixes are 9 chars)
 
@@ -57,7 +57,7 @@ export const API_CONFIG = {
   ] as const,
 
   webhooks: {
-    signatureHeader: 'X-BTC-Signature',
+    signatureHeader: 'X-AB-Signature',
     maxFailures: 3,
     retryBackoffMs: [10_000, 30_000, 90_000] as const,
     events: [

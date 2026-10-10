@@ -16,5 +16,5 @@ export function isLocalDemoProbe(request: Request): boolean {
   }
   const host = request.headers.get('host') ?? '';
   const local = host.startsWith('localhost:') || host.startsWith('127.0.0.1:');
-  return local && request.headers.get('x-btc-memory-demo') === '1';
+  return local && request.headers.get('x-ab-memory-demo') === '1';
 }

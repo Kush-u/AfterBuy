@@ -1,7 +1,7 @@
 /**
  * @file app/(dashboard)/reseller/intelligence/page.tsx
  *
- * Reseller MemoryOS section. Existing dashboard chrome is unchanged.
+ * Reseller Buyer Memory section. Existing dashboard chrome is unchanged.
  *
  * @module Dashboard
  */

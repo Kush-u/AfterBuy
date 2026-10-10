@@ -15,7 +15,7 @@ export default function NotFound(): JSX.Element {
       <p className="text-8xl font-black text-[var(--text-3)]">404</p>
       <h1 className="text-xl font-semibold text-[var(--text-1)]">Page not found</h1>
       <p className="max-w-sm text-sm text-[var(--text-2)]">The page you requested does not exist.</p>
-      <Link href={ROUTES.home} className="btc-btn-primary">
+      <Link href={ROUTES.home} className="ab-btn-primary">
         Go to Dashboard
       </Link>
     </main>

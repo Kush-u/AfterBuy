@@ -99,21 +99,21 @@ export default function ResellerDashboardPage(): JSX.Element {
 
   return (
     <div className="space-y-6">
-      <DocumentTitle title="Dashboard — Black Tier Circle" />
+      <DocumentTitle title="Dashboard — AfterBuy" />
       <DashboardHero subtitle="Your store, orders, and wallet in one place" />
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex flex-wrap items-center gap-2">
           <input
             value={storeName}
             onChange={(event) => setStoreName(event.target.value)}
-            className="btc-input max-w-xs text-base font-semibold"
+            className="ab-input max-w-xs text-base font-semibold"
             aria-label="Store name"
           />
           <button
             type="button"
             onClick={() => void saveName()}
             disabled={savingName}
-            className="btc-btn-secondary"
+            className="ab-btn-secondary"
           >
             {savingName ? 'Saving…' : 'Save name'}
           </button>
@@ -219,13 +219,13 @@ function ResellerDashboardBody({ data }: { readonly data: Overview }): JSX.Eleme
         </Card>
       </div>
       <div className="flex flex-wrap gap-2">
-        <Link href={ROUTES.reseller.products} className="btc-btn-primary text-xs">
+        <Link href={ROUTES.reseller.products} className="ab-btn-primary text-xs">
           Add Products
         </Link>
-        <Link href={ROUTES.reseller.deposits} className="btc-btn-secondary text-xs">
+        <Link href={ROUTES.reseller.deposits} className="ab-btn-secondary text-xs">
           Deposit Funds
         </Link>
-        <Link href={ROUTES.reseller.bot} className="btc-btn-secondary text-xs">
+        <Link href={ROUTES.reseller.bot} className="ab-btn-secondary text-xs">
           Configure Bot
         </Link>
       </div>

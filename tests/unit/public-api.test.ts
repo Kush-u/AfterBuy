@@ -171,7 +171,7 @@ function seedDb() {
 }
 
 describe('API key management', () => {
-  it('generateApiKey creates key with correct format btc_{env}_{32hex}', async () => {
+  it('generateApiKey creates key with correct format ab_{env}_{32hex}', async () => {
     const db = seedDb();
     const created = await generateApiKey(db, {
       tenantId: TENANT_ID,
@@ -179,7 +179,7 @@ describe('API key management', () => {
       environment: 'live',
       createdBy: PROFILE_ID,
     });
-    expect(created.rawKey).toMatch(/^btc_live_[0-9a-f]{32}$/);
+    expect(created.rawKey).toMatch(/^ab_live_[0-9a-f]{32}$/);
   });
 
   it('generateApiKey stores hash not raw key', async () => {
@@ -225,7 +225,7 @@ describe('API key management', () => {
 
   it('authenticateApiRequest with invalid key throws AuthError', async () => {
     const db = seedDb();
-    await expect(authenticateApiRequest(db, 'btc_test_ffffffffffffffffffffffffffffffff')).rejects.toBeInstanceOf(
+    await expect(authenticateApiRequest(db, 'ab_test_ffffffffffffffffffffffffffffffff')).rejects.toBeInstanceOf(
       AuthError,
     );
   });

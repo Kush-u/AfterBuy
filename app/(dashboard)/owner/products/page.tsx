@@ -207,7 +207,7 @@ export default function OwnerProductsPage(): JSX.Element {
 
   return (
     <>
-      <DocumentTitle title="Products — Black Tier Circle" />
+      <DocumentTitle title="Products — AfterBuy" />
       <PageHeader
         title="Products"
         description="Create and manage digital products, prices, and availability"

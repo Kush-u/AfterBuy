@@ -3,7 +3,7 @@
  *
  * API key management and request authentication for the public v1 API.
  *
- * Key format: btc_{env}_{32 random hex chars}
+ * Key format: ab_{env}_{32 random hex chars}
  * Key storage: SHA-256 hash stored in DB, raw key shown once and discarded
  *
  * SECURITY INVARIANTS:

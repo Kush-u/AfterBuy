@@ -56,12 +56,12 @@ export default function SupplierSettingsPage({ params }: { readonly params: { su
         <FormField label="Rotate API Key" type="password" value={apiKey} onChange={setApiKey} helper="Leave blank to keep the current key" />
         <label className="mt-3 block text-sm">
           Status
-          <select className="btc-input mt-1" value={status} onChange={(event) => setStatus(event.target.value)}>
+          <select className="ab-input mt-1" value={status} onChange={(event) => setStatus(event.target.value)}>
             <option value="active">Active</option>
             <option value="paused">Paused</option>
           </select>
         </label>
-        <button type="button" className="btc-btn-primary mt-4" disabled={busy} onClick={() => void save()}>
+        <button type="button" className="ab-btn-primary mt-4" disabled={busy} onClick={() => void save()}>
           Save Settings
         </button>
       </div>

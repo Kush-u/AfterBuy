@@ -100,7 +100,7 @@ export function TopBar({ displayName, role, avatarUrl = null, onMenuClick }: Top
       <button
         type="button"
         className="hidden h-9 min-w-[220px] items-center gap-2 rounded-full border border-[var(--border-ghost)] bg-[var(--surface-1)] px-3 text-left text-xs text-[var(--text-3)] md:flex"
-        onClick={() => window.dispatchEvent(new Event('btc:command'))}
+        onClick={() => window.dispatchEvent(new Event('ab:command'))}
       >
         <Search size={14} aria-hidden="true" />
         Search

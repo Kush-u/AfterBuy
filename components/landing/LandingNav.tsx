@@ -53,9 +53,9 @@ export function LandingNav(): JSX.Element {
 
   return (
     <header className={`nav ${scrolled ? 'is-scrolled' : ''}`}>
-      <Link href={ROUTES.home} className="wordmark" aria-label="Black Tier Circle home">
+      <Link href={ROUTES.home} className="wordmark" aria-label="AfterBuy home">
         <span className="mark" aria-hidden="true" />
-        Black Tier Circle
+        AfterBuy
       </Link>
       <nav className="nav-links" aria-label="Primary">
         {LINKS.map((link) => (

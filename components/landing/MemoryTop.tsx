@@ -70,7 +70,7 @@ const LAYERS = [
     kicker: 'Customer memory',
     title: 'Customers are remembered',
     body: 'Every preference, every objection, every purchase. Your AI knows them before they say hello.',
-    tag: 'btc-prod:tenant:{id}:customer:{id}',
+    tag: 'afterbuy-prod:tenant:{id}:customer:{id}',
     tone: 'violet',
   },
   {
@@ -78,7 +78,7 @@ const LAYERS = [
     kicker: 'Store intelligence',
     title: 'Stores develop institutional memory',
     body: 'Cross-customer patterns surface automatically. What worked. What did not. What will.',
-    tag: 'btc-prod:tenant:{id}',
+    tag: 'afterbuy-prod:tenant:{id}',
     tone: 'blue',
   },
   {
@@ -86,7 +86,7 @@ const LAYERS = [
     kicker: 'Platform operations',
     title: 'The platform sees everything',
     body: 'System-wide health, anomaly detection, and operational intelligence. All in one control tower.',
-    tag: 'btc-prod:platform',
+    tag: 'afterbuy-prod:platform',
     tone: 'gold',
   },
 ];

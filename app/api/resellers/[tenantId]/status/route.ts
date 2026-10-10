@@ -34,7 +34,7 @@ export async function PATCH(request: Request, context: RouteContext): Promise<Re
         tenantId: tenant.id,
         type: 'reseller_activated',
         title: 'Account Activated',
-        body: 'Your Black Tier Circle reseller account has been activated. Welcome!',
+        body: 'Your AfterBuy reseller account has been activated. Welcome!',
       });
       await createNotification(asDbClient(session.admin), {
         userId: session.user.id,

@@ -1,7 +1,7 @@
 /**
  * @file scripts/seed-memory-demo.ts
  *
- * Seeds the MemoryOS demo customer and tenant banks.
+ * Seeds the Buyer Memory demo customer and tenant banks.
  *
  * @module Scripts
  */

@@ -212,7 +212,7 @@ export function OwnerOrdersBoard({ stats }: OwnerOrdersBoardProps): JSX.Element 
         ))}
       </div>
       <div className="mb-4 flex flex-wrap gap-2">
-        <select value={tenant} onChange={(event) => setTenant(event.target.value)} className="btc-select" aria-label="Reseller">
+        <select value={tenant} onChange={(event) => setTenant(event.target.value)} className="ab-select" aria-label="Reseller">
           <option value="all">Reseller: All</option>
           {facets.tenants.map((item) => (
             <option key={item.id} value={item.id}>
@@ -220,7 +220,7 @@ export function OwnerOrdersBoard({ stats }: OwnerOrdersBoardProps): JSX.Element 
             </option>
           ))}
         </select>
-        <select value={supplier} onChange={(event) => setSupplier(event.target.value)} className="btc-select" aria-label="Supplier">
+        <select value={supplier} onChange={(event) => setSupplier(event.target.value)} className="ab-select" aria-label="Supplier">
           <option value="all">Supplier: All</option>
           <option value="own">Own Products</option>
           {facets.suppliers
@@ -250,7 +250,7 @@ export function OwnerOrdersBoard({ stats }: OwnerOrdersBoardProps): JSX.Element 
         value={query}
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Search by order ID (first 8 chars)"
-        className="btc-input mb-4 max-w-sm"
+        className="ab-input mb-4 max-w-sm"
       />
       {error ? <PageError message={error} onRetry={() => void load()} /> : null}
       {loading ? <SkeletonTable /> : null}

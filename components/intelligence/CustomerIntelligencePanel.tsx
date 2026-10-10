@@ -103,7 +103,7 @@ export function CustomerIntelligencePanel({
     try {
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
       if (customerId === DEMO_CUSTOMER_ID) {
-        headers['x-btc-memory-demo'] = '1';
+        headers['x-ab-memory-demo'] = '1';
       }
       const response = await fetch(
         `${API_ROUTES.intelligenceCustomer}?customerId=${encodeURIComponent(customerId)}`,
@@ -135,7 +135,7 @@ export function CustomerIntelligencePanel({
     setOutcomeNote(null);
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
     if (customerId === DEMO_CUSTOMER_ID) {
-      headers['x-btc-memory-demo'] = '1';
+      headers['x-ab-memory-demo'] = '1';
     }
     const response = await fetch(API_ROUTES.intelligenceOutcome, {
       method: 'POST',

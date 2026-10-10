@@ -104,7 +104,7 @@ export default function OwnerSuppliersPage(): JSX.Element {
         title="Suppliers"
         description={pending > 0 ? `${pending} products waiting for review` : 'Import products from a supplier API'}
         actions={
-          <Link href={ROUTES.owner.supplierConnect} className="btc-btn-primary">
+          <Link href={ROUTES.owner.supplierConnect} className="ab-btn-primary">
             + Connect Supplier
           </Link>
         }
@@ -123,7 +123,7 @@ export default function OwnerSuppliersPage(): JSX.Element {
         <div className="rounded-[var(--r-lg)] border border-[var(--border)] bg-[var(--bg-card)] p-8 text-center">
           <p className="text-lg font-medium">No suppliers connected yet</p>
           <p className="mt-2 text-sm text-[var(--text-2)]">Connect a supplier API to import products into your catalog.</p>
-          <Link href={ROUTES.owner.supplierConnect} className="btc-btn-primary mt-4 inline-flex">
+          <Link href={ROUTES.owner.supplierConnect} className="ab-btn-primary mt-4 inline-flex">
             + Connect Supplier
           </Link>
         </div>
@@ -145,16 +145,16 @@ export default function OwnerSuppliersPage(): JSX.Element {
                 Products: {row.productCount} synced | Last sync: {ago(row.lastSyncAt)}
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
-                <Link href={ROUTES.owner.supplierDetail(row.supplierId)} className="btc-btn-primary">
+                <Link href={ROUTES.owner.supplierDetail(row.supplierId)} className="ab-btn-primary">
                   View Products
                 </Link>
-                <button type="button" className="btc-btn-secondary" disabled={busy === row.supplierId} onClick={() => void sync(row.supplierId)}>
+                <button type="button" className="ab-btn-secondary" disabled={busy === row.supplierId} onClick={() => void sync(row.supplierId)}>
                   Sync Now
                 </button>
-                <button type="button" className="btc-btn-secondary" disabled={busy === row.supplierId} onClick={() => void balance(row.supplierId)}>
+                <button type="button" className="ab-btn-secondary" disabled={busy === row.supplierId} onClick={() => void balance(row.supplierId)}>
                   Check Balance
                 </button>
-                <Link href={ROUTES.owner.supplierSettings(row.supplierId)} className="btc-btn-secondary">
+                <Link href={ROUTES.owner.supplierSettings(row.supplierId)} className="ab-btn-secondary">
                   Settings
                 </Link>
               </div>

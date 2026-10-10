@@ -61,7 +61,7 @@ export default function OwnerLaunchPage(): JSX.Element {
             {items.length > 0 ? (
               <Badge variant={isReady ? 'success' : 'warning'}>{isReady ? 'Ready' : 'Needs work'}</Badge>
             ) : null}
-            <button type="button" onClick={() => void load()} className="btc-btn-primary">
+            <button type="button" onClick={() => void load()} className="ab-btn-primary">
               Re-check
             </button>
           </div>

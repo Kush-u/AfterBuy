@@ -41,7 +41,7 @@ export function AIWelcomeScreen({ variant, displayName, onPick }: AIWelcomeScree
       <div className="ai-welcome is-page">
         <AIOrb size={120} rings />
         <h2 className="ai-hero-title">Hi, {name}!</h2>
-        <p className="ai-hero-lead">I&apos;m your BT Memory AI — powered by MemoryOS.</p>
+        <p className="ai-hero-lead">I&apos;m Remy, your AfterBuy assistant — powered by Buyer Memory.</p>
         <p className="ai-hero-sub">Ask me anything about your customers, store patterns, or platform intelligence.</p>
         <div className="ai-chip-grid is-page">
           {PAGE_CHIPS.map((chip, index) => (
@@ -63,7 +63,7 @@ export function AIWelcomeScreen({ variant, displayName, onPick }: AIWelcomeScree
   return (
     <div className="ai-welcome">
       <AIOrb size={80} rings />
-      <p className="ai-welcome-title">Hi! I&apos;m your BT Memory AI.</p>
+      <p className="ai-welcome-title">Hi! I&apos;m Remy.</p>
       <p className="ai-welcome-sub">Ask me about customers, patterns, or store intelligence.</p>
       <div className="ai-chip-grid">
         {PANEL_CHIPS.map((chip, index) => (

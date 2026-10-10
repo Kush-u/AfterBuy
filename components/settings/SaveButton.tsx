@@ -15,7 +15,7 @@ export function SaveButton({ busy = false, children, onClick }: SaveButtonProps)
 
   return (
     <MagneticButton
-      className="btc-btn-primary mt-4 gap-2"
+      className="ab-btn-primary mt-4 gap-2"
       disabled={busy}
       onClick={() => {
         setSaved(true);

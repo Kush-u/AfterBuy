@@ -71,7 +71,7 @@ export function CommerceRecoveryPanel({ tenantId }: CommerceRecoveryPanelProps):
     try {
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
       if (tenantId === DEMO_TENANT_ID) {
-        headers['x-btc-memory-demo'] = '1';
+        headers['x-ab-memory-demo'] = '1';
       }
       const response = await fetch(API_ROUTES.intelligenceRecovery, {
         method: 'POST',
@@ -91,7 +91,7 @@ export function CommerceRecoveryPanel({ tenantId }: CommerceRecoveryPanelProps):
         degraded: json.degraded === true,
       });
       window.dispatchEvent(
-        new CustomEvent('btc:memory-activity', {
+        new CustomEvent('ab:memory-activity', {
           detail: { text: `Recovery searched for ${incidentType.toLowerCase()}`, tone: 'orange' },
         }),
       );
@@ -113,7 +113,7 @@ export function CommerceRecoveryPanel({ tenantId }: CommerceRecoveryPanelProps):
           id="incident-description"
           value={description}
           onChange={(event) => setDescription(event.target.value)}
-          className="btc-input mt-2 min-h-24"
+          className="ab-input mt-2 min-h-24"
           placeholder="Supplier API stopped responding during checkout"
         />
         <div className="mt-3 flex flex-wrap items-center gap-3">
@@ -124,7 +124,7 @@ export function CommerceRecoveryPanel({ tenantId }: CommerceRecoveryPanelProps):
             id="incident-type"
             value={incidentType}
             onChange={(event) => setIncidentType(event.target.value as (typeof INCIDENTS)[number])}
-            className="btc-select"
+            className="ab-select"
           >
             {INCIDENTS.map((item) => (
               <option key={item} value={item}>
@@ -132,7 +132,7 @@ export function CommerceRecoveryPanel({ tenantId }: CommerceRecoveryPanelProps):
               </option>
             ))}
           </select>
-          <button type="button" className="btc-btn-primary" disabled={loading || description.trim().length === 0} onClick={() => void findRecovery()}>
+          <button type="button" className="ab-btn-primary" disabled={loading || description.trim().length === 0} onClick={() => void findRecovery()}>
             {loading ? 'Finding…' : 'Find Recovery'}
           </button>
         </div>

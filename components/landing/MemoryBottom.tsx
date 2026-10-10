@@ -47,7 +47,7 @@ const STEPS = [
   {
     num: '01',
     title: 'Connect your Telegram bot',
-    body: 'Point MemoryOS at the bot you already run. No new checkout. No new app for customers.',
+    body: 'Point Buyer Memory at the bot you already run. No new checkout. No new app for customers.',
     icon: <Plug size={22} aria-hidden="true" />,
   },
   {
@@ -238,7 +238,7 @@ export function MemoryBottom(): JSX.Element {
           <div>
             <Link href="#hero" className="mem-logo">
               <span className="mem-mark" aria-hidden="true">BT</span>
-              <span className="mem-word">Black Tier MemoryOS</span>
+              <span className="mem-word">AfterBuy</span>
             </Link>
             <p>Commerce intelligence with a memory that stays in its bank.</p>
           </div>
@@ -246,7 +246,7 @@ export function MemoryBottom(): JSX.Element {
             <a href="#features">Features</a>
             <a href="#architecture">Architecture</a>
             <Link href="/api-docs">Docs</Link>
-            <a href="https://github.com/Luvoia-Web/Black-Tier-Circle">GitHub</a>
+            <a href="https://github.com/Kush-u/AfterBuy">GitHub</a>
           </nav>
           <div className="foot-side">
             <p>Powered by Hindsight by Vectorize</p>
@@ -260,7 +260,7 @@ export function MemoryBottom(): JSX.Element {
             </button>
           </div>
         </div>
-        <p className="copy">© {new Date().getFullYear()} Black Tier Circle</p>
+        <p className="copy">© {new Date().getFullYear()} AfterBuy</p>
       </footer>
     </>
   );

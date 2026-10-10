@@ -55,8 +55,8 @@ export function MemoryPreloader(): JSX.Element | null {
   if (gone) return null;
 
   return (
-    <div className="mem-preloader" role="status" aria-live="polite" aria-label="Loading MemoryOS">
-      <p className="mem-preloader-kicker">MemoryOS</p>
+    <div className="mem-preloader" role="status" aria-live="polite" aria-label="Loading Buyer Memory">
+      <p className="mem-preloader-kicker">Buyer Memory</p>
       <p className="mem-preloader-count">{count}%</p>
     </div>
   );

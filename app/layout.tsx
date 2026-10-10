@@ -1,7 +1,7 @@
 /**
  * @file app/layout.tsx
  *
- * Root App Router layout for Black Tier Circle.
+ * Root App Router layout for AfterBuy.
  *
  * Wraps every route with Inter, theme bootstrap, and design-token styles.
  *
@@ -18,10 +18,10 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
   title: {
-    default: 'Black Tier Circle',
-    template: '%s — Black Tier Circle',
+    default: 'AfterBuy',
+    template: '%s — AfterBuy',
   },
-  description: 'Multi-tenant Telegram reseller platform',
+  description: 'AfterBuy — the Telegram store that remembers every buyer.',
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',
@@ -35,7 +35,7 @@ type RootLayoutProps = {
 
 const THEME_BOOTSTRAP = `
   try {
-    const t = localStorage.getItem('btc-theme') || 'dark';
+    const t = localStorage.getItem('afterbuy-theme') || 'dark';
     document.documentElement.setAttribute('data-theme', t);
   } catch(e) {}
 `;

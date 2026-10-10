@@ -67,7 +67,7 @@ export function PendingWait({ supportContact }: PendingWaitProps): JSX.Element {
 
   return (
     <div className="login-card relative z-10 max-w-md text-center">
-      <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-soft)]">Black Tier Circle</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-[var(--accent-soft)]">AfterBuy</p>
       <h1 className="mt-3 text-2xl font-semibold text-white">Account Pending Approval</h1>
       <p className="mt-3 text-sm leading-6 text-white/70">
         The store owner will review and activate your account. You will receive access once approved.

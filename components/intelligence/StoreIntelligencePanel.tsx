@@ -70,7 +70,7 @@ export function StoreIntelligencePanel({ tenantId }: StoreIntelligencePanelProps
     try {
       const headers: Record<string, string> = { 'Content-Type': 'application/json' };
       if (tenantId === DEMO_TENANT_ID) {
-        headers['x-btc-memory-demo'] = '1';
+        headers['x-ab-memory-demo'] = '1';
       }
       const response = await fetch(API_ROUTES.intelligenceStore, {
         method: 'POST',

@@ -311,7 +311,7 @@ export default function ResellerAccountPage(): JSX.Element {
               {profile?.status === 'suspended' ? 'Suspended' : 'Active'}
             </p>
             <p className="mt-2 text-sm text-[var(--text-2)]">Joined: {profile ? joinedLong(profile.createdAt) : '—'}</p>
-            <p className="mt-2 text-sm text-[var(--text-2)]">Platform: Black Tier Circle</p>
+            <p className="mt-2 text-sm text-[var(--text-2)]">Platform: AfterBuy</p>
             <p className="mt-4 text-sm text-[var(--text-2)]">Your Reseller ID</p>
             <div className="mt-1 flex items-center gap-2">
               <code className="text-sm text-[var(--text-1)]">{shortId}</code>
@@ -326,7 +326,7 @@ export default function ResellerAccountPage(): JSX.Element {
             <p className="mt-2 text-sm text-[var(--text-2)]">Contact support to delete your account. All data will be removed.</p>
             <button
               type="button"
-              className="btc-btn-secondary mt-3"
+              className="ab-btn-secondary mt-3"
               onClick={() => {
                 const ok = window.confirm('Send a deletion request to the store owner? Your account stays active until they review it.');
                 if (!ok) {

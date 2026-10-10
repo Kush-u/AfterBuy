@@ -108,9 +108,9 @@ export function ResellerApiKeysPanel(): JSX.Element {
       </ul>
       <label className="mt-4 block text-sm text-[var(--text-2)]" htmlFor="api-key-label">
         Label
-        <input id="api-key-label" className="btc-input mt-1 w-full" value={label} onChange={(event) => setLabel(event.target.value)} />
+        <input id="api-key-label" className="ab-input mt-1 w-full" value={label} onChange={(event) => setLabel(event.target.value)} />
       </label>
-      <button type="button" className="btc-btn-primary mt-3" disabled={busy} onClick={() => void generate()}>
+      <button type="button" className="ab-btn-primary mt-3" disabled={busy} onClick={() => void generate()}>
         {busy ? 'Generating…' : 'Generate API key'}
       </button>
       {rawKey ? (

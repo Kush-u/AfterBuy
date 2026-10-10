@@ -64,7 +64,7 @@ const EMPTY: ProductFormValues = {
   supplierMetadata: '',
 };
 
-const inputClass = 'btc-input';
+const inputClass = 'ab-input';
 
 /**
  * Owner product create/edit form with a live reseller margin calculator.

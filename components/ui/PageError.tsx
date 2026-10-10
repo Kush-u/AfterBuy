@@ -26,7 +26,7 @@ export function PageError({ message = 'Failed to load data', onRetry }: PageErro
         <button
           type="button"
           onClick={onRetry}
-          className="btc-btn-secondary"
+          className="ab-btn-secondary"
         >
           Try again
         </button>

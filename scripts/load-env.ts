@@ -1,7 +1,7 @@
 /**
  * @file scripts/load-env.ts
  *
- * Loads .env.local for MemoryOS scripts. Does not override variables
+ * Loads .env.local for Buyer Memory scripts. Does not override variables
  * already present in the process environment.
  *
  * @module Scripts

@@ -272,7 +272,7 @@ export default function ResellerProductsPage(): JSX.Element {
 
   return (
     <>
-      <DocumentTitle title="My Store — Black Tier Circle" />
+      <DocumentTitle title="My Store — AfterBuy" />
       <PageHeader
         title="My Store"
         description="Owner products appear here as soon as they are published. Set your price and they show in your bot."
@@ -306,7 +306,7 @@ export default function ResellerProductsPage(): JSX.Element {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search products"
-          className="btc-input max-w-sm"
+          className="ab-input max-w-sm"
           aria-label="Search products"
         />
         <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-card)] p-3">
@@ -316,7 +316,7 @@ export default function ResellerProductsPage(): JSX.Element {
             <input
               value={markup}
               onChange={(event) => setMarkup(event.target.value)}
-              className="btc-input w-24"
+              className="ab-input w-24"
               aria-label="Markup percent"
               inputMode="decimal"
             />
@@ -386,7 +386,7 @@ export default function ResellerProductsPage(): JSX.Element {
                     <input
                       value={draft}
                       onChange={(event) => setDrafts((current) => ({ ...current, [row.id]: event.target.value }))}
-                      className="btc-input w-36"
+                      className="ab-input w-36"
                       inputMode="decimal"
                       aria-label={`Price for ${row.title}`}
                     />

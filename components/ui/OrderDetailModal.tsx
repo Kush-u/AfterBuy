@@ -289,7 +289,7 @@ function OrderDetailActions({
         <p className="text-[var(--text-2)]">Waiting for payment</p>
       ) : null}
       {order.fulfillmentStatus === 'manual_pending' ? (
-        <button type="button" disabled={actions.isBusy} onClick={actions.onMarkFulfilled} className="btc-btn-primary w-full">
+        <button type="button" disabled={actions.isBusy} onClick={actions.onMarkFulfilled} className="ab-btn-primary w-full">
           ✓ Mark as Fulfilled
         </button>
       ) : null}
@@ -335,7 +335,7 @@ function RefundAction({ amountLabel }: { readonly amountLabel: string }): JSX.El
 function OwnerManageActions({ actions }: { readonly actions: DrawerActions }): JSX.Element {
   return (
     <div className="space-y-3">
-      <button type="button" disabled={actions.isBusy} onClick={actions.onOverride} className="btc-btn-secondary w-full">
+      <button type="button" disabled={actions.isBusy} onClick={actions.onOverride} className="ab-btn-secondary w-full">
         Override Payment
       </button>
       <button
@@ -356,7 +356,7 @@ function RetryAction({ actions }: { readonly actions: DrawerActions }): JSX.Elem
       type="button"
       disabled={actions.isBusy}
       onClick={actions.onRetry}
-      className="btc-btn-secondary flex w-full items-center justify-center gap-2"
+      className="ab-btn-secondary flex w-full items-center justify-center gap-2"
     >
       <RotateCw size={16} />
       Retry Delivery

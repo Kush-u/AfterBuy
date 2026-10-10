@@ -55,7 +55,7 @@ export default function ApiDocsPage(): JSX.Element {
     <div className="min-h-screen bg-[var(--bg-page)] text-[var(--text-1)]">
       <div className="mx-auto max-w-4xl space-y-10 px-6 py-12">
         <header>
-          <p className="text-sm text-[var(--accent-soft)]">Black Tier Circle</p>
+          <p className="text-sm text-[var(--accent-soft)]">AfterBuy</p>
           <h1 className="mt-2 text-3xl font-semibold">Public API v1</h1>
           <p className="mt-2 text-[var(--text-2)]">
             Versioned, key-authenticated REST API for reseller integrations. Breaking changes go to{' '}
@@ -69,10 +69,10 @@ export default function ApiDocsPage(): JSX.Element {
         <section className="space-y-3">
           <h2 className="text-xl font-semibold">1. Authentication</h2>
           <p className="text-sm text-[var(--text-2)]">
-            Send the raw API key on every request. Keys look like <code>btc_live_</code> or{' '}
-            <code>btc_test_</code> plus 32 hex characters. Raw keys are shown once at creation.
+            Send the raw API key on every request. Keys look like <code>ab_live_</code> or{' '}
+            <code>ab_test_</code> plus 32 hex characters. Raw keys are shown once at creation.
           </p>
-          <Code>{`${API_CONFIG.apiKeyHeader}: btc_test_0123456789abcdef0123456789abcdef`}</Code>
+          <Code>{`${API_CONFIG.apiKeyHeader}: ab_test_0123456789abcdef0123456789abcdef`}</Code>
         </section>
 
         <section className="space-y-3">

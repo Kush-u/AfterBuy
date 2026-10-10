@@ -251,7 +251,7 @@ export function AssistantChat({
             )}
           </button>
         </div>
-        <p className="ai-footnote">BTC Assistant · Powered by Claude · Responses may be inaccurate</p>
+        <p className="ai-footnote">Remy · Powered by Claude · Responses may be inaccurate</p>
       </form>
     </div>
   );

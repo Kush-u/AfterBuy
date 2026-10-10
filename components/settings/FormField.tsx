@@ -46,7 +46,7 @@ export function FormField({
       </span>
       {multiline ? (
         <textarea
-          className="btc-input mt-1 w-full"
+          className="ab-input mt-1 w-full"
           rows={rows}
           value={value}
           placeholder={placeholder}
@@ -54,7 +54,7 @@ export function FormField({
         />
       ) : (
         <input
-          className="btc-input mt-1 w-full"
+          className="ab-input mt-1 w-full"
           type={inputType}
           value={value}
           placeholder={placeholder}

@@ -99,9 +99,9 @@ export function AccountStudio(): JSX.Element {
         />
         <label className="mt-3 block text-sm text-[var(--text-2)]">
           Phone
-          <input className="btc-input mt-1" value={phone} onChange={(event) => setPhone(event.target.value)} />
+          <input className="ab-input mt-1" value={phone} onChange={(event) => setPhone(event.target.value)} />
         </label>
-        <button type="button" className="btc-btn-secondary mt-2" onClick={() => void save({ supportPhone: phone }, 'phone')}>
+        <button type="button" className="ab-btn-secondary mt-2" onClick={() => void save({ supportPhone: phone }, 'phone')}>
           Save phone
         </button>
         {saved ? <LottiePlayer name="success-checkmark" loop={false} className="mt-2 h-10 w-10" /> : null}
@@ -143,8 +143,8 @@ function Field({
     <label className="mt-3 block text-sm text-[var(--text-2)]">
       {label}
       <span className="mt-1 flex gap-2">
-        <input className="btc-input" value={draft} onChange={(event) => setDraft(event.target.value)} />
-        <button type="button" className="btc-btn-secondary" onClick={() => onSave(draft)}>
+        <input className="ab-input" value={draft} onChange={(event) => setDraft(event.target.value)} />
+        <button type="button" className="ab-btn-secondary" onClick={() => onSave(draft)}>
           Save
         </button>
       </span>

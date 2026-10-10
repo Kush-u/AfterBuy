@@ -135,7 +135,7 @@ export default function SupplierCatalogPage({ params }: { readonly params: { sup
         title="Supplier Products"
         description="Set wholesale and retail prices, then publish into the catalog."
         actions={
-          <button type="button" className="btc-btn-secondary" onClick={() => void sync()}>
+          <button type="button" className="ab-btn-secondary" onClick={() => void sync()}>
             Sync Now
           </button>
         }
@@ -148,7 +148,7 @@ export default function SupplierCatalogPage({ params }: { readonly params: { sup
           <button
             key={id}
             type="button"
-            className={tab === id ? 'btc-btn-primary' : 'btc-btn-secondary'}
+            className={tab === id ? 'ab-btn-primary' : 'ab-btn-secondary'}
             onClick={() => setTab(id)}
           >
             {label}
@@ -157,7 +157,7 @@ export default function SupplierCatalogPage({ params }: { readonly params: { sup
         ))}
       </div>
       <input
-        className="btc-input mb-4 max-w-md"
+        className="ab-input mb-4 max-w-md"
         placeholder="Search products"
         value={search}
         onChange={(event) => setSearch(event.target.value)}
@@ -193,7 +193,7 @@ export default function SupplierCatalogPage({ params }: { readonly params: { sup
                 <label className="mt-3 block text-sm">
                   Your wholesale
                   <input
-                    className="btc-input mt-1"
+                    className="ab-input mt-1"
                     value={entry.wholesale}
                     onChange={(event) =>
                       setPrices({ ...prices, [item.id]: { ...entry, wholesale: event.target.value } })
@@ -203,17 +203,17 @@ export default function SupplierCatalogPage({ params }: { readonly params: { sup
                 <label className="mt-3 block text-sm">
                   Your retail
                   <input
-                    className="btc-input mt-1"
+                    className="ab-input mt-1"
                     value={entry.retail}
                     onChange={(event) => setPrices({ ...prices, [item.id]: { ...entry, retail: event.target.value } })}
                   />
                 </label>
                 <p className="mt-2 text-sm text-[var(--text-2)]">{note}</p>
                 <div className="mt-3 flex gap-2">
-                  <button type="button" className="btc-btn-primary" onClick={() => void publish(item)}>
+                  <button type="button" className="ab-btn-primary" onClick={() => void publish(item)}>
                     Publish to Catalog
                   </button>
-                  <button type="button" className="btc-btn-secondary" onClick={() => void review(item, 'reject')}>
+                  <button type="button" className="ab-btn-secondary" onClick={() => void review(item, 'reject')}>
                     Reject
                   </button>
                 </div>

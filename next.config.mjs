@@ -1,7 +1,7 @@
 /**
  * @file next.config.mjs
  *
- * Next.js 14 configuration for Black Tier Circle.
+ * Next.js 14 configuration for AfterBuy.
  *
  * Next.js 14 does not load TypeScript config files. This module is the
  * supported equivalent of the requested next.config.ts.

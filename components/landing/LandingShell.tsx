@@ -16,16 +16,16 @@ type LandingShellProps = {
 
 export function LandingShell({ children }: LandingShellProps): JSX.Element {
   useEffect(() => {
-    document.body.classList.add('btc-landing-active');
+    document.body.classList.add('ab-landing-active');
     const stop = startLandingScroll();
     return () => {
-      document.body.classList.remove('btc-landing-active');
+      document.body.classList.remove('ab-landing-active');
       stop();
     };
   }, []);
 
   return (
-    <div className="btc-landing">
+    <div className="ab-landing">
       <a className="skip-link" href="#content">
         Skip to content
       </a>

@@ -126,12 +126,12 @@ export default function OwnerResellersPage(): JSX.Element {
 
   return (
     <>
-      <DocumentTitle title="Resellers — Black Tier Circle" />
+      <DocumentTitle title="Resellers — AfterBuy" />
       <PageHeader
         title="Resellers"
         description="Invite, activate, and suspend reseller tenants"
         actions={
-          <Link href={ROUTES.owner.resellersInvite} className="btc-btn-primary">
+          <Link href={ROUTES.owner.resellersInvite} className="ab-btn-primary">
             + Invite Reseller
           </Link>
         }
@@ -166,16 +166,16 @@ export default function OwnerResellersPage(): JSX.Element {
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search resellers…"
-          className="btc-input max-w-sm"
+          className="ab-input max-w-sm"
           aria-label="Search resellers"
         />
-        <select value={status} onChange={(event) => setStatus(event.target.value as typeof status)} className="btc-input w-40">
+        <select value={status} onChange={(event) => setStatus(event.target.value as typeof status)} className="ab-input w-40">
           <option value="all">Status: All</option>
           <option value="active">Active</option>
           <option value="pending">Pending</option>
           <option value="suspended">Suspended</option>
         </select>
-        <select value={sort} onChange={(event) => setSort(event.target.value as typeof sort)} className="btc-input w-40">
+        <select value={sort} onChange={(event) => setSort(event.target.value as typeof sort)} className="ab-input w-40">
           <option value="newest">Sort: Newest</option>
           <option value="name">Sort: Name</option>
         </select>

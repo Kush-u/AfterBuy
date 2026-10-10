@@ -160,7 +160,7 @@ export default function ResellerOrdersPage(): JSX.Element {
                 setPeriod(next);
               }}
             />
-            <button type="button" onClick={exportCsv} className="btc-btn-primary">
+            <button type="button" onClick={exportCsv} className="ab-btn-primary">
               Export CSV
             </button>
           </div>
@@ -194,7 +194,7 @@ export default function ResellerOrdersPage(): JSX.Element {
             setQ(event.target.value);
           }}
           placeholder="Search order ID, customer, product"
-          className="btc-input min-w-[16rem] flex-1"
+          className="ab-input min-w-[16rem] flex-1"
         />
         <select
           value={pageSize}
@@ -202,7 +202,7 @@ export default function ResellerOrdersPage(): JSX.Element {
             setPage(1);
             setPageSize(Number(event.target.value));
           }}
-          className="btc-select"
+          className="ab-select"
         >
           <option value={20}>20 / page</option>
           <option value={50}>50 / page</option>

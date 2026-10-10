@@ -1,5 +1,5 @@
 /**
- * Floating navigation for MemoryOS.
+ * Floating navigation for Buyer Memory.
  */
 
 'use client';
@@ -38,9 +38,9 @@ export function MemoryNav(): JSX.Element {
 
   return (
     <header className={scrolled ? 'mem-nav is-scrolled' : 'mem-nav'}>
-      <Link href="#hero" className="mem-logo" aria-label="Black Tier MemoryOS">
-        <img src="/logo.png" alt="Black Tier Circle" className="h-8 w-8 object-contain" />
-        <span className="mem-word">Black Tier MemoryOS</span>
+      <Link href="#hero" className="mem-logo" aria-label="AfterBuy">
+        <img src="/logo.png" alt="AfterBuy" className="h-8 w-8 object-contain" />
+        <span className="mem-word">AfterBuy</span>
       </Link>
 
       <nav className="mem-links" aria-label="Primary">

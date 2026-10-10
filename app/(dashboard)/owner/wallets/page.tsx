@@ -147,7 +147,7 @@ export default function OwnerWalletsPage(): JSX.Element {
 
   return (
     <>
-      <DocumentTitle title="Wallets — Black Tier Circle" />
+      <DocumentTitle title="Wallets — AfterBuy" />
       <PageHeader title="Wallets" description="Your store revenue, then reseller prepaid balances" />
       {owner ? (
         <motion.section
@@ -188,10 +188,10 @@ export default function OwnerWalletsPage(): JSX.Element {
             )}
           </ul>
           <div className="mt-4 flex flex-wrap gap-3">
-            <Link href={`${ROUTES.owner.orders}?store=mine`} className="btc-btn-secondary">
+            <Link href={`${ROUTES.owner.orders}?store=mine`} className="ab-btn-secondary">
               View full ledger
             </Link>
-            <Link href={ROUTES.owner.tokens} className="btc-btn-primary">
+            <Link href={ROUTES.owner.tokens} className="ab-btn-primary">
               Generate top-up token
             </Link>
           </div>
@@ -203,7 +203,7 @@ export default function OwnerWalletsPage(): JSX.Element {
         onChange={(event) => setSearch(event.target.value)}
         placeholder="Search resellers"
         aria-label="Search resellers"
-        className="btc-input mb-4 max-w-sm"
+        className="ab-input mb-4 max-w-sm"
       />
       {error ? <PageError message={error} onRetry={() => void load()} /> : null}
       {loading ? (

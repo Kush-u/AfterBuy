@@ -83,7 +83,7 @@ function enqueueOrderWebhook(
 ): void {
   if (event === 'order.fulfilled') {
     try {
-      // MemoryOS: non-blocking side-effect, never blocks commerce
+      // Buyer Memory: non-blocking side-effect, never blocks commerce
       scheduleFulfilledOrderMemory(supabase, data);
     } catch (error: unknown) {
       logger.error('order memory retain failed', {

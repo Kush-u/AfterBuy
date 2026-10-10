@@ -1,7 +1,7 @@
 /**
  * @file lib/validations/intelligence.ts
  *
- * Zod schemas for MemoryOS API routes.
+ * Zod schemas for Buyer Memory API routes.
  *
  * @module Validations
  */

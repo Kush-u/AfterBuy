@@ -226,12 +226,12 @@ export default function ResellerDepositsPage(): JSX.Element {
                 <p className="text-sm text-[var(--amber)]">Pending deposits {data.deposits.pending}</p>
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
-                <Link href={payments.binance ? ROUTES.reseller.settings : ROUTES.reseller.settings} className="btc-btn-primary">
+                <Link href={payments.binance ? ROUTES.reseller.settings : ROUTES.reseller.settings} className="ab-btn-primary">
                   {payments.binance ? 'Binance Pay ready' : 'Set up Binance Pay'}
                 </Link>
                 <button
                   type="button"
-                  className="btc-btn-secondary"
+                  className="ab-btn-secondary"
                   onClick={() => {
                     if (payments.address) {
                       void navigator.clipboard.writeText(payments.address);
@@ -243,7 +243,7 @@ export default function ResellerDepositsPage(): JSX.Element {
                 >
                   {payments.address ? 'Copy BEP20 address' : 'Add BEP20 address'}
                 </button>
-                <Link href={ROUTES.reseller.walletHistory} className="btc-btn-secondary">
+                <Link href={ROUTES.reseller.walletHistory} className="ab-btn-secondary">
                   View full history
                 </Link>
               </div>
@@ -284,13 +284,13 @@ export default function ResellerDepositsPage(): JSX.Element {
                 value={digitsOnly}
                 onChange={(event) => setToken(event.target.value)}
                 placeholder="12-digit token"
-                className="btc-input flex-1 font-mono tracking-widest"
+                className="ab-input flex-1 font-mono tracking-widest"
               />
               <button
                 type="button"
                 disabled={!formatValid}
                 onClick={() => void redeem()}
-                className="btc-btn-primary"
+                className="ab-btn-primary"
               >
                 Redeem
               </button>
@@ -312,15 +312,15 @@ export default function ResellerDepositsPage(): JSX.Element {
               value={q}
               onChange={(event) => setQ(event.target.value)}
               placeholder="Search TxID / user / note"
-              className="btc-input max-w-xs"
+              className="ab-input max-w-xs"
             />
-            <select value={status} onChange={(event) => setStatus(event.target.value)} className="btc-select">
+            <select value={status} onChange={(event) => setStatus(event.target.value)} className="ab-select">
               <option value="all">All statuses</option>
               <option value="approved">Approved</option>
               <option value="pending">Pending</option>
               <option value="failed">Failed</option>
             </select>
-            <select value={source} onChange={(event) => setSource(event.target.value)} className="btc-select">
+            <select value={source} onChange={(event) => setSource(event.target.value)} className="ab-select">
               <option value="all">All sources</option>
               <option value="binance_pay">Binance Pay</option>
               <option value="usdt_bep20">USDT BEP20</option>

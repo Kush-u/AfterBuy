@@ -107,7 +107,7 @@ export function Hero(): JSX.Element {
             </span>
           </h1>
           <p className="lede hero-fade">
-            Connect your bot. Add products. Start selling. Black Tier Circle handles everything else.
+            Connect your bot. Add products. Start selling. AfterBuy handles everything else.
           </p>
           <div className="hero-actions hero-fade">
             <MagneticButton href={ROUTES.login}>Start Selling →</MagneticButton>

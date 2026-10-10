@@ -101,9 +101,9 @@ export default function InvitePage({ params }: InvitePageProps): JSX.Element {
       <div className="absolute right-6 top-6">
         <ThemeToggle />
       </div>
-      <div className="btc-card w-full max-w-[400px] p-8">
-        <p className="text-lg font-semibold">◆ Black Tier Circle</p>
-        <h1 className="mt-2 text-base font-semibold">You&apos;ve been invited to Black Tier Circle</h1>
+      <div className="ab-card w-full max-w-[400px] p-8">
+        <p className="text-lg font-semibold">◆ AfterBuy</p>
+        <h1 className="mt-2 text-base font-semibold">You&apos;ve been invited to AfterBuy</h1>
         {state.kind === 'loading' ? <p className="mt-4 text-sm text-[var(--text-2)]">Checking invite…</p> : null}
         {state.kind === 'invalid' ? (
           <div className="mt-4 rounded-[var(--r-md)] border border-[var(--red)]/20 bg-[var(--red-soft)] px-4 py-3 text-sm text-[var(--red)]">
@@ -121,7 +121,7 @@ export default function InvitePage({ params }: InvitePageProps): JSX.Element {
             <p className="text-sm text-[var(--text-2)]">Create your reseller account.</p>
             <label className="flex flex-col gap-1 text-sm text-[var(--text-2)]">
               Email
-              <input type="email" name="email" readOnly value={state.email} className="btc-input opacity-80" />
+              <input type="email" name="email" readOnly value={state.email} className="ab-input opacity-80" />
             </label>
             <label className="flex flex-col gap-1 text-sm text-[var(--text-2)]">
               Display name
@@ -133,7 +133,7 @@ export default function InvitePage({ params }: InvitePageProps): JSX.Element {
                 maxLength={50}
                 value={displayName}
                 onChange={(event) => setDisplayName(event.target.value)}
-                className="btc-input"
+                className="ab-input"
               />
             </label>
             <label className="flex flex-col gap-1 text-sm text-[var(--text-2)]">
@@ -145,7 +145,7 @@ export default function InvitePage({ params }: InvitePageProps): JSX.Element {
                 minLength={8}
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
-                className="btc-input"
+                className="ab-input"
               />
             </label>
             {error ? (
@@ -153,7 +153,7 @@ export default function InvitePage({ params }: InvitePageProps): JSX.Element {
                 {error}
               </p>
             ) : null}
-            <button type="submit" disabled={loading} className="btc-btn-primary">
+            <button type="submit" disabled={loading} className="ab-btn-primary">
               {loading ? 'Creating account…' : 'Create Account'}
             </button>
           </form>

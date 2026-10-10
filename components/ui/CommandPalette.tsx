@@ -75,10 +75,10 @@ export function CommandPalette({ role }: { readonly role: UserRole }): JSX.Eleme
       setQuery('');
       setActive(0);
     }
-    window.addEventListener('btc:command', onOpen);
+    window.addEventListener('ab:command', onOpen);
     return () => {
       window.removeEventListener('keydown', onKey);
-      window.removeEventListener('btc:command', onOpen);
+      window.removeEventListener('ab:command', onOpen);
     };
   }, []);
 

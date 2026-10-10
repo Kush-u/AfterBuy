@@ -1,5 +1,5 @@
 -- ============================================================
--- Black Tier Circle — synthetic development seed
+-- AfterBuy — synthetic development seed
 -- No real credentials, tokens, or customer PII.
 -- Products do not depend on auth.users so this can run after 0001.
 -- ============================================================

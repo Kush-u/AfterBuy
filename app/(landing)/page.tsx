@@ -1,7 +1,7 @@
 /**
  * @file app/(landing)/page.tsx
  *
- * Public MemoryOS homepage. The WebGL canvas is client-only.
+ * Public Buyer Memory homepage. The WebGL canvas is client-only.
  */
 
 import dynamic from 'next/dynamic';

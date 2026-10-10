@@ -38,7 +38,7 @@ export async function POST(request: Request): Promise<Response> {
         `customer:${parsed.customerId} ${parsed.outcome} recommendation — ${parsed.context}`,
       );
     } catch {
-      // MemoryOS failure must not change the commerce response.
+      // Buyer Memory failure must not change the commerce response.
     }
     if (parsed.outcome === 'converted' || parsed.outcome === 'rejected') {
       // Fire and forget — never await, never block the response.

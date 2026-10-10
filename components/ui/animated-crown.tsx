@@ -30,7 +30,7 @@ export function AnimatedCrown({ size = 80, float = true }: AnimatedCrownProps): 
         viewBox="0 0 100 78"
         fill="none"
         aria-hidden="true"
-        className={float ? 'btc-crown-float relative' : 'relative'}
+        className={float ? 'ab-crown-float relative' : 'relative'}
         style={{ filter: 'drop-shadow(0 0 8px var(--crown-glow))' }}
       >
         <polygon
@@ -39,14 +39,14 @@ export function AnimatedCrown({ size = 80, float = true }: AnimatedCrownProps): 
           stroke="var(--crown-stroke)"
           strokeWidth={1.5}
           strokeLinejoin="round"
-          className="btc-crown-pulse"
+          className="ab-crown-pulse"
         />
         <path
           d="M8 64h84v8a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3v-8z"
           fill="var(--crown-fill)"
           stroke="var(--crown-stroke)"
           strokeWidth={1.5}
-          className="btc-crown-pulse"
+          className="ab-crown-pulse"
         />
       </svg>
     </div>

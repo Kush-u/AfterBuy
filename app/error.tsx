@@ -31,7 +31,7 @@ export default function ErrorPage({ error, reset }: ErrorPageProps): JSX.Element
       JSON.stringify({
         timestamp: new Date().toISOString(),
         level: 'error',
-        service: 'black-tier-circle',
+        service: 'afterbuy',
         message: 'render error boundary',
         correlationId,
         code: error.digest ?? 'RENDER_ERROR',
@@ -48,10 +48,10 @@ export default function ErrorPage({ error, reset }: ErrorPageProps): JSX.Element
       </p>
       <p className="text-xs text-[var(--text-3)]">Reference: {correlationId}</p>
       <div className="flex flex-wrap justify-center gap-3">
-        <button type="button" onClick={reset} className="btc-btn-primary">
+        <button type="button" onClick={reset} className="ab-btn-primary">
           Try again
         </button>
-        <a href="mailto:support@blacktiercircle.com" className="btc-btn-secondary">
+        <a href="mailto:support@afterbuy.app" className="ab-btn-secondary">
           Contact support
         </a>
       </div>

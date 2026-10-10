@@ -268,10 +268,10 @@ export default function OwnerSettingsPage(): JSX.Element {
                   <p>Last active: {relativeTime(settings.ownerBotLastHealthAt)}</p>
                   <p className="break-all text-[var(--text-2)]">Webhook: {webhookUrl || 'Not set'}</p>
                   <div className="flex gap-2 pt-2">
-                    <button type="button" className="btc-btn-primary" disabled={botBusy} onClick={() => void testBot()}>
+                    <button type="button" className="ab-btn-primary" disabled={botBusy} onClick={() => void testBot()}>
                       Test Bot
                     </button>
-                    <button type="button" className="btc-btn-secondary" disabled={botBusy} onClick={() => void disconnectBot()}>
+                    <button type="button" className="ab-btn-secondary" disabled={botBusy} onClick={() => void disconnectBot()}>
                       Disconnect Bot
                     </button>
                   </div>

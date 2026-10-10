@@ -1,7 +1,7 @@
 /**
  * @file components/ui/ThemeToggle.tsx
  *
- * Dark/light mode toggle. Persists to localStorage as `btc-theme`.
+ * Dark/light mode toggle. Persists to localStorage as `afterbuy-theme`.
  * Default theme is light.
  *
  * @module Components
@@ -12,7 +12,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-const STORAGE_KEY = 'btc-theme';
+const STORAGE_KEY = 'afterbuy-theme';
 
 function readTheme(): 'dark' | 'light' {
   if (typeof document === 'undefined') {

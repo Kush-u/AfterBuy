@@ -20,12 +20,12 @@ export function EmptyState({ title, description, action }: EmptyStateProps): JSX
         <p className="mt-2 max-w-md text-sm text-[var(--text-2)]">{description}</p>
       </FadeUp>
       {action?.href ? (
-        <Link href={action.href} className="btc-btn-primary mt-6">
+        <Link href={action.href} className="ab-btn-primary mt-6">
           {action.label}
         </Link>
       ) : null}
       {action?.onClick ? (
-        <button type="button" onClick={action.onClick} className="btc-btn-primary mt-6">
+        <button type="button" onClick={action.onClick} className="ab-btn-primary mt-6">
           {action.label}
         </button>
       ) : null}

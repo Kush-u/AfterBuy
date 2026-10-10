@@ -18,7 +18,7 @@ type ChatSession = {
   readonly startedAt: string;
 };
 
-const STORAGE_KEY = 'btc-chat-sessions';
+const STORAGE_KEY = 'afterbuy-chat-sessions';
 const MAX_SESSIONS = 10;
 
 function loadSessions(): ChatSession[] {
@@ -99,7 +99,7 @@ export function AssistantPage(): JSX.Element {
         Chats
       </button>
       <aside className={`ai-side${navOpen ? ' is-open' : ''}`}>
-        <p className="ai-side-title">BTC Assistant</p>
+        <p className="ai-side-title">Remy</p>
         <button type="button" className="ai-new-chat" onClick={newChat}>+ New Chat</button>
         {savedSessions.length === 0 ? (
           <div className="ai-session is-active"><p>Current Session</p><ul><li>No messages yet</li></ul></div>

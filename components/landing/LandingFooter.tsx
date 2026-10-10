@@ -13,7 +13,7 @@ export function LandingFooter(): JSX.Element {
       <div className="footer-brand">
         <span className="mark" aria-hidden="true" />
         <div>
-          <p className="wordmark">Black Tier Circle</p>
+          <p className="wordmark">AfterBuy</p>
           <p>Your Telegram store, live in minutes.</p>
         </div>
       </div>
@@ -23,7 +23,7 @@ export function LandingFooter(): JSX.Element {
         <Link href={ROUTES.public.apiDocs}>API Docs</Link>
         <Link href={ROUTES.login}>Login</Link>
       </nav>
-      <p className="legal">© 2026 Black Tier Circle. Non-custodial Telegram commerce platform.</p>
+      <p className="legal">© 2026 AfterBuy. Non-custodial Telegram commerce platform.</p>
     </footer>
   );
 }

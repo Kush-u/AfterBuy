@@ -187,7 +187,7 @@ export default function ResellerWebhooksPage(): JSX.Element {
               className={`${inputClass} mt-1 w-full`}
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://example.com/webhooks/btc"
+              placeholder="https://example.com/webhooks/afterbuy"
               required
             />
           </label>

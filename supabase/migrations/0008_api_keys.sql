@@ -7,7 +7,7 @@ create table api_keys (
   tenant_id       uuid not null references tenants(id),
   -- Key hash stored (SHA-256 of raw key) — raw key never stored
   key_hash        text not null unique,
-  -- Key prefix stored for identification (e.g. btc_live_abc1) — not the full key
+  -- Key prefix stored for identification (e.g. ab_live_abc1) — not the full key
   key_prefix      text not null,
   label           text not null,
   environment     text not null default 'test',

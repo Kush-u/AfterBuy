@@ -16,7 +16,7 @@ import { AssistantChat, type ChatMessage } from '@/components/assistant/assistan
 import { ROUTES } from '@/lib/navigation';
 import type { UserRole } from '@/modules/identity/types';
 
-const SEEN_KEY = 'btc-assistant-seen';
+const SEEN_KEY = 'afterbuy-assistant-seen';
 
 type AssistantWidgetProps = {
   readonly role: UserRole;

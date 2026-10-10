@@ -41,7 +41,7 @@ async function retainFulfilledOrderMemory(supabase: DbClient, orderId: string): 
     const bankId = resolveCustomerMemoryBank(order.tenantId, order.customerId);
     const purchasedAt = new Date().toISOString();
 
-    // MemoryOS: non-blocking side-effect, never blocks commerce
+    // Buyer Memory: non-blocking side-effect, never blocks commerce
     await retainCommerceExperience(
       bankId,
       `customer-interaction:${order.id}`,
@@ -53,7 +53,7 @@ async function retainFulfilledOrderMemory(supabase: DbClient, orderId: string): 
     const listMinor = product.retailPriceMinor * BigInt(order.quantity);
     if (order.quotedRetailPriceMinor < listMinor) {
       const originalPrice = minorToUsdt(listMinor);
-      // MemoryOS: non-blocking side-effect, never blocks commerce
+      // Buyer Memory: non-blocking side-effect, never blocks commerce
       await retainCommerceExperience(
         bankId,
         `preference:${order.id}`,

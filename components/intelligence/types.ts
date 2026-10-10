@@ -1,7 +1,7 @@
 /**
  * @file components/intelligence/types.ts
  *
- * Shared shapes for MemoryOS panels.
+ * Shared shapes for Buyer Memory panels.
  *
  * @module Components
  */

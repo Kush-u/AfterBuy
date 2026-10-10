@@ -65,7 +65,7 @@ function mapRow(row: PlatformSettingsRow): PlatformSettings {
     binancePayEnabled: row.binance_pay_enabled === true,
     binancePayConfigured: Boolean(row.binance_pay_api_key_encrypted && row.binance_pay_api_secret_encrypted),
     bep20Enabled: row.bep20_enabled !== false,
-    platformName: row.platform_name?.trim() || 'Black Tier Circle',
+    platformName: row.platform_name?.trim() || 'AfterBuy',
     supportContact: row.support_contact,
     supportTelegram: row.support_telegram,
   };
@@ -101,7 +101,7 @@ export async function loadPlatformSettingsRow(supabase: DbClient): Promise<Platf
   const inserted = await supabase
     .from('platform_settings')
     .insert({
-      platform_name: 'Black Tier Circle',
+      platform_name: 'AfterBuy',
       owner_bot_status: 'disconnected',
       binance_pay_enabled: false,
       bep20_enabled: true,

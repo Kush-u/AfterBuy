@@ -152,7 +152,7 @@ function createSupplier1Connector(): SupplierConnector {
         headers: {
           Authorization: `Bearer ${SUPPLIER_CONFIG.supplier_1.apiKey}`,
           'Content-Type': 'application/json',
-          'User-Agent': 'BlackTierCircle/1.0',
+          'User-Agent': 'AfterBuy/1.0',
         },
         ...(body ? { body: JSON.stringify(body) } : {}),
         signal: controller.signal,

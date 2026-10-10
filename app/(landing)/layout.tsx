@@ -12,9 +12,10 @@ import { LandingShell } from '@/components/landing/LandingShell';
 import './landing.css';
 
 export const metadata: Metadata = {
-  title: 'Black Tier MemoryOS',
+  // Absolute so the root `%s — AfterBuy` template is not appended a second time.
+  title: { absolute: 'AfterBuy — The Telegram store that remembers every buyer' },
   description:
-    'Three-layer AI memory for Telegram commerce. Every customer remembered. Every pattern learned. Every store optimized.',
+    'AfterBuy gives every Telegram store a Buyer Memory: who bought what, when they come back, and what to say next.',
 };
 
 type LandingLayoutProps = {

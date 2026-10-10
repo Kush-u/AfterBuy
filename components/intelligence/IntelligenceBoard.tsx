@@ -66,8 +66,8 @@ export function IntelligenceBoard({ tenantId }: IntelligenceBoardProps): JSX.Ele
       };
       setFeed((current) => [item, ...current].slice(0, 12));
     }
-    window.addEventListener('btc:memory-activity', onActivity);
-    return () => window.removeEventListener('btc:memory-activity', onActivity);
+    window.addEventListener('ab:memory-activity', onActivity);
+    return () => window.removeEventListener('ab:memory-activity', onActivity);
   }, []);
 
   const selected = customers.find((customer) => customer.id === customerId);
@@ -77,7 +77,7 @@ export function IntelligenceBoard({ tenantId }: IntelligenceBoardProps): JSX.Ele
     <div className="space-y-6">
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-[11px] uppercase tracking-[0.14em] text-[var(--text-3)]">MemoryOS</p>
+          <p className="text-[11px] uppercase tracking-[0.14em] text-[var(--text-3)]">Buyer Memory</p>
           <h1 className="mt-1 bg-[image:var(--grad-memory)] bg-clip-text text-3xl font-semibold tracking-tight text-transparent">
             Intelligence Center
           </h1>
@@ -115,7 +115,7 @@ export function IntelligenceBoard({ tenantId }: IntelligenceBoardProps): JSX.Ele
         <select
           value={customerId}
           onChange={(event) => setCustomerId(event.target.value)}
-          className="btc-select"
+          className="ab-select"
           aria-label="Customer"
         >
           <option value={DEMO_CUSTOMER_ID}>Demo customer</option>

@@ -134,7 +134,7 @@ export function OwnerPlatformPanels(): JSX.Element {
             </li>
           ))}
         </ul>
-        <button type="button" className="btc-btn-primary mt-4" onClick={() => setOpen(true)}>
+        <button type="button" className="ab-btn-primary mt-4" onClick={() => setOpen(true)}>
           Add webhook
         </button>
         {secret ? (
@@ -149,7 +149,7 @@ export function OwnerPlatformPanels(): JSX.Element {
           <div className="mt-4 space-y-3 rounded-[var(--r-md)] border border-[var(--border)] p-3" role="dialog" aria-label="Add webhook">
             <label className="block text-sm text-[var(--text-2)]" htmlFor="owner-webhook-url">
               URL
-              <input id="owner-webhook-url" className="btc-input mt-1 w-full" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://" />
+              <input id="owner-webhook-url" className="ab-input mt-1 w-full" value={url} onChange={(event) => setUrl(event.target.value)} placeholder="https://" />
             </label>
             <fieldset className="space-y-2">
               <legend className="text-sm text-[var(--text-2)]">Events</legend>
@@ -168,7 +168,7 @@ export function OwnerPlatformPanels(): JSX.Element {
                 </label>
               ))}
             </fieldset>
-            <button type="button" className="btc-btn-primary" disabled={busy} onClick={() => void saveWebhook()}>
+            <button type="button" className="ab-btn-primary" disabled={busy} onClick={() => void saveWebhook()}>
               {busy ? 'Saving…' : 'Save webhook'}
             </button>
           </div>
@@ -177,7 +177,7 @@ export function OwnerPlatformPanels(): JSX.Element {
 
       <SettingsCard icon={<PauseCircle size={18} />} title="Danger zone" description="Platform-wide controls.">
         <div className="flex flex-wrap gap-3">
-          <button type="button" className="btc-btn-primary" disabled={pausing} onClick={() => void setMaintenance(true)}>
+          <button type="button" className="ab-btn-primary" disabled={pausing} onClick={() => void setMaintenance(true)}>
             {pausing ? 'Working…' : 'Pause platform'}
           </button>
           <button type="button" className="min-h-11 rounded-[var(--r-md)] border border-[var(--border)] px-4 text-sm" disabled={pausing} onClick={() => void setMaintenance(false)}>

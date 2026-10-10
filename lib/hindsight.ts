@@ -1,7 +1,7 @@
 /**
  * @file lib/hindsight.ts
  *
- * Channel-independent MemoryOS service. Commerce memory is stored in
+ * Channel-independent Buyer Memory service. Commerce memory is stored in
  * Hindsight banks. Missing configuration fails open and never throws.
  *
  * Bank ids are the isolation boundary. Callers must pass trusted tenant
@@ -17,7 +17,7 @@ import { HindsightClient, HindsightError } from '@vectorize-io/hindsight-client'
 
 import { logger } from './logger';
 
-const DEFAULT_BANK_PREFIX = 'btc-prod';
+const DEFAULT_BANK_PREFIX = 'afterbuy-prod';
 const DECISION_MARKER = 'MEMORY_DECISION_V1 ';
 const OUTCOME_MARKER = 'MEMORY_OUTCOME_V1 ';
 
@@ -88,7 +88,7 @@ function markMemoryDegraded(): void {
 }
 
 /**
- * Runs MemoryOS calls for an API request. A Hindsight failure sets degraded
+ * Runs Buyer Memory calls for an API request. A Hindsight failure sets degraded
  * and does not throw, so commerce and the route can both fail open.
  */
 export async function runMemoryObservation<T>(
@@ -139,7 +139,7 @@ function getClient(): HindsightClient | null {
     sharedClient = new HindsightClient({
       apiKey,
       baseUrl,
-      userAgent: 'black-tier-circle/memoryos',
+      userAgent: 'afterbuy/buyer-memory',
     });
   }
   return sharedClient;

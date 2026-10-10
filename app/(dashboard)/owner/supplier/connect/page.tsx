@@ -102,7 +102,7 @@ export default function ConnectSupplierPage(): JSX.Element {
         />
         <button
           type="button"
-          className="btc-btn-primary mt-4"
+          className="ab-btn-primary mt-4"
           disabled={busy || apiKey.trim().length < 8}
           onClick={() => void submit(false)}
         >
@@ -112,7 +112,7 @@ export default function ConnectSupplierPage(): JSX.Element {
           <div className="mt-4 rounded-[var(--r-md)] border border-[var(--border)] bg-[var(--bg-raised)] p-4 text-sm">
             <p className="text-[var(--text-1)]">Connected to {probe.username} · {probe.productCount} products · Balance: {probe.balance} {probe.membership}</p>
             {probe.warning ? <p className="mt-2 text-[var(--amber)]">{probe.warning}</p> : null}
-            <button type="button" className="btc-btn-primary mt-4" disabled={busy} onClick={() => void submit(true)}>
+            <button type="button" className="ab-btn-primary mt-4" disabled={busy} onClick={() => void submit(true)}>
               {busy ? 'Saving…' : 'Save Supplier'}
             </button>
           </div>

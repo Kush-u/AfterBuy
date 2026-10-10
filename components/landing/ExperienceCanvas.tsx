@@ -35,7 +35,7 @@ export default function ExperienceCanvas(): JSX.Element {
     }
 
     const reduced = landingReducedMotion();
-    const root = document.querySelector('.btc-landing');
+    const root = document.querySelector('.ab-landing');
     const ctx = gsap.context(() => {
       if (reduced) {
         crystal.progress = 1;
